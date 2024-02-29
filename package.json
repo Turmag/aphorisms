@@ -11,10 +11,11 @@
         "bd": "yarn build && yarn deploy"
     },
     "dependencies": {
+        "@types/node": "^20.11.24",
         "pinia": "^2.0.28",
         "redaxios": "^0.5.1",
         "sass": "^1.56.1",
-        "vue": "^3.2.41",
+        "vue": "^3.4.21",
         "vue-router": "^4.1.6"
     },
     "devDependencies": {
