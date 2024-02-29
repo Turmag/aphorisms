@@ -17,10 +17,10 @@
     </blockquote>
 </template>
 
-<script setup>
+<script setup lang="ts">
     import { computed, ref } from 'vue';
     import { useRoute } from 'vue-router';
-    import { mainStore } from '../store/main';
+    import { mainStore } from '@/store/main';
     const props = defineProps({
         numb: {
             type: Number,
@@ -39,12 +39,12 @@
     const store = mainStore();
 
     let isLinkCopied = ref(false);
-    let timeout = null;
+    let timeout: ReturnType<typeof setTimeout>;
 
     const isBlur = computed(
         () =>
             Boolean(route.query.phraseNumb) &&
-            route.query.phraseNumb != props.numb &&
+            route.query.phraseNumb !== String(props.numb) &&
             !store.unBlured
     );
 
@@ -59,7 +59,7 @@
         clearTimeout(timeout);
         isLinkCopied.value = true;
 
-        var link = location.origin + location.pathname + '?phraseNumb=' + props.numb;
+        var link = `${location.origin}${location.pathname}?phraseNumb=${props.numb}`;
 
         // Копируем ссылку в буфер обмена
         var tempInput = document.createElement('input');
