@@ -76,22 +76,22 @@
     .blockquote {
         position: relative;
         margin: 0;
-        color: #231e28;
+        color: var(--blockquote-color);
         padding: 40px 40px 40px 100px;
-        border-left: 8px solid #cbdde7;
-        background: #faf8eb;
+        border-left: 8px solid var(--border-left-color);
+        background: var(--blockquote-bg-1);
         font-weight: 300;
         font-size: 28px;
         line-height: 30px;
-        border-right: 1px solid #dcdcdc;
-        border-bottom: 1px solid #dcdcdc;
+        border-right: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
 
         &:nth-child(2n) {
-            background: #fff9e4;
+            background: var(--blockquote-bg-2);
         }
 
         &:first-child {
-            border-top: 1px solid #cbdde7;
+            border-top: 1px solid var(--border-color);
         }
 
         &--blur {
@@ -112,7 +112,7 @@
                 position: absolute;
                 font-family: Arial;
                 font-size: 90px;
-                color: #cbdde7;
+                color: var(--border-left-color);
             }
         }
 
