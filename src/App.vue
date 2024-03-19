@@ -7,18 +7,18 @@
             v-bind="aphorism"
             :numb="i + 1"
         />
-    </div>
+    </div> 
 </template>
 
 <script setup lang="ts">
-    import { onMounted } from 'vue';
-    import { mainStore } from '@/store/main';
-    import Blockquote from '@/components/Blockquote.vue';
+import { onMounted } from 'vue';
+import { mainStore } from '@/store/main';
+import Blockquote from '@/components/Blockquote.vue';
 
-    const store = mainStore();
+const store = mainStore();
 
-    onMounted(async () => {
-        await store.getAphorisms();
-        document.onclick = () => (store.unBlured = true);
-    });
+onMounted(async () => {
+    await store.getAphorisms();
+    document.onclick = () => (store.unBlured = true);
+});
 </script>

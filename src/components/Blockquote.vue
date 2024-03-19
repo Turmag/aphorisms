@@ -7,69 +7,75 @@
         >
             <div class="blockquote__icon-popup-wrapper">
                 <Transition name="fade">
-                    <div v-if="isLinkCopied" class="blockquote__icon-popup">Ссылка скопирована</div>
+                    <div v-if="isLinkCopied" class="blockquote__icon-popup">
+                        Ссылка скопирована
+                    </div>
                 </Transition>
             </div>
         </div>
-        <div class="blockquote__numb">{{ numb }}</div>
-        <div class="blockquote__text" v-html="value"></div>
-        <div class="blockquote__author">{{ author }}</div>
+        <div class="blockquote__numb">
+            {{ numb }}
+        </div>
+        <div class="blockquote__text" v-html="value" />
+        <div class="blockquote__author">
+            {{ author }}
+        </div>
     </blockquote>
 </template>
 
 <script setup lang="ts">
-    import { computed, ref } from 'vue';
-    import { useRoute } from 'vue-router';
-    import { mainStore } from '@/store/main';
-    const props = defineProps({
-        numb: {
-            type: Number,
-            default: 0,
-        },
-        text: {
-            type: String,
-            default: '',
-        },
-        author: {
-            type: String,
-            default: '',
-        },
-    });
-    const route = useRoute();
-    const store = mainStore();
+import { computed, ref } from 'vue';
+import { useRoute } from 'vue-router';
+import { mainStore } from '@/store/main';
+const props = defineProps({
+    numb: {
+        type: Number,
+        default: 0,
+    },
+    text: {
+        type: String,
+        default: '',
+    },
+    author: {
+        type: String,
+        default: '',
+    },
+});
+const route = useRoute();
+const store = mainStore();
 
-    let isLinkCopied = ref(false);
-    let timeout: ReturnType<typeof setTimeout>;
+const isLinkCopied = ref(false);
+let timeout: ReturnType<typeof setTimeout>;
 
-    const isBlur = computed(
-        () =>
-            Boolean(route.query.phraseNumb) &&
-            route.query.phraseNumb !== String(props.numb) &&
-            !store.unBlured
-    );
+const isBlur = computed(
+    () =>
+        Boolean(route.query.phraseNumb) &&
+        route.query.phraseNumb !== String(props.numb) &&
+        !store.unBlured,
+);
 
-    const blockquoteClass = computed(() => ({
-        'blockquote--blur': isBlur.value,
-        'blockquote--single': !isBlur.value,
-    }));
+const blockquoteClass = computed(() => ({
+    'blockquote--blur': isBlur.value,
+    'blockquote--single': !isBlur.value,
+}));
 
-    const value = computed(() => props.text.replace(/\n/g, '<br>'));
+const value = computed(() => props.text.replace(/\n/g, '<br>'));
 
-    const copyLink = () => {
-        clearTimeout(timeout);
-        isLinkCopied.value = true;
+const copyLink = () => {
+    clearTimeout(timeout);
+    isLinkCopied.value = true;
 
-        var link = `${location.origin}${location.pathname}?phraseNumb=${props.numb}`;
+    var link = `${location.origin}${location.pathname}?phraseNumb=${props.numb}`;
 
-        // Копируем ссылку в буфер обмена
-        var tempInput = document.createElement('input');
-        tempInput.setAttribute('value', link);
-        document.body.appendChild(tempInput);
-        tempInput.select();
-        document.execCommand('copy');
-        document.body.removeChild(tempInput);
-        timeout = setTimeout(() => (isLinkCopied.value = false), 1000);
-    };
+    // Копируем ссылку в буфер обмена
+    var tempInput = document.createElement('input');
+    tempInput.setAttribute('value', link);
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempInput);
+    timeout = setTimeout(() => (isLinkCopied.value = false), 1000);
+};
 </script>
 
 <style lang="scss" scoped>

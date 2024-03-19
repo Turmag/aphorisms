@@ -1,26 +1,25 @@
 import { defineStore } from 'pinia';
 import { useRoute } from 'vue-router';
+import { type Aphorism } from '@/services/types';
 import axios from 'redaxios';
 const path = import.meta.env.MODE === 'development' ? '' : import.meta.env.BASE_URL;
 
 export const mainStore = defineStore('main', {
     state: () => {
         return {
-            aphorisms: [],
+            aphorisms: [] as Aphorism[],
             unBlured: false,
         };
     },
     actions: {
         async getAphorisms() {
             const route = useRoute();
-            let aphorisms = [];
             try {
-                const { data } = await axios.get(`${path}/api/getAphorisms.php`);
-                aphorisms = data;
+                const { data }: {data: Aphorism[]} = await axios.get(`${path}/api/getAphorisms.php`);
+                this.aphorisms = data;
             } catch (error) {
                 console.error('error', error);
             }
-            this.aphorisms = aphorisms;
 
             if (Boolean(route.query.phraseNumb) && !this.unBlured) {
                 setTimeout(
