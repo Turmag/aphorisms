@@ -16,6 +16,7 @@
     },
     "include": [
         "src",
+        "shims-vue.d.ts",
         ".eslintrc.js"
     ]
 }

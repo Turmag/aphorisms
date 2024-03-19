@@ -1,5 +1,5 @@
 <template>
-    <h1>Афоризмы</h1>
+    <Header />
     <div class="aphorisms">
         <Blockquote
             v-for="(aphorism, i) in store.aphorisms"
@@ -11,11 +11,15 @@
 </template>
 
 <script setup lang="ts">
+import Blockquote from '@/components/Blockquote.vue';
+import Header from '@/components/Header.vue';
+import { useTheme } from '@/assets/js/theme';
 import { onMounted } from 'vue';
 import { mainStore } from '@/store/main';
-import Blockquote from '@/components/Blockquote.vue';
 
 const store = mainStore();
+
+useTheme();
 
 onMounted(async () => {
     await store.getAphorisms();

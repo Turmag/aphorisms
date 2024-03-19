@@ -9,6 +9,8 @@ export const mainStore = defineStore('main', {
         return {
             aphorisms: [] as Aphorism[],
             unBlured: false,
+            isDarkMode: false,
+            isSavedDarkMode: false,
         };
     },
     actions: {
