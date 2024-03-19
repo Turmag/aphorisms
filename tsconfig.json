@@ -13,5 +13,9 @@
         "moduleResolution": "node",
         "strict": true,
         "allowSyntheticDefaultImports": true
-    }
+    },
+    "include": [
+        "src",
+        ".eslintrc.js"
+    ]
 }

@@ -9,9 +9,9 @@ module.exports = {
     },
     parser: 'vue-eslint-parser',
     parserOptions: {
+        project: ['./tsconfig.json'],
         parser: '@typescript-eslint/parser',
-        sourceType: 'module',
-        // project: ['./tsconfig.eslint.json'],
+        extraFileExtensions: ['.vue'],
     },
     extends: [
         'plugin:vue/vue3-recommended',

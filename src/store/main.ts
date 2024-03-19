@@ -27,7 +27,7 @@ export const mainStore = defineStore('main', {
                         document
                             .querySelector('.blockquote--single')
                             ?.scrollIntoView({ behavior: 'smooth' }),
-                    200
+                    200,
                 );
             }
         },
