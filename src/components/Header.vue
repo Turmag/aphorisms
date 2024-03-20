@@ -43,6 +43,7 @@ const resetStorageDarkMode = () => {
     .header {
         display: flex;
         gap: 16px;
+        height: 60px;
     }
 
     .switchWrapper {
