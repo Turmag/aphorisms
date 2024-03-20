@@ -17,6 +17,8 @@
     "include": [
         "src",
         "shims-vue.d.ts",
-        ".eslintrc.js"
+        ".eslintrc.js",
+        ".stylelintrc.js",
+        "vite.config.ts",
     ]
 }

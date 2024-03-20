@@ -82,15 +82,15 @@ const copyLink = () => {
     .blockquote {
         position: relative;
         margin: 0;
-        color: var(--blockquote-color);
         padding: 40px 40px 40px 100px;
-        border-left: 8px solid var(--border-left-color);
-        background: var(--blockquote-bg-1);
-        font-weight: 300;
-        font-size: 28px;
-        line-height: 30px;
         border-right: 1px solid var(--border-color);
         border-bottom: 1px solid var(--border-color);
+        border-left: 8px solid var(--border-left-color);
+        background: var(--blockquote-bg-1);
+        font-size: 28px;
+        line-height: 30px;
+        color: var(--blockquote-color);
+        font-weight: 300;
 
         &:nth-child(2n) {
             background: var(--blockquote-bg-2);
@@ -106,17 +106,17 @@ const copyLink = () => {
 
         &__icon {
             position: absolute;
-            left: 15px;
             top: 35px;
+            left: 15px;
+            z-index: 1;
             width: 85px;
             cursor: pointer;
             user-select: none;
-            z-index: 1;
 
             &::before {
                 content: '\201C';
                 position: absolute;
-                font-family: Arial;
+                font-family: Arial, Verdana, Tahoma, sans-serif;
                 font-size: 90px;
                 color: var(--border-left-color);
             }
@@ -133,38 +133,38 @@ const copyLink = () => {
         &__icon-popup {
             position: absolute;
             top: 11px;
+            box-sizing: border-box;
             width: 108px;
-            background: rgba(0, 0, 0, 0.85);
-            color: #fff;
-            border-radius: 4px;
             padding: 10px;
+            border-radius: 4px;
+            background: rgb(0 0 0 / 85%);
+            text-align: center;
+            text-transform: none;
             font-size: 14px;
             line-height: 16px;
-            text-align: center;
-            box-sizing: border-box;
-            text-transform: none;
-            filter: drop-shadow(0 7px 11px rgba(8, 0, 47, 0.07))
-                drop-shadow(0 3px 5px rgba(8, 0, 47, 0.05));
+            color: #fff;
             cursor: default;
+            filter: drop-shadow(0 7px 11px rgb(8 0 47 / 7%))
+                drop-shadow(0 3px 5px rgb(8 0 47 / 5%));
 
-            &:before {
+            &::before {
                 content: '';
                 position: absolute;
                 bottom: calc(100% - 1px);
                 left: 15px;
+                z-index: 1;
                 display: block;
                 width: 22px;
                 height: 7px;
-                background: url(../assets/popup-decor.svg) center no-repeat;
+                background: url("../assets/popup-decor.svg") center no-repeat;
                 transform: rotate(180deg);
-                z-index: 1;
             }
         }
 
         &__numb {
             position: absolute;
-            left: 15px;
             top: 50px;
+            left: 15px;
             font-size: 25px;
         }
 
@@ -176,7 +176,7 @@ const copyLink = () => {
             font-size: 20px;
             font-style: italic;
 
-            &:before {
+            &::before {
                 content: '— ';
             }
         }

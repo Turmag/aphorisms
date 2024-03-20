@@ -36,8 +36,8 @@ const toggle = () => {
         top: -12px;
         width: 100%;
         height: 22px;
-        background-color: var(--color);
         border-radius: 50px;
+        background-color: var(--color);
         cursor: pointer;
         user-select: none;
     }
@@ -63,14 +63,14 @@ const toggle = () => {
         width: 16px;
         height: 16px;
         border-radius: 50%;
-        box-shadow: inset 4px -1px 0px 0px var(--background-color);
+        box-shadow: inset 4px -1px 0 0 var(--background-color);
         background-color: var(--color);
         transition: 0.3s;
     }
 
     input:checked ~ .slider::before {
+        background-color: var(--background-color);
         transform: translateX(22px);
         box-shadow: none;
-        background-color: var(--background-color);
     }
 </style>

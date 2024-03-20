@@ -11,7 +11,7 @@
                 height="10"
                 viewBoxWidth="1920"
                 viewBoxHeight="1920"
-                style="min-width: 15px"
+                style="min-width: 15px;"
                 @click="resetStorageDarkMode"
             >
                 <Reset />
@@ -56,9 +56,9 @@ const resetStorageDarkMode = () => {
         width: 10px;
         height: 10px;
         border-radius: 50%;
+        outline: none;
         color: var(--color);
         cursor: pointer;
         user-select: none;
-        outline: none;
     }
 </style>
