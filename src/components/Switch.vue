@@ -20,7 +20,7 @@ const toggle = () => {
     const bodyClass = document.body.classList;
     bodyClass.contains('dark') ? bodyClass.remove('dark') : bodyClass.add('dark');
     store.isDarkMode = bodyClass.contains('dark');
-    localStorage.setItem('docsDarkMode', String(store.isDarkMode));
+    localStorage.setItem('aphorismsDarkMode', String(store.isDarkMode));
     store.isSavedDarkMode = true;
 };
 </script>
