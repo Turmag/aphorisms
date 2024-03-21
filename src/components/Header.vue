@@ -30,11 +30,7 @@ const store = mainStore();
 const resetStorageDarkMode = () => {
     delete localStorage['aphorismsDarkMode'];
     store.isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    if (store.isDarkMode) {
-        document.body.classList.add('dark');
-    } else {
-        document.body.classList.remove('dark');
-    }
+    store.isDarkMode ? document.body.classList.add('dark') : document.body.classList.remove('dark');
     store.isSavedDarkMode = false;
 };
 </script>

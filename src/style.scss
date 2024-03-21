@@ -6,6 +6,8 @@
     --blockquote-bg-1: #faf8eb;
     --blockquote-bg-2: #fff9e4;
     --blockquote-color: #231e28;
+    --copy-bg: rgb(0 0 0 / 85%);
+    --copy-shadow-color: rgb(8 0 47 / 7%);
 
     background-color: var(--background-color);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -35,6 +37,8 @@ body {
         --blockquote-bg-1: #050714;
         --blockquote-bg-2: #00061b;
         --blockquote-color: #dce1d7;
+        --copy-bg: rgb(255 255 255 / 85%);
+        --copy-shadow-color: rgb(247 255 208 / 7%);
     }
 }
 

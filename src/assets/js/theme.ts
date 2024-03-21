@@ -22,26 +22,18 @@ export function useTheme() {
 
     watchEffect(onInvalidate => {
         const media = window.matchMedia('(prefers-color-scheme: dark)');
-        if (media.matches !== matches.value) {
-            matches.value = media.matches;
-        }
+        if (media.matches !== matches.value) matches.value = media.matches;
 
-        const onChange = () => {
-            matches.value = media.matches;
-        };
+        const onChange = () => matches.value = media.matches;
         media.addEventListener('change', onChange);
 
-        onInvalidate(() => {
-            media.removeEventListener('change', onChange);
-        });
+        onInvalidate(() => media.removeEventListener('change', onChange));
     });
 
     watch(
         () => matches.value,
         val => {
-            if (!store.isSavedDarkMode) {
-                val ? setDarkMode() : setLightMode();
-            }
+            if (!store.isSavedDarkMode) val ? setDarkMode() : setLightMode();
         },
     );
 
@@ -54,8 +46,6 @@ export function useTheme() {
             store.isSavedDarkMode = true;
         }
 
-        if (isDarkMode === 'true') {
-            setDarkMode();
-        }
+        if (isDarkMode === 'true') setDarkMode();
     });
 }
