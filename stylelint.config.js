@@ -23,6 +23,7 @@ module.exports = {
         'selector-pseudo-element-no-unknown': null,
         'selector-pseudo-class-no-unknown': null,
         'selector-class-pattern': null,
+        'value-keyword-case': null,
         'order/properties-order': [
             'content',
             'position',
