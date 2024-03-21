@@ -15,10 +15,7 @@
         "allowSyntheticDefaultImports": true
     },
     "include": [
-        "src",
-        "shims-vue.d.ts",
+        "./**/*",
         ".eslintrc.js",
-        ".stylelintrc.js",
-        "vite.config.ts",
     ]
 }
