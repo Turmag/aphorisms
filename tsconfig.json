@@ -17,5 +17,7 @@
     "include": [
         "./**/*",
         ".eslintrc.js",
+        "**/*/*.json",
+        "package.json",
     ]
 }

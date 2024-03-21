@@ -11,12 +11,13 @@ module.exports = {
     parserOptions: {
         project: ['./tsconfig.json'],
         parser: '@typescript-eslint/parser',
-        extraFileExtensions: ['.vue'],
+        extraFileExtensions: ['.vue', '.json'],
     },
     extends: [
         'plugin:vue/vue3-recommended',
         'eslint:recommended',
         'plugin:vue/recommended',
+        'plugin:jsonc/recommended-with-jsonc',
     ],
     plugins: ['vue', '@typescript-eslint'],
     rules: {
@@ -38,6 +39,14 @@ module.exports = {
                 closeBracket: 0,
                 alignAttributesVertically: true,
                 ignores: [],
+            },
+        ],
+        'jsonc/indent': [
+            'error',
+            4,
+            {
+                SwitchCase: 1,
+                ignoredNodes: ['ConditionalExpression'],
             },
         ],
         'vue/script-indent': [
@@ -148,6 +157,10 @@ module.exports = {
                     },
                 ],
             },
+        },
+        {
+            files: ['*.json', '*.json5', '*.jsonc'],
+            parser: 'jsonc-eslint-parser',
         },
     ],
 };
