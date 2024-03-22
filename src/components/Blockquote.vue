@@ -1,5 +1,5 @@
 <template>
-    <blockquote :class="blockquoteClasses">
+    <blockquote :class="blockquoteClasses" :isSingle="!isBlur">
         <div
             :class="$style.icon"
             title="Скопировать ссылку на данный афоризм"

@@ -21,4 +21,19 @@ function dataBaseToArray($result){
     }
     return $array;
 }
+
+function replaceChar(){
+    $mysqli = mysqli_connect(DB_HOST, DB_LOGIN, DB_PASSWORD, DB_NAME);
+	mysqli_set_charset($mysqli, 'utf8');
+	
+    $sql = "UPDATE
+                aphorisms
+            SET text = REPLACE(`text`, ' – ', ' — ')
+			WHERE 
+                text LIKE '% - %'
+            OR
+                text LIKE '% – %'
+            ";
+    mysqli_query($mysqli, $sql) or die(mysqli_connect_error());
+}
 ?>

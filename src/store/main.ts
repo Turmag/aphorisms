@@ -26,8 +26,7 @@ export const mainStore = defineStore('main', {
             if (Boolean(route.query.phraseNumb) && !this.unBlured) {
                 setTimeout(
                     () =>
-                        document
-                            .querySelector('.blockquote--single')
+                        document.querySelector('[issingle=true]')
                             ?.scrollIntoView({ behavior: 'smooth' }),
                     200,
                 );
