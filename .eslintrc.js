@@ -133,6 +133,7 @@ module.exports = {
                 allowedNames: ['self'],
             },
         ],
+        '@typescript-eslint/member-delimiter-style': 'error',
     },
     overrides: [
         {
