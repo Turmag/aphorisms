@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue';
 import path from 'path';
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => {
+export default defineConfig(({ mode }: { mode: string }) => {
     return {
         plugins: [vue()],
         base: '/aphorisms/',
@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => {
                 '/api': {
                     target: 'https://focusinfo.ru/aphorisms/api',
                     changeOrigin: true,
-                    rewrite: path => path.replace(/^\/api/, ''),
+                    rewrite: (path: string) => path.replace(/^\/api/, ''),
                 },
             },
         },
