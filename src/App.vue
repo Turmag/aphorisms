@@ -1,13 +1,11 @@
 <template>
     <Header />
-    <div class="aphorisms">
-        <Blockquote
-            v-for="(aphorism, i) in store.aphorisms"
-            :key="i"
-            v-bind="aphorism"
-            :numb="i + 1"
-        />
-    </div> 
+    <Blockquote
+        v-for="(aphorism, i) in store.aphorisms"
+        :key="i"
+        v-bind="aphorism"
+        :numb="i + 1"
+    />
 </template>
 
 <script setup lang="ts">
