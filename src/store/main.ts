@@ -11,8 +11,16 @@ export const mainStore = defineStore('main', {
             unBlured: false,
             isDarkMode: false,
             isSavedDarkMode: false,
+            filterWord: '',
         };
     },
+
+    getters: {
+        filteredAphorisms(state): Aphorism[] {
+            return state.aphorisms.filter((aphorism: Aphorism) => aphorism.text.toLowerCase().includes(this.filterWord.toLowerCase()) || aphorism.author.toLowerCase().includes(this.filterWord.toLowerCase()));
+        },
+    },
+
     actions: {
         async getAphorisms() {
             const route = useRoute();

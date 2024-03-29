@@ -1,6 +1,8 @@
 <template>
     <header :class="$style.header">
-        <h1>Афоризмы</h1>
+        <h1 :class="$style.title">
+            Афоризмы
+        </h1>
         <div :class="$style.switchWrapper">
             <Switch />
             <IconBase
@@ -21,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import Switch from '@/components/Switch.vue';
+import Switch from '@/components/header/Switch.vue';
 import IconBase from '@/components/IconBase.vue';
 import Reset from '@/assets/icons/Reset.vue';
 import { mainStore } from '@/store/main';
@@ -40,6 +42,14 @@ const resetStorageDarkMode = () => {
         display: flex;
         gap: 16px;
         height: 60px;
+    }
+
+    .title {
+        margin-top: 0;
+        padding: 14px 0 0 16px;
+        font-size: 28px;
+        color: var(--color);
+        font-weight: bold;
     }
 
     .switchWrapper {

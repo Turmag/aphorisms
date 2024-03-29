@@ -1,16 +1,11 @@
 <template>
     <Header />
-    <Blockquote
-        v-for="(aphorism, i) in store.aphorisms"
-        :key="i"
-        v-bind="aphorism"
-        :numb="i + 1"
-    />
+    <Main />
 </template>
 
 <script setup lang="ts">
-import Blockquote from '@/components/Blockquote.vue';
-import Header from '@/components/Header.vue';
+import Header from '@/components/header/Header.vue';
+import Main from '@/components/main/Main.vue';
 import { useTheme } from '@/assets/js/theme';
 import { onMounted } from 'vue';
 import { mainStore } from '@/store/main';
