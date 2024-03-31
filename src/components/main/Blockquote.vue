@@ -38,19 +38,16 @@ import { useRoute } from 'vue-router';
 import { mainStore } from '@/store/main';
 import { useToggle } from '@vueuse/core';
 
-const props = defineProps({
-    numb: {
-        type: Number,
-        default: 0,
-    },
-    text: {
-        type: String,
-        default: '',
-    },
-    author: {
-        type: String,
-        default: '',
-    },
+interface Props {
+    numb: number;
+    text: string;
+    author: string;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+    numb: 0,
+    text: '',
+    author: '',
 });
 
 const route = useRoute();
