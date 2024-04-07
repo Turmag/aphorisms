@@ -2,6 +2,7 @@
     <VueFinalModal
         :class="$style.modal"
         :content-class="$style.content"
+        :lock-scroll="false"
         overlay-transition="vfm-fade"
         content-transition="vfm-fade"
     >
@@ -91,6 +92,10 @@ onMounted(async () => setTimeout(() => input.value?.focus()));
         background-color: var(--background-color);
         flex-direction: column;
         gap: 16px;
+
+        @media screen and (width <= 600px) {
+            width: 380px;
+        }
     }
 
     .title {
@@ -99,6 +104,10 @@ onMounted(async () => setTimeout(() => input.value?.focus()));
         font-size: 40px;
         line-height: normal;
         color: var(--color);
+
+        @media screen and (width <= 600px) {
+            font-size: 32px;
+        }
     }
 
     .inputWrapper {
@@ -123,6 +132,10 @@ onMounted(async () => setTimeout(() => input.value?.focus()));
         justify-content: center;
         gap: 30px;
         width: 100%;
+
+        @media screen and (width <= 600px) {
+            gap: 16px;
+        }
     }
 
     .btn {
@@ -149,6 +162,12 @@ onMounted(async () => setTimeout(() => input.value?.focus()));
 
         &:active {
             background-color: var(--btn-background-color-active);
+        }
+
+        @media screen and (width <= 600px) {
+            min-width: 170px;
+            height: 40px;
+            font-size: 20px;
         }
     }
 </style>

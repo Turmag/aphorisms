@@ -28,7 +28,7 @@ const resetFilter = () => store.filterWord = '';
         display: flex;
         align-items: center;
         gap: 16px;
-        padding-left: 16px;
+        padding-inline: 16px;
     }
 
     .filter {
