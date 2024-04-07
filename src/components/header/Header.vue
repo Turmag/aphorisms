@@ -19,13 +19,15 @@
                 <Reset />
             </IconBase>
         </div>
+        <Settings />
     </header>
 </template>
 
 <script setup lang="ts">
-import Switch from '@/components/header/Switch.vue';
 import IconBase from '@/components/IconBase.vue';
 import Reset from '@/assets/icons/Reset.vue';
+import Switch from '@/components/header/Switch.vue';
+import Settings from '@/components/header/Settings.vue';
 import { mainStore } from '@/store/main';
 const store = mainStore();
 
@@ -40,13 +42,14 @@ const resetStorageDarkMode = () => {
 <style lang="scss" module>
     .header {
         display: flex;
+        align-items: center;
         gap: 16px;
         height: 60px;
+        padding-inline: 16px;
     }
 
     .title {
-        margin-top: 0;
-        padding: 14px 0 0 16px;
+        margin-top: 10px;
         font-size: 28px;
         color: var(--color);
         font-weight: bold;

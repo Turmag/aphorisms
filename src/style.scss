@@ -8,6 +8,9 @@
     --blockquote-color: #231e28;
     --copy-bg: rgb(0 0 0 / 85%);
     --copy-shadow-color: rgb(8 0 47 / 7%);
+    --btn-background-color: #dcdcdc;
+    --btn-background-color-hover: #c7c7c7;
+    --btn-background-color-active: #b4b4b4;
 
     background-color: var(--background-color);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -39,6 +42,9 @@ body {
         --blockquote-color: #dce1d7;
         --copy-bg: rgb(255 255 255 / 85%);
         --copy-shadow-color: rgb(247 255 208 / 7%);
+        --btn-background-color: #646363;
+        --btn-background-color-hover: #838282;
+        --btn-background-color-active: #a0a0a0;
     }
 }
 

@@ -19,7 +19,7 @@ module.exports = {
         'plugin:vue/recommended',
         'plugin:jsonc/recommended-with-jsonc',
     ],
-    plugins: ['vue', '@typescript-eslint'],
+    plugins: ['vue', '@typescript-eslint', '@typescript-eslint/recommended'],
     rules: {
         indent: 'off',
         '@typescript-eslint/indent': [
