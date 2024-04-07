@@ -20,7 +20,7 @@ import Cancel from '@/assets/icons/Cancel.vue';
 import { mainStore } from '@/store/main';
 const store = mainStore();
 
-const resetFilter = () => (store.filterWord = '');
+const resetFilter = () => store.filterWord = '';
 </script>
 
 <style lang="scss" module>

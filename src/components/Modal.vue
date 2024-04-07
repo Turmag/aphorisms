@@ -14,6 +14,7 @@
                 v-model="password"
                 :class="$style.input"
                 type="password"
+                autocomplete="new-password"
                 placeholder="Пароль для входа"
                 @keydown.enter="sendPassword"
             >

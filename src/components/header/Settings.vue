@@ -20,8 +20,6 @@ import { authStore } from '@/store/auth';
 
 const store = authStore();
 
-console.log('store.isAuthorized', store.isAuthorized);
-
 const { open: openSettings, close } = useModal({
     component: Modal,
     attrs: {
