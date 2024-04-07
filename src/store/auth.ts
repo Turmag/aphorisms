@@ -11,10 +11,12 @@ export const authStore = defineStore('auth', {
         async authorize(password: string) {
             let text = 'Пароль введён неверно';
             let type = 'error';
+            let isSuccess = false;
 
             try {
                 const { data } = await Api.authorize(password);
-                this.isAuthorized = data === 'success';
+                isSuccess = data === 'success';
+                this.isAuthorized = isSuccess;
                 if(this.isAuthorized) {
                     text = 'Всё прекрасно!';
                     type = 'success';
@@ -29,6 +31,8 @@ export const authStore = defineStore('auth', {
                 text,
                 type,
             });
+
+            return isSuccess;
         },
 
         async checkAuthorize() {

@@ -31,9 +31,14 @@ const { open: openSettings, close } = useModal({
             close();
         },
         async onApply(password: string) {
-            if(store.isAuthorized) await store.logout();
-            else if(password.length) await store.authorize(password);
-            close();
+            let isSuccess = false;
+            if(store.isAuthorized) {
+                await store.logout();
+                isSuccess = true;
+            } else if(password.length) {
+                isSuccess = await store.authorize(password);
+            } 
+            if(isSuccess) close();
         },
     },
 });
