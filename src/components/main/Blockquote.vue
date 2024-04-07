@@ -21,37 +21,78 @@
             </div>
         </div>
         <div :class="$style.numb">
-            {{ numb }}
+            {{ id }}
         </div>
-        <div :class="$style.text" v-html="value" />
-        <div :class="$style.author">
+        <textarea
+            v-if="isEditable"
+            v-model="editText"
+            :class="$style.textarea"
+            :style="`height: ${textBlockHeight}px;`"
+        />
+        <div
+            v-else
+            ref="textBlock"
+            :class="$style.text"
+            v-html="value"
+        />
+        <textarea
+            v-if="isEditable"
+            v-model="editAuthor"
+            :class="[$style.textarea, $style.textareaAuthor]"
+        />
+        <div v-else :class="$style.author">
             {{ author }}
         </div>
+        <IconBase
+            v-if="authStoreVar.isAuthorized"
+            :class="$style.edit"
+            width="20"
+            height="20"
+            :viewBoxWidth="35"
+            :viewBoxHeight="35"
+            @click="toggleIsEditable"
+        >
+            <Edit />
+        </IconBase>
+        <IconBase
+            v-if="authStoreVar.isAuthorized && isChangedAphorism"
+            :class="$style.save"
+            width="20"
+            height="20"
+            :viewBoxWidth="62"
+            :viewBoxHeight="62"
+            @click="saveAphorism"
+        >
+            <Save />
+        </IconBase>
     </blockquote>
 </template>
 
 <script setup lang="ts">
 import IconBase from '@/components/IconBase.vue';
 import CopyDecor from '@/assets/icons/CopyDecor.vue';
-import { computed, useCssModule } from 'vue';
+import Edit from '@/assets/icons/Edit.vue';
+import Save from '@/assets/icons/Save.vue';
+import {
+    ref, computed, useCssModule, 
+} from 'vue';
 import { useRoute } from 'vue-router';
 import { mainStore } from '@/store/main';
+import { authStore } from '@/store/auth';
 import { useToggle } from '@vueuse/core';
 
 interface Props {
-    numb: number;
+    id: string;
     text: string;
     author: string;
+    isEditable?: boolean;
 }
 
-const props = withDefaults(defineProps<Props>(), {
-    numb: 0,
-    text: '',
-    author: '',
-});
+const props = withDefaults(defineProps<Props>(), { isEditable: false });
 
 const route = useRoute();
 const store = mainStore();
+const authStoreVar = authStore();
 const $style = useCssModule();
 
 const [isLinkCopied, toggleIsLinkCopied] = useToggle();
@@ -61,7 +102,7 @@ let timeout: ReturnType<typeof setTimeout>;
 const isBlur = computed(
     () =>
         Boolean(route.query.phraseNumb) &&
-        route.query.phraseNumb !== String(props.numb) &&
+        route.query.phraseNumb !== String(props.id) &&
         !store.unBlured,
 );
 
@@ -76,7 +117,7 @@ const copyLink = () => {
     clearTimeout(timeout);
     toggleIsLinkCopied(true);
 
-    var link = `${location.origin}${location.pathname}?phraseNumb=${props.numb}`;
+    var link = `${location.origin}${location.pathname}?phraseNumb=${props.id}`;
 
     // Копируем ссылку в буфер обмена
     var tempInput = document.createElement('input');
@@ -87,6 +128,25 @@ const copyLink = () => {
     document.body.removeChild(tempInput);
     timeout = setTimeout(() => (toggleIsLinkCopied(false)), 1000);
 };
+
+const textBlock = ref<HTMLDivElement>();
+const editText = ref(props.text);
+const editAuthor = ref(props.author);
+const textBlockHeight = ref(0);
+const toggleIsEditable = () => {
+    textBlockHeight.value = (textBlock.value?.clientHeight ?? 0) + 15;
+    editText.value = props.text;
+    editAuthor.value = props.author;
+    store.toggleIsEditableAphorism(props.id);
+};
+
+const isChangedAphorism = computed(() => editText.value !== props.text || editAuthor.value !== props.author);
+
+const saveAphorism = () => store.saveAphorism({
+    id: props.id,
+    text: editText.value,
+    author: editAuthor.value,
+});
 </script>
 
 <style lang="scss" module>
@@ -98,7 +158,6 @@ const copyLink = () => {
         border-bottom: 1px solid var(--border-color);
         border-left: 8px solid var(--border-left-color);
         background: var(--blockquote-bg-1);
-        font-size: 28px;
         line-height: 30px;
         color: var(--blockquote-color);
         font-weight: 300;
@@ -181,6 +240,21 @@ const copyLink = () => {
 
     .text {
         margin-bottom: 10px;
+        font-size: 28px;
+    }
+
+    .textarea {
+        width: 100%;
+        border: none;
+        background-color: transparent;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 28px;
+        resize: none;
+    }
+
+    .textareaAuthor {
+        font-size: 20px;
+        font-style: italic;
     }
 
     .author {
@@ -202,5 +276,18 @@ const copyLink = () => {
         height: 7px;
         color: var(--copy-bg);
         transform: rotate(180deg);
+    }
+
+    .edit, .save {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        color: var(--icon-color);
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .save {
+        top: 40px;
     }
 </style>

@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { Aphorism } from '@/services/types';
 import { LocationQuery } from 'vue-router';
+import { notify } from '@kyvg/vue3-notification';
 import Api from '@/services/api';
 
 export const mainStore = defineStore('main', {
@@ -39,6 +40,36 @@ export const mainStore = defineStore('main', {
                     200,
                 );
             }
+        },
+
+        toggleIsEditableAphorism(id: string) {
+            const aphorism = this.aphorisms.find((aphorism: Aphorism) => aphorism.id === id) ?? {} as Aphorism;
+            aphorism.isEditable = !aphorism.isEditable;
+        },
+
+        async saveAphorism({ id, text, author }: { id: string; text: string; author: string }) {
+            let notifyText = 'Афоризм не удалось сохранить';
+            let type = 'error';
+
+            const aphorism = this.aphorisms.find((aphorism: Aphorism) => aphorism.id === id) ?? {} as Aphorism;
+            aphorism.text = text;
+            aphorism.author = author;
+            aphorism.isEditable = false;
+            try {
+                const { data: result } = await Api.saveAphorism(aphorism);
+                if (result === 'success') {
+                    notifyText = 'Афоризм успешно сохранён!';
+                    type = 'success';
+                }
+            } catch (error) {
+                console.error('error', error);
+            }
+            
+            notify({
+                title: 'Сохранение афоризма',
+                text: notifyText,
+                type,
+            });
         },
     },
 });

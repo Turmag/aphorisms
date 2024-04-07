@@ -19,7 +19,7 @@ module.exports = {
         'plugin:vue/recommended',
         'plugin:jsonc/recommended-with-jsonc',
     ],
-    plugins: ['vue', '@typescript-eslint', '@typescript-eslint/recommended'],
+    plugins: ['vue', '@typescript-eslint'],
     rules: {
         indent: 'off',
         '@typescript-eslint/indent': [
@@ -83,7 +83,8 @@ module.exports = {
         'quote-props': ['error', 'as-needed'],
         'comma-style': ['error', 'last'],
         'semi-style': ['error', 'last'],
-        semi: [2, 'always'],
+        semi: 'off',
+        '@typescript-eslint/semi': ['error', 'always'],
         'comma-dangle': ['error', 'always-multiline'],
         'brace-style': ['error', '1tbs'],
         'eol-last': ['error', 'always'],
@@ -134,6 +135,7 @@ module.exports = {
             },
         ],
         '@typescript-eslint/member-delimiter-style': 'error',
+        '@typescript-eslint/no-unused-vars': 'error',
     },
     overrides: [
         {

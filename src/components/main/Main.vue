@@ -6,7 +6,6 @@
                 v-for="(aphorism, i) in store.filteredAphorisms"
                 :key="i"
                 v-bind="aphorism"
-                :numb="Number(aphorism.id)"
             />
         </div>
     </main>

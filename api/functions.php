@@ -2,6 +2,8 @@
 header("Content-Type: text/html; charset=utf-8");
 require "db_connect.php";
 
+session_start();
+
 function myAphorisms(){
 	$mysqli = mysqli_connect(DB_HOST, DB_LOGIN, DB_PASSWORD, DB_NAME);
 	mysqli_set_charset($mysqli, 'utf8');
@@ -20,6 +22,18 @@ function dataBaseToArray($result){
         $array[] = $row;
     }
     return $array;
+}
+
+function saveAphorism($id, $text, $author){
+	$mysqli = mysqli_connect(DB_HOST, DB_LOGIN, DB_PASSWORD, DB_NAME);
+	mysqli_set_charset($mysqli, "utf8");
+	$text = mysqli_real_escape_string($mysqli, $text);
+	$author = mysqli_real_escape_string($mysqli, $author);
+	$sql = "UPDATE aphorisms SET 
+			text = '$text',
+			author = '$author'
+			WHERE id = $id";
+	mysqli_query($mysqli, $sql) or die(mysqli_connect_error());
 }
 
 function replaceChar(){
@@ -49,11 +63,16 @@ function isAuthorizedUser(){
 	return $_SESSION["isAphorismsAuthorized"];
 }
 
+function checkAuthorizedUser(){
+	if(!isAuthorizedUser()){
+		header('HTTP/1.1 500 Internal Server Error');
+		die("Эта операция недопустима неавторизованным пользователям");
+	}
+}
+
 function setCookies(){
 	$cookiesFile = 'cookies.json';
-	if(!file_exists($cookiesFile)){
-		file_put_contents($cookiesFile, '[]');
-	}
+	if(!file_exists($cookiesFile)) file_put_contents($cookiesFile, '[]');
 
 	$handle = fopen($cookiesFile, "r");
 	$cookies = json_decode(fread($handle, filesize($cookiesFile)));
@@ -71,9 +90,7 @@ function setCookies(){
 
 function unsetCookie(){
 	$cookiesFile = 'cookies.json';
-	if(!file_exists($cookiesFile)){
-		file_put_contents($cookiesFile, '[]');
-	}
+	if(!file_exists($cookiesFile)) file_put_contents($cookiesFile, '[]');
 
 	$handle = fopen($cookiesFile, "r");
 	$cookies = json_decode(fread($handle, filesize($cookiesFile)));
@@ -92,9 +109,7 @@ function unsetCookie(){
 
 function checkCookie(){
 	$cookiesFile = 'cookies.json';
-	if(!file_exists($cookiesFile)){
-		file_put_contents($cookiesFile, '[]');
-	}
+	if(!file_exists($cookiesFile)) file_put_contents($cookiesFile, '[]');
 	$handle = fopen($cookiesFile, "r");
 	$cookies = json_decode(fread($handle, filesize($cookiesFile)));
 	fclose($handle);

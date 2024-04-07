@@ -32,7 +32,9 @@
 
 <script setup lang="ts">
 import { VueFinalModal } from 'vue-final-modal';
-import { ref, computed, onMounted } from 'vue';
+import {
+    ref, computed, onMounted, 
+} from 'vue';
 
 interface Props {
     getTitle: () => string;
@@ -49,10 +51,12 @@ const props = withDefaults(
     },
 );
 
-const emits = defineEmits<{
+interface Emits {
     (e: 'apply', value: string): void;
     (e: 'cancel'): void;
-}>();
+}
+
+const emits = defineEmits<Emits>();
 
 const title = computed(() => props.getTitle() ?? '');
 const applyText = computed(() => props.getApplyText());

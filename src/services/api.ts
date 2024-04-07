@@ -4,6 +4,18 @@ import { Aphorism } from '@/services/types';
 
 export default { 
     getAphorisms: (): Promise<{ data: Aphorism[] }> => axios.get(`${path}/api/getAphorisms.php`),
+    saveAphorism: (aphorism: Aphorism): Promise<{ data: string }> => {
+        const formData = new FormData();
+        formData.append('id', aphorism.id);
+        formData.append('text', aphorism.text);
+        formData.append('author', aphorism.author);
+        return axios.post(`${path}/api/saveAphorism.php`, formData, {
+            headers: {
+                'Content-Type': 'text/html',
+                'Access-Control-Allow-Origin': '*',
+            },
+        });
+    },
     authorize: (password: string): Promise<{ data: string }> => {
         const formData = new FormData();
         formData.append('password', password);
@@ -12,8 +24,8 @@ export default {
                 'Content-Type': 'text/html',
                 'Access-Control-Allow-Origin': '*',
             },
-        })
+        });
     },
     checkAuthorize: (): Promise<{ data: string }> => axios.post(`${path}/api/checkAuthorize.php`),
     logout: (): Promise<{ data: string }> => axios.post(`${path}/api/logout.php`),
- };
+};

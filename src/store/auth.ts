@@ -4,9 +4,7 @@ import Api from '@/services/api';
 
 export const authStore = defineStore('auth', {
     state: () => {
-        return {
-            isAuthorized: false
-        };
+        return { isAuthorized: false };
     },
 
     actions: {
@@ -17,7 +15,7 @@ export const authStore = defineStore('auth', {
             try {
                 const { data } = await Api.authorize(password);
                 this.isAuthorized = data === 'success';
-                if(this.isAuthorized){
+                if(this.isAuthorized) {
                     text = 'Всё прекрасно!';
                     type = 'success';
                     this.isAuthorized = true;
@@ -47,7 +45,7 @@ export const authStore = defineStore('auth', {
             }
         },
 
-        async logout(){
+        async logout() {
             try {
                 const { data: result } = await Api.logout();
                 if (result === 'success') this.isAuthorized = false;
@@ -59,6 +57,6 @@ export const authStore = defineStore('auth', {
                     type: 'error',
                 });
             }
-        }
-    }
+        },
+    },
 });

@@ -1,7 +1,7 @@
 <template>
     <Header />
     <Main />
-    <notifications :duration="5000" />
+    <notifications :duration="5000" :width="400" />
     <ModalsContainer />
 </template>
 
