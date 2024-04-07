@@ -161,6 +161,7 @@ const saveAphorism = () => store.saveAphorism({
         line-height: 30px;
         color: var(--blockquote-color);
         font-weight: 300;
+        scroll-margin: 60px;
 
         &:nth-child(2n) {
             background: var(--blockquote-bg-2);
