@@ -12,6 +12,7 @@
     --btn-background-color-hover: #c7c7c7;
     --btn-background-color-active: #b4b4b4;
     --icon-color: #7fabc4;
+    --shadow-color: rgb(34 60 80 / 20%);
 
     background-color: var(--background-color);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -47,6 +48,7 @@ body {
         --btn-background-color-hover: #838282;
         --btn-background-color-active: #a0a0a0;
         --icon-color: #f7bfa0;
+        --shadow-color: rgb(240 245 248 / 20%);
     }
 }
 

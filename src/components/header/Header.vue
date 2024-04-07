@@ -41,11 +41,17 @@ const resetStorageDarkMode = () => {
 
 <style lang="scss" module>
     .header {
+        position: fixed;
+        top: 0;
+        z-index: 2;
         display: flex;
         align-items: center;
-        gap: 16px;
+        width: 100%;
         height: 60px;
+        background-color: var(--background-color);
+        gap: 16px;
         padding-inline: 16px;
+        box-shadow: 0 3px 2px 0 var(--shadow-color);
     }
 
     .title {
