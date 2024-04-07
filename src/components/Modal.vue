@@ -118,7 +118,7 @@ onMounted(async () => setTimeout(() => input.value?.focus()));
 
     .input {
         width: 400px;
-        height: 40px;
+        height: 60px;
         padding: 5px;
         border-radius: 8px;
         border: 1px solid var(--border-color);
