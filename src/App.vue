@@ -7,15 +7,18 @@
 import Header from '@/components/header/Header.vue';
 import Main from '@/components/main/Main.vue';
 import { useTheme } from '@/assets/js/theme';
-import { onMounted } from 'vue';
 import { mainStore } from '@/store/main';
+import { useRoute } from 'vue-router';
+import { onMounted } from 'vue';
 
 const store = mainStore();
+const route = useRoute();
 
 useTheme();
 
 onMounted(async () => {
     await store.getAphorisms();
-    document.onclick = () => (store.unBlured = true);
+    store.scrollToChosenAphorism(route.query);
+    document.onclick = () => store.unBlured = true;
 });
 </script>
