@@ -14,7 +14,7 @@
 <script setup lang="ts">
 import IconBase from '@/components/IconBase.vue';
 import Settings from '@/assets/icons/Settings.vue';
-import Modal from '@/components/Modal.vue';
+import Modal from '@/components/modal/Modal.vue';
 import { useModal } from 'vue-final-modal';
 import { authStore } from '@/store/auth';
 
@@ -46,7 +46,6 @@ const { open: openSettings, close } = useModal({
 
 <style lang="scss" module>
     .settings {
-        margin-left: auto;
         outline: none;
         color: var(--color);
         cursor: pointer;

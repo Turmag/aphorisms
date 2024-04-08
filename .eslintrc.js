@@ -127,6 +127,7 @@ module.exports = {
             before: false,
             after: true, 
         }],
+        'vue/no-v-model-argument': 'off',
         '@typescript-eslint/no-this-alias': [
             'error',
             {

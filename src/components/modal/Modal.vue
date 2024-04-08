@@ -20,11 +20,12 @@
                 @keydown.enter="sendPassword"
             >
         </div>
+        <AphorismFields v-if="isShowAphorismFields" v-model:text="text" v-model:author="author" />
         <div :class="$style.btns">
             <div :class="$style.btn" @click="emits('cancel')">
                 {{ cancelText }}
             </div>
-            <div :class="$style.btn" @click="sendPassword">
+            <div :class="$style.btn" @click="apply">
                 {{ applyText }}
             </div>
         </div>
@@ -32,6 +33,7 @@
 </template>
 
 <script setup lang="ts">
+import AphorismFields from '@/components/modal/AphorismFields.vue';
 import { VueFinalModal } from 'vue-final-modal';
 import {
     ref, computed, onMounted, 
@@ -42,6 +44,7 @@ interface Props {
     getApplyText?: () => string;
     getCancelText?: () => string;
     getIsShowInput?: () => boolean;
+    isShowAphorismFields: boolean;
 }
 
 const props = withDefaults(
@@ -49,11 +52,12 @@ const props = withDefaults(
         getApplyText: () => 'Да',
         getCancelText: () => 'Отмена',
         getIsShowInput: () => true,
+        isShowAphorismFields: false,
     },
 );
 
 interface Emits {
-    (e: 'apply', value: string): void;
+    (e: 'apply', value: string, additionalValue?: string): void;
     (e: 'cancel'): void;
 }
 
@@ -66,7 +70,13 @@ const isShowInput = computed(() => props.getIsShowInput());
 
 const password = ref('');
 
+const apply = () => props.isShowAphorismFields ? addAphorism() : sendPassword();
+
 const sendPassword = () => emits('apply', password.value);
+
+const text = ref('');
+const author = ref('');
+const addAphorism = () => emits('apply', text.value, author.value);
 
 const input = ref<HTMLInputElement>();
 onMounted(async () => setTimeout(() => input.value?.focus()));

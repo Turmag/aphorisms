@@ -36,6 +36,28 @@ function saveAphorism($id, $text, $author){
 	mysqli_query($mysqli, $sql) or die(mysqli_connect_error());
 }
 
+function addAphorism($text, $author){
+	$mysqli = mysqli_connect(DB_HOST, DB_LOGIN, DB_PASSWORD, DB_NAME);
+	mysqli_set_charset($mysqli, "utf8");
+	$sql = "INSERT INTO aphorisms(
+								text,
+								author
+								)
+							VALUES(                      
+								'$text',
+								'$author'
+								)";
+	mysqli_query($mysqli, $sql) or die(mysqli_connect_error());
+}
+
+function removeAphorism($id){
+	$mysqli = mysqli_connect(DB_HOST, DB_LOGIN, DB_PASSWORD, DB_NAME);
+	mysqli_set_charset($mysqli, "utf8");
+	$sql = "DELETE from aphorisms
+			WHERE id = $id";
+	mysqli_query($mysqli, $sql) or die(mysqli_connect_error());
+}
+
 function replaceChar(){
     $mysqli = mysqli_connect(DB_HOST, DB_LOGIN, DB_PASSWORD, DB_NAME);
 	mysqli_set_charset($mysqli, 'utf8');

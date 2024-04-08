@@ -21,7 +21,7 @@
             </div>
         </div>
         <div :class="$style.numb">
-            {{ id }}
+            {{ numb }}
         </div>
         <textarea
             v-if="isEditable"
@@ -65,6 +65,17 @@
         >
             <Save />
         </IconBase>
+        <IconBase
+            v-if="authStoreVar.isAuthorized"
+            :class="$style.delete"
+            width="20"
+            height="20"
+            :viewBoxWidth="24"
+            :viewBoxHeight="24"
+            @click="deleteAphorism"
+        >
+            <Delete />
+        </IconBase>
     </blockquote>
 </template>
 
@@ -73,8 +84,14 @@ import IconBase from '@/components/IconBase.vue';
 import CopyDecor from '@/assets/icons/CopyDecor.vue';
 import Edit from '@/assets/icons/Edit.vue';
 import Save from '@/assets/icons/Save.vue';
+import Delete from '@/assets/icons/Delete.vue';
+import Modal from '@/components/modal/Modal.vue';
+import { useModal } from 'vue-final-modal';
 import {
-    ref, computed, useCssModule, 
+    ref,
+    computed,
+    watch,
+    useCssModule, 
 } from 'vue';
 import { useRoute } from 'vue-router';
 import { mainStore } from '@/store/main';
@@ -85,6 +102,7 @@ interface Props {
     id: string;
     text: string;
     author: string;
+    numb: number;
     isEditable?: boolean;
 }
 
@@ -147,6 +165,30 @@ const saveAphorism = () => store.saveAphorism({
     text: editText.value,
     author: editAuthor.value,
 });
+
+const { open: deleteAphorism, close } = useModal({
+    component: Modal,
+    attrs: {
+        getTitle: () => `Хочешь удалить афоризм #${props.numb}?`,
+        getCancelText: () => 'Не хочу',
+        getIsShowInput: () => false,
+        onCancel() {
+            close();
+        },
+        onApply() {
+            store.removeAphorism(props.id);
+            close();
+        },
+    },
+});
+
+watch(
+    () => props.id,
+    () => {
+        editText.value = props.text;
+        editAuthor.value = props.author;
+    },
+);
 </script>
 
 <style lang="scss" module>
@@ -279,7 +321,7 @@ const saveAphorism = () => store.saveAphorism({
         transform: rotate(180deg);
     }
 
-    .edit, .save {
+    .edit, .save, .delete {
         position: absolute;
         top: 10px;
         right: 10px;
@@ -290,5 +332,10 @@ const saveAphorism = () => store.saveAphorism({
 
     .save {
         top: 40px;
+    }
+    
+    .delete {
+        top: initial;
+        bottom: 10px;
     }
 </style>

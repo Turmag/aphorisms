@@ -19,7 +19,10 @@
                 <Reset />
             </IconBase>
         </div>
-        <Settings />
+        <div :class="$style.additional">
+            <Add v-if="authStoreVar.isAuthorized" />
+            <Settings />
+        </div>
     </header>
 </template>
 
@@ -27,9 +30,13 @@
 import IconBase from '@/components/IconBase.vue';
 import Reset from '@/assets/icons/Reset.vue';
 import Switch from '@/components/header/Switch.vue';
+import Add from '@/components/header/Add.vue';
 import Settings from '@/components/header/Settings.vue';
 import { mainStore } from '@/store/main';
+import { authStore } from '@/store/auth';
+
 const store = mainStore();
+const authStoreVar = authStore();
 
 const resetStorageDarkMode = () => {
     delete localStorage['aphorismsDarkMode'];
@@ -75,5 +82,11 @@ const resetStorageDarkMode = () => {
         color: var(--color);
         cursor: pointer;
         user-select: none;
+    }
+
+    .additional {
+        display: flex;
+        gap: 8px;
+        margin-left: auto;
     }
 </style>

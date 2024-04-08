@@ -16,6 +16,27 @@ export default {
             },
         });
     },
+    addAphorism: ({ text, author }: { text: string; author: string }): Promise<{ data: string }> => {
+        const formData = new FormData();
+        formData.append('text', text);
+        formData.append('author', author);
+        return axios.post(`${path}/api/addAphorism.php`, formData, {
+            headers: {
+                'Content-Type': 'text/html',
+                'Access-Control-Allow-Origin': '*',
+            },
+        });
+    },
+    removeAphorism: (id: string): Promise<{ data: string }> => {
+        const formData = new FormData();
+        formData.append('id', id);
+        return axios.post(`${path}/api/removeAphorism.php`, formData, {
+            headers: {
+                'Content-Type': 'text/html',
+                'Access-Control-Allow-Origin': '*',
+            },
+        });
+    },
     authorize: (password: string): Promise<{ data: string }> => {
         const formData = new FormData();
         formData.append('password', password);

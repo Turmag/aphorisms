@@ -71,5 +71,56 @@ export const mainStore = defineStore('main', {
                 type,
             });
         },
+
+        async addAphorism({ text, author }: { text: string; author: string }) {
+            let notifyText = 'Афоризм не удалось добавить';
+            let type = 'error';
+            let isSuccess = false;
+
+            try {
+                const { data: result } = await Api.addAphorism({
+                    text,
+                    author, 
+                });
+                isSuccess = result === 'success';
+                if (isSuccess) {
+                    notifyText = 'Афоризм успешно добавлен!';
+                    type = 'success';
+                }
+            } catch (error) {
+                console.error('error', error);
+            }
+            
+            notify({
+                title: 'Добавление афоризма',
+                text: notifyText,
+                type,
+            });
+
+            return isSuccess;
+        },
+
+        async removeAphorism(id: string) {
+            let notifyText = 'Афоризм не удалось удалить';
+            let type = 'error';
+
+            const index = this.aphorisms.findIndex((aphorism: Aphorism) => aphorism.id === id) ?? -1;
+            this.aphorisms.splice(index, 1);
+            try {
+                const { data: result } = await Api.removeAphorism(id);
+                if (result === 'success') {
+                    notifyText = 'Афоризм успешно удалён!';
+                    type = 'success';
+                }
+            } catch (error) {
+                console.error('error', error);
+            }
+            
+            notify({
+                title: 'Удаление афоризма',
+                text: notifyText,
+                type,
+            });
+        },
     },
 });
