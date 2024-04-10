@@ -5,3 +5,8 @@ export interface Aphorism {
     numb: number;
     isEditable?: boolean;
 }
+
+export interface ScrollTopObj {
+    top: number;
+    time: number;
+}

@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
-import { router } from '@/router';
+import { router } from '@/router/router';
 import '@/style.scss';
 import '@/assets/scss/notification.scss';
 import 'vue-final-modal/style.css';

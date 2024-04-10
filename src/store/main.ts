@@ -7,6 +7,7 @@ import Api from '@/services/api';
 export const mainStore = defineStore('main', {
     state: () => {
         return {
+            isLoadedPage: false,
             aphorisms: [] as Aphorism[],
             unBlured: false,
             isDarkMode: false,
