@@ -31,4 +31,3 @@ onMounted(async () => {
     document.onclick = () => store.unBlured = true;
 });
 </script>
-@/assets/js/scrollPosition
