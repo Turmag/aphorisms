@@ -6,7 +6,6 @@ import { ScrollTopObj } from '@/services/types';
 export const useScrollPosition = () => {
     const store = mainStore();
 
-
     window.onbeforeunload = () => {
         const obj = {
             top: window.scrollY,
