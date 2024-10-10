@@ -80,7 +80,7 @@
 </template>
 
 <script setup lang="ts">
-import IconBase from '@/components/IconBase.vue';
+import IconBase from '@/components/shared/IconBase.vue';
 import CopyDecor from '@/assets/icons/CopyDecor.vue';
 import Edit from '@/assets/icons/Edit.vue';
 import Save from '@/assets/icons/Save.vue';

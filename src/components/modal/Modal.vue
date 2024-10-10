@@ -47,7 +47,7 @@ interface IProps {
     getApplyText?: () => string;
     getCancelText?: () => string;
     getIsShowInput?: () => boolean;
-    isShowAphorismFields: boolean;
+    isShowAphorismFields?: boolean;
 }
 
 const props = withDefaults(

@@ -1,23 +1,10 @@
 <template>
-    <header :class="$style.header">
+    <header :class="headerClasses">
         <h1 :class="$style.title">
             Афоризмы
         </h1>
         <div :class="$style.switchWrapper">
             <Switch />
-            <IconBase
-                v-if="store.isSavedDarkMode"
-                v-tooltip="'Вернуться к системной теме'"
-                :class="$style.themeReset"
-                width="10"
-                height="10"
-                viewBoxWidth="1920"
-                viewBoxHeight="1920"
-                style="min-width: 15px;"
-                @click="resetStorageDarkMode"
-            >
-                <Reset />
-            </IconBase>
         </div>
         <div :class="$style.additional">
             <Add v-if="authStoreVar.isAuthorized" />
@@ -27,30 +14,29 @@
 </template>
 
 <script setup lang="ts">
-import IconBase from '@/components/IconBase.vue';
-import Reset from '@/assets/icons/Reset.vue';
+import { computed, useCssModule } from 'vue';
 import Switch from '@/components/header/Switch.vue';
 import Add from '@/components/header/Add.vue';
 import Settings from '@/components/header/Settings.vue';
-import { mainStore } from '@/store/main';
+import { useStorage } from '@vueuse/core';
 import { authStore } from '@/store/auth';
 
-const store = mainStore();
 const authStoreVar = authStore();
+const $style = useCssModule();
+const isStickyFilters = useStorage('isStickyFilters', false);
 
-const resetStorageDarkMode = () => {
-    delete localStorage['aphorismsDarkMode'];
-    store.isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    store.isDarkMode ? document.body.classList.add('dark') : document.body.classList.remove('dark');
-    store.isSavedDarkMode = false;
-};
+const headerClasses = computed(() => ({
+    [$style.header]: true,
+    [$style.headerShadow]: !isStickyFilters.value,
+}));
 </script>
 
 <style lang="scss" module>
     .header {
-        position: fixed;
+        position: sticky;
         top: 0;
-        z-index: 2;
+        left: 0;
+        z-index: 3;
         display: flex;
         align-items: center;
         width: 100%;
@@ -58,6 +44,9 @@ const resetStorageDarkMode = () => {
         background-color: var(--background-color);
         gap: 16px;
         padding-inline: 16px;
+    }
+
+    .headerShadow {
         box-shadow: 0 3px 2px 0 var(--shadow-color);
     }
 
@@ -66,22 +55,6 @@ const resetStorageDarkMode = () => {
         font-size: 28px;
         color: var(--color);
         font-weight: bold;
-    }
-
-    .switchWrapper {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .themeReset {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        outline: none;
-        color: var(--color);
-        cursor: pointer;
-        user-select: none;
     }
 
     .additional {

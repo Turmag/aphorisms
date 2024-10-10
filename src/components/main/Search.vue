@@ -1,5 +1,5 @@
 <template>
-    <div :class="$style.wrapper">
+    <div :class="wrapperClasses">
         <input v-model="store.filterWord" :class="$style.filter" placeholder="Поиск">
         <IconBase
             :class="$style.cancel"
@@ -11,24 +11,47 @@
         >
             <Cancel />
         </IconBase>
+        <Checkbox v-model="isStickyFilters">
+            Липкий поиск
+        </Checkbox>
     </div>
 </template>
 
 <script setup lang="ts">
-import IconBase from '@/components/IconBase.vue';
+import { computed, useCssModule } from 'vue';
+import IconBase from '@/components/shared/IconBase.vue';
 import Cancel from '@/assets/icons/Cancel.vue';
+import Checkbox from '@/components/shared/Checkbox.vue';
+import { useStorage } from '@vueuse/core';
 import { mainStore } from '@/store/main';
+
 const store = mainStore();
+const $style = useCssModule();
+const isStickyFilters = useStorage('isStickyFilters', false);
+
+const wrapperClasses = computed(() => ({
+    [$style.wrapper]: true,
+    [$style.wrapperSticky]: isStickyFilters.value,
+}));
 
 const resetFilter = () => store.filterWord = '';
 </script>
 
 <style lang="scss" module>
     .wrapper {
+        z-index: 2;
         display: flex;
         align-items: center;
+        padding: 16px;
+        background-color: var(--background-color);
         gap: 16px;
-        padding-inline: 16px;
+    }
+
+    .wrapperSticky {
+        position: sticky;
+        top: 60px;
+        left: 0;
+        box-shadow: 0 3px 2px 0 var(--shadow-color);
     }
 
     .filter {

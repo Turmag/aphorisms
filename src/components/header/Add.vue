@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import IconBase from '@/components/IconBase.vue';
+import IconBase from '@/components/shared/IconBase.vue';
 import Add from '@/assets/icons/Add.vue';
 import Modal from '@/components/modal/Modal.vue';
 import { useModal } from 'vue-final-modal';

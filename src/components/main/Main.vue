@@ -22,8 +22,5 @@ const store = mainStore();
     .main {
         display: flex;
         flex-direction: column;
-        gap: 16px;
-        margin-top: 60px;
-        padding-top: 16px;
     }
 </style>
