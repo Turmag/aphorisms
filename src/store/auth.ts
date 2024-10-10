@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { notify } from '@kyvg/vue3-notification';
-import Api from '@/services/api';
+import Api from '@/shared/api';
 
 export const authStore = defineStore('auth', {
     state: () => {

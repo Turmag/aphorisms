@@ -8,19 +8,19 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-interface Props {
+interface IProps {
     text: string;
     author: string;
 }
 
-const props = defineProps<Props>();
+const props = defineProps<IProps>();
 
-interface Emits {
+interface IEmits {
     (e: 'update:text', value: string): void;
     (e: 'update:author', value: string): void;
 }
 
-const emits = defineEmits<Emits>();
+const emits = defineEmits<IEmits>();
 
 const localText = computed(({
     get: () => props.text,

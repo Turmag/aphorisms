@@ -1,8 +1,7 @@
 {
     "name": "aphorisms",
-    "version": "2.0.0",
+    "version": "2.0.2",
     "private": true,
-    "type": "commonjs",
     "scripts": {
         "bd": "yarn build && yarn deploy",
         "build": "vite build",
@@ -17,7 +16,7 @@
         "floating-vue": "^5.2.2",
         "pinia": "^2.0.28",
         "sass": "^1.56.1",
-        "vue": "^3.4.21",
+        "vue": "^3.5.11",
         "vue-final-modal": "^4.5.4",
         "vue-router": "^4.1.6"
     },

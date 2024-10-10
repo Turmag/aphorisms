@@ -1,4 +1,4 @@
-export interface Aphorism {
+export interface IAphorism {
     author: string;
     id: string;
     text: string;
@@ -6,7 +6,7 @@ export interface Aphorism {
     isEditable?: boolean;
 }
 
-export interface ScrollTopObj {
+export interface IScrollTopObj {
     top: number;
     time: number;
 }

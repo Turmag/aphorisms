@@ -1,10 +1,10 @@
 import axios from 'axios';
 const path = import.meta.env.MODE === 'development' ? '' : import.meta.env.BASE_URL;
-import { Aphorism } from '@/services/types';
+import type { IAphorism } from '@/shared/types';
 
 export default { 
-    getAphorisms: (): Promise<{ data: Aphorism[] }> => axios.get(`${path}/api/getAphorisms.php`),
-    saveAphorism: (aphorism: Aphorism): Promise<{ data: string }> => {
+    getAphorisms: (): Promise<{ data: IAphorism[] }> => axios.get(`${path}/api/getAphorisms.php`),
+    saveAphorism: (aphorism: IAphorism): Promise<{ data: string }> => {
         const formData = new FormData();
         formData.append('id', aphorism.id);
         formData.append('text', aphorism.text);

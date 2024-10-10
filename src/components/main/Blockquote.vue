@@ -98,7 +98,7 @@ import { mainStore } from '@/store/main';
 import { authStore } from '@/store/auth';
 import { useToggle } from '@vueuse/core';
 
-interface Props {
+interface IProps {
     id: string;
     text: string;
     author: string;
@@ -106,7 +106,7 @@ interface Props {
     isEditable?: boolean;
 }
 
-const props = withDefaults(defineProps<Props>(), { isEditable: false });
+const props = withDefaults(defineProps<IProps>(), { isEditable: false });
 
 const route = useRoute();
 const store = mainStore();

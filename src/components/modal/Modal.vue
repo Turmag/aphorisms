@@ -36,10 +36,13 @@
 import AphorismFields from '@/components/modal/AphorismFields.vue';
 import { VueFinalModal } from 'vue-final-modal';
 import {
-    ref, computed, onMounted, 
+    ref,
+    computed,
+    useTemplateRef,
+    onMounted, 
 } from 'vue';
 
-interface Props {
+interface IProps {
     getTitle: () => string;
     getApplyText?: () => string;
     getCancelText?: () => string;
@@ -48,7 +51,7 @@ interface Props {
 }
 
 const props = withDefaults(
-    defineProps<Props>(), {
+    defineProps<IProps>(), {
         getApplyText: () => 'Да',
         getCancelText: () => 'Отмена',
         getIsShowInput: () => true,
@@ -56,12 +59,12 @@ const props = withDefaults(
     },
 );
 
-interface Emits {
+interface IEmits {
     (e: 'apply', value: string, additionalValue?: string): void;
     (e: 'cancel'): void;
 }
 
-const emits = defineEmits<Emits>();
+const emits = defineEmits<IEmits>();
 
 const title = computed(() => props.getTitle() ?? '');
 const applyText = computed(() => props.getApplyText());
@@ -78,7 +81,7 @@ const text = ref('');
 const author = ref('');
 const addAphorism = () => emits('apply', text.value, author.value);
 
-const input = ref<HTMLInputElement>();
+const input = useTemplateRef('input');
 onMounted(async () => setTimeout(() => input.value?.focus()));
 </script>
 

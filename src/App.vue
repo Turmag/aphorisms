@@ -9,12 +9,11 @@
 import Header from '@/components/header/Header.vue';
 import Main from '@/components/main/Main.vue';
 import { ModalsContainer } from 'vue-final-modal';
-import { useTheme } from '@/assets/js/theme';
-import { useScrollPosition } from '@/assets/js/scrollPosition';
+import { useTheme } from '@/shared/composables/theme';
+import { useScrollPosition } from '@/shared/composables/scrollPosition';
 import { mainStore } from '@/store/main';
 import { authStore } from '@/store/auth';
 import { useRoute } from 'vue-router';
-import { onMounted } from 'vue';
 
 const store = mainStore();
 const authStoreVar = authStore();
@@ -23,11 +22,13 @@ const route = useRoute();
 useTheme();
 useScrollPosition();
 
-onMounted(async () => {
+const init = async () => {
     await authStoreVar.checkAuthorize();
     await store.getAphorisms();
     store.isLoadedPage = true;
     store.scrollToChosenAphorism(route.query);
     document.onclick = () => store.unBlured = true;
-});
+};
+
+init();
 </script>

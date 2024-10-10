@@ -1,14 +1,14 @@
 import { defineStore } from 'pinia';
-import { Aphorism } from '@/services/types';
+import type { IAphorism } from '@/shared/types';
 import { LocationQuery } from 'vue-router';
 import { notify } from '@kyvg/vue3-notification';
-import Api from '@/services/api';
+import Api from '@/shared/api';
 
 export const mainStore = defineStore('main', {
     state: () => {
         return {
             isLoadedPage: false,
-            aphorisms: [] as Aphorism[],
+            aphorisms: [] as IAphorism[],
             unBlured: false,
             isDarkMode: false,
             isSavedDarkMode: false,
@@ -17,8 +17,8 @@ export const mainStore = defineStore('main', {
     },
 
     getters: {
-        filteredAphorisms(state): Aphorism[] {
-            return state.aphorisms.filter((aphorism: Aphorism) => aphorism.text.toLowerCase().includes(this.filterWord.toLowerCase()) || aphorism.author.toLowerCase().includes(this.filterWord.toLowerCase()));
+        filteredAphorisms(state): IAphorism[] {
+            return state.aphorisms.filter(aphorism => aphorism.text.toLowerCase().includes(this.filterWord.toLowerCase()) || aphorism.author.toLowerCase().includes(this.filterWord.toLowerCase()));
         },
     },
 
@@ -44,7 +44,7 @@ export const mainStore = defineStore('main', {
         },
 
         toggleIsEditableAphorism(id: string) {
-            const aphorism = this.aphorisms.find((aphorism: Aphorism) => aphorism.id === id) ?? {} as Aphorism;
+            const aphorism = this.aphorisms.find(aphorism => aphorism.id === id) ?? {} as IAphorism;
             aphorism.isEditable = !aphorism.isEditable;
         },
 
@@ -52,7 +52,7 @@ export const mainStore = defineStore('main', {
             let notifyText = 'Афоризм не удалось сохранить';
             let type = 'error';
 
-            const aphorism = this.aphorisms.find((aphorism: Aphorism) => aphorism.id === id) ?? {} as Aphorism;
+            const aphorism = this.aphorisms.find(aphorism => aphorism.id === id) ?? {} as IAphorism;
             aphorism.text = text;
             aphorism.author = author;
             aphorism.isEditable = false;
@@ -105,7 +105,7 @@ export const mainStore = defineStore('main', {
             let notifyText = 'Афоризм не удалось удалить';
             let type = 'error';
 
-            const index = this.aphorisms.findIndex((aphorism: Aphorism) => aphorism.id === id) ?? -1;
+            const index = this.aphorisms.findIndex(aphorism => aphorism.id === id) ?? -1;
             this.aphorisms.splice(index, 1);
             try {
                 const { data: result } = await Api.removeAphorism(id);
