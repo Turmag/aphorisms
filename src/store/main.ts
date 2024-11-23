@@ -1,17 +1,15 @@
 import { defineStore } from 'pinia';
-import type { IAphorism } from '@/shared/types';
+import type { IStore, IAphorism } from '@/shared/types';
 import type { LocationQuery } from 'vue-router';
 import { notify } from '@kyvg/vue3-notification';
 import Api from '@/shared/api';
 
 export const mainStore = defineStore('main', {
-    state: () => {
+    state: (): IStore => {
         return {
             isLoadedPage: false,
-            aphorisms: [] as IAphorism[],
+            aphorisms: [],
             unBlured: false,
-            isDarkMode: false,
-            isSavedDarkMode: false,
             filterWord: '',
         };
     },

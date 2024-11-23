@@ -5,7 +5,7 @@
                 <input
                     :class="$style.input"
                     type="checkbox"
-                    :checked="!store.isDarkMode"
+                    :checked="!isDarkMode"
                     @change="toggle"
                 >
                 <span :class="$style.slider" />
@@ -13,7 +13,7 @@
         </div>
 
         <IconBase
-            v-if="store.isSavedDarkMode"
+            v-if="isSavedDarkMode"
             v-tooltip="'Вернуться к системной теме'"
             :class="$style.themeReset"
             width="10"
@@ -31,26 +31,32 @@
 <script setup lang="ts">
 import IconBase from '@/components/shared/IconBase.vue';
 import Reset from '@/assets/icons/Reset.vue';
-import { mainStore } from '@/store/main';
-const store = mainStore();
+import { useStorage } from '@vueuse/core';
+
+const isDarkMode = useStorage('isDarkModeAphorisms', false);
+const isSavedDarkMode = useStorage('isSavedDarkModeAphorisms', false);
 
 const toggle = () => {
     const bodyClass = document.body.classList;
     bodyClass.contains('dark') ? bodyClass.remove('dark') : bodyClass.add('dark');
-    store.isDarkMode = bodyClass.contains('dark');
-    localStorage.setItem('aphorismsDarkMode', String(store.isDarkMode));
-    store.isSavedDarkMode = true;
+    isDarkMode.value = bodyClass.contains('dark');
+    isSavedDarkMode.value = true;
 };
 
 const resetStorageDarkMode = () => {
-    delete localStorage['aphorismsDarkMode'];
-    store.isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    store.isDarkMode ? document.body.classList.add('dark') : document.body.classList.remove('dark');
-    store.isSavedDarkMode = false;
+    isDarkMode.value = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    isDarkMode.value ? document.body.classList.add('dark') : document.body.classList.remove('dark');
+    isSavedDarkMode.value = false;
 };
 </script>
 
 <style lang="scss" module>
+    .switchWrapper {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
     .switch {
         position: relative;
         width: 44px;
@@ -97,12 +103,6 @@ const resetStorageDarkMode = () => {
         background-color: var(--background-color);
         transform: translateX(22px);
         box-shadow: none;
-    }
-
-    .switchWrapper {
-        display: flex;
-        align-items: center;
-        gap: 8px;
     }
 
     .themeReset {
