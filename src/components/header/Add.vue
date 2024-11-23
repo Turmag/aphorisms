@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import IconBase from '@/components/shared/IconBase.vue';
-import Add from '@/assets/icons/Add.vue';
+import { Add } from '@/assets/icons';
 import Modal from '@/components/modal/Modal.vue';
 import { useModal } from 'vue-final-modal';
 import { mainStore } from '@/store/main';

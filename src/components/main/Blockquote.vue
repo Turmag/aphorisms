@@ -80,13 +80,15 @@
 </template>
 
 <script setup lang="ts">
-import IconBase from '@/components/shared/IconBase.vue';
-import CopyDecor from '@/assets/icons/CopyDecor.vue';
-import Edit from '@/assets/icons/Edit.vue';
-import Save from '@/assets/icons/Save.vue';
-import Delete from '@/assets/icons/Delete.vue';
-import Modal from '@/components/modal/Modal.vue';
 import { useModal } from 'vue-final-modal';
+import IconBase from '@/components/shared/IconBase.vue';
+import Modal from '@/components/modal/Modal.vue';
+import {
+    CopyDecor,
+    Edit,
+    Save,
+    Delete,
+} from '@/assets/icons';
 import {
     ref,
     computed,
@@ -167,17 +169,20 @@ const saveAphorism = () => store.saveAphorism({
 });
 
 const { open: deleteAphorism, close } = useModal({
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     component: Modal,
     attrs: {
         getTitle: () => `Хочешь удалить афоризм #${props.numb}?`,
         getCancelText: () => 'Не хочу',
         getIsShowInput: () => false,
         onCancel() {
-            close();
+            void (async () => await close())();
         },
         onApply() {
-            store.removeAphorism(props.id);
-            close();
+            void (async () => {
+                await store.removeAphorism(props.id);
+                await close();
+            })();
         },
     },
 });

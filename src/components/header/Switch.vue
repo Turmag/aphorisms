@@ -30,7 +30,7 @@
 
 <script setup lang="ts">
 import IconBase from '@/components/shared/IconBase.vue';
-import Reset from '@/assets/icons/Reset.vue';
+import { Reset } from '@/assets/icons';
 import { useStorage } from '@vueuse/core';
 
 const isDarkMode = useStorage('isDarkModeAphorisms', false);

@@ -14,15 +14,16 @@ module.exports = {
         extraFileExtensions: ['.vue', '.json'],
     },
     extends: [
-        'plugin:vue/vue3-recommended',
         'eslint:recommended',
-        'plugin:vue/recommended',
+        'plugin:@typescript-eslint/recommended-type-checked',
+        'plugin:@typescript-eslint/stylistic-type-checked',
+        'plugin:vue/vue3-recommended',
         'plugin:jsonc/recommended-with-jsonc',
     ],
-    plugins: ['vue', '@typescript-eslint'],
+    plugins: ['@typescript-eslint', '@stylistic', 'eslint-plugin-local-rules'],
     rules: {
         indent: 'off',
-        '@typescript-eslint/indent': [
+        '@stylistic/indent': [
             'error',
             4,
             {
@@ -135,9 +136,13 @@ module.exports = {
                 allowedNames: ['self'],
             },
         ],
-        '@typescript-eslint/member-delimiter-style': 'error',
+        '@stylistic/member-delimiter-style': 'error',
         '@typescript-eslint/no-unused-vars': 'error',
         '@typescript-eslint/consistent-type-imports': 'error',
+        'local-rules/prefer-true-attribute-shorthand': ['error', 'always'],
+        'local-rules/add-vue-extension': 'error',
+        'local-rules/use-shortest-alias': 'error',
+        'local-rules/import-entities-by-column-or-line': ['error', { minProperties: 3 }],
     },
     overrides: [
         {
@@ -145,10 +150,9 @@ module.exports = {
             rules: { indent: 'off' },
         },
         {
-            files: ['*.ts'],
+            files: ['*.js', '*.json', '*.json5', '*.jsonc'],
             extends: [
-                'plugin:@typescript-eslint/recommended-type-checked',
-                'plugin:@typescript-eslint/stylistic-type-checked',
+                'plugin:@typescript-eslint/disable-type-checked',
             ],
         },
         {
