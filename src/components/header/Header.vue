@@ -3,9 +3,7 @@
         <h1 :class="$style.title">
             Афоризмы
         </h1>
-        <div :class="$style.switchWrapper">
-            <Switch />
-        </div>
+        <Switch />
         <div :class="$style.additional">
             <Add v-if="authStoreVar.isAuthorized" />
             <Settings />
