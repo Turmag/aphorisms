@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import type { IAphorism } from '@/shared/types';
-import { LocationQuery } from 'vue-router';
+import type { LocationQuery } from 'vue-router';
 import { notify } from '@kyvg/vue3-notification';
 import Api from '@/shared/api';
 
