@@ -3,22 +3,21 @@ import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import vueLint from 'eslint-plugin-vue';
 import stylistic from '@stylistic/eslint-plugin';
+import local from 'eslint-plugin-local';
 
-// const localRules = require('eslint-plugin-local-rules')
-import localRules from 'eslint-plugin-local-rules';
-console.log('localRules', localRules);
 export default tseslint.config(
-    { plugins: { 'local-rules': localRules } },
+    { plugins: { local } },
 
     // config parsers
     {
         files: ['*.vue', '**/*.vue', '*.ts', '**/*.ts'],
         languageOptions: {
             parserOptions: {
-                parser: '@typescript-eslint/parser',
+                parser: tseslint.parser,
                 sourceType: 'module',
                 projectService: true,
                 tsconfigRootDir: import.meta.dirname,
+                extraFileExtensions: ['.vue'],
             },
         },
     },
@@ -93,15 +92,17 @@ export default tseslint.config(
             'vue/multiline-html-element-content-newline': ['warn', { ignores: ['pre', 'textarea'] }],
             'prefer-const': 'error',
             '@typescript-eslint/consistent-type-imports': 'error',
-            'arrow-body-style': ['error'],
+            'arrow-body-style': 'error',
+            'no-useless-escape': 'off',
+            'vue/no-v-html': 'off',
             '@typescript-eslint/no-misused-promises': [
                 'error',
                 { checksVoidReturn: false },
             ],
-            'local-rules/prefer-true-attribute-shorthand': ['error', 'always'],
-            // 'local-rules/add-vue-extension': 'error',
-            // 'local-rules/use-shortest-alias': 'error',
-            // 'local-rules/import-entities-by-column-or-line': ['error', { minProperties: 3 }],
+            'local/prefer-true-attribute-shorthand': ['error', 'always'],
+            'local/add-vue-extension': 'error',
+            'local/use-shortest-alias': 'error',
+            'local/import-entities-by-column-or-line': ['error', { minProperties: 3 }],
         },
     },
 

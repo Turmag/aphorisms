@@ -22,7 +22,6 @@
         "vue-router": "^4.1.6"
     },
     "devDependencies": {
-        "@rushstack/eslint-patch": "^1.7.2",
         "@stylistic/eslint-plugin": "^2.11.0",
         "@types/node": "^20.11.24",
         "@typescript-eslint/eslint-plugin": "^7.3.1",
@@ -31,7 +30,7 @@
         "@vue/eslint-config-typescript": "^13.0.0",
         "eslint": "^9.15.0",
         "eslint-plugin-jsonc": "^2.14.1",
-        "eslint-plugin-local-rules": "^3.0.2",
+        "eslint-plugin-local": "^6.0.0",
         "eslint-plugin-vue": "^9.31.0",
         "jsonc-eslint-parser": "^2.4.0",
         "postcss-html": "^1.6.0",

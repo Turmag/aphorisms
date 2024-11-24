@@ -70,6 +70,7 @@
             height="20"
             :viewBoxWidth="62"
             :viewBoxHeight="62"
+            asdf
             @click="saveAphorism"
         >
             <Save />
@@ -81,7 +82,6 @@
             height="20"
             :viewBoxWidth="24"
             :viewBoxHeight="24"
-            :asd="true"
             @click="deleteAphorism"
         >
             <Delete />

@@ -1,23 +1,23 @@
 {
-    compilerOptions: {
-        baseUrl: '.',
-        paths: {
-            '@/*': ['src/*'],
-            '@components/*': ['src/components/*'],
-            '@assets/*': ['src/assets/*']
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["src/*"],
+            "@components/*": ["src/components/*"],
+            "@assets/*": ["src/assets/*"]
         },
-        lib: ['esnext', 'dom'],
-        types: ['node', 'vite/client'],
-        target: 'esnext',
-        module: 'esnext',
-        moduleResolution: 'node',
-        strict: true,
-        allowSyntheticDefaultImports: true,
+        "lib": ["esnext", "dom"],
+        "types": ["node", "vite/client"],
+        "target": "esnext",
+        "module": "esnext",
+        "moduleResolution": "node",
+        "strict": true,
+        "allowSyntheticDefaultImports": true
     },
-    include: [
-        './**/*',
-        '.eslintrc.js',
-        '**/*/*.json',
-        'package.json',
-    ],
+    "include": [
+        "./**/*",
+        ".eslintrc.js",
+        "**/*/*.json",
+        "package.json",
+    ]
 }
