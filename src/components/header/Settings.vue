@@ -21,25 +21,25 @@ import { authStore } from '@/store/auth';
 const store = authStore();
 
 const { open: openSettings, close } = useModal({
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     component: Modal,
     attrs: {
         getTitle: () => store.isAuthorized ? 'Хочешь выйти?' : 'Хочешь войти?',
         getApplyText: () => store.isAuthorized ? 'Выхожу' : 'Захожу',
         getCancelText: () => 'Нет, спасибо',
         getIsShowInput: () => !store.isAuthorized,
-        async  onCancel() {
-            await close();
+        onCancel() {
+            close();
         },
         async onApply(password: string) {
             let isSuccess = false;
             if (store.isAuthorized) {
                 await store.logout();
                 isSuccess = true;
-            } else if (password.length) {
+            }
+            else if (password.length) {
                 isSuccess = await store.authorize(password);
-            } 
-            if (isSuccess) await close();
+            }
+            if (isSuccess) close();
         },
     },
 });

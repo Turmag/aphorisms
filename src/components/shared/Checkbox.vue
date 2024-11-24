@@ -49,7 +49,7 @@ const modelValue = defineModel<boolean>();
                 content: "";
                 display: block;
                 width: 100%;
-                padding-top: 100%; 
+                padding-top: 100%;
             }
 
             > * {
@@ -121,4 +121,3 @@ const modelValue = defineModel<boolean>();
         color: var(--color);
     }
   </style>
-  

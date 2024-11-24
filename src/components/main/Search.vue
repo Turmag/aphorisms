@@ -1,6 +1,10 @@
 <template>
     <div :class="wrapperClasses">
-        <input v-model="store.filterWord" :class="$style.filter" placeholder="Поиск">
+        <input
+            v-model="store.filterWord"
+            :class="$style.filter"
+            placeholder="Поиск"
+        >
         <IconBase
             :class="$style.cancel"
             width="20"

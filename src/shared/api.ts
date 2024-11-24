@@ -2,7 +2,7 @@ import axios, { type AxiosResponse } from 'axios';
 const path = import.meta.env.MODE === 'development' ? '' : import.meta.env.BASE_URL;
 import type { IAphorism } from '@/shared/types';
 
-export default { 
+export default {
     getAphorisms: (): Promise<{ data: IAphorism[] }> => axios.get(`${path}/api/getAphorisms.php`),
     saveAphorism: (aphorism: IAphorism): Promise<AxiosResponse<string>> => {
         const formData = new FormData();

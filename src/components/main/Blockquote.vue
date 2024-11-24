@@ -1,5 +1,8 @@
 <template>
-    <blockquote :class="blockquoteClasses" :isSingle="!isBlur">
+    <blockquote
+        :class="blockquoteClasses"
+        :isSingle="!isBlur"
+    >
         <div
             :class="$style.icon"
             title="Скопировать ссылку на данный афоризм"
@@ -7,7 +10,10 @@
         >
             <div :class="$style.popupWrapper">
                 <Transition name="fade">
-                    <div v-if="isLinkCopied" :class="$style.popup">
+                    <div
+                        v-if="isLinkCopied"
+                        :class="$style.popup"
+                    >
                         Ссылка скопирована
                         <IconBase
                             :class="$style.decor"
@@ -40,7 +46,10 @@
             v-model="editAuthor"
             :class="[$style.textarea, $style.textareaAuthor]"
         />
-        <div v-else :class="$style.author">
+        <div
+            v-else
+            :class="$style.author"
+        >
             {{ author }}
         </div>
         <IconBase
@@ -93,7 +102,7 @@ import {
     ref,
     computed,
     watch,
-    useCssModule, 
+    useCssModule,
 } from 'vue';
 import { useRoute } from 'vue-router';
 import { mainStore } from '@/store/main';
@@ -121,9 +130,9 @@ let timeout: ReturnType<typeof setTimeout>;
 
 const isBlur = computed(
     () =>
-        Boolean(route.query.phraseNumb) &&
-        route.query.phraseNumb !== String(props.id) &&
-        !store.unBlured,
+        Boolean(route.query.phraseNumb)
+        && route.query.phraseNumb !== String(props.id)
+        && !store.unBlured,
 );
 
 const blockquoteClasses = computed(() => ({
@@ -169,7 +178,7 @@ const saveAphorism = () => store.saveAphorism({
 });
 
 const { open: deleteAphorism, close } = useModal({
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
     component: Modal,
     attrs: {
         getTitle: () => `Хочешь удалить афоризм #${props.numb}?`,
@@ -338,7 +347,7 @@ watch(
     .save {
         top: 40px;
     }
-    
+
     .delete {
         top: initial;
         bottom: 10px;

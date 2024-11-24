@@ -39,7 +39,7 @@ import {
     ref,
     computed,
     useTemplateRef,
-    onMounted, 
+    onMounted,
 } from 'vue';
 
 interface IProps {
