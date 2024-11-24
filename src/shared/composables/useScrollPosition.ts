@@ -19,9 +19,9 @@ export const useScrollPosition = () => {
         () => {
             const aphorismsScrollTopStringify = localStorage.getItem('aphorismsScrollTop') ?? '{}';
             const aphorismsScrollTopObj = JSON.parse(aphorismsScrollTopStringify) as IScrollTopObj;
-            if(aphorismsScrollTopObj.time) {
+            if (aphorismsScrollTopObj.time) {
                 const diffSeconds = getSecondsDiff(new Date(), new Date(aphorismsScrollTopObj.time));
-                if(diffSeconds > 5) {
+                if (diffSeconds > 5) {
                     localStorage.removeItem('aphorismsScrollTop');
                 } else {
                     window.scrollTo({ top: aphorismsScrollTopObj.top });

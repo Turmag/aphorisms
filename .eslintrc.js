@@ -84,7 +84,7 @@ module.exports = {
         'quote-props': ['error', 'as-needed'],
         'comma-style': ['error', 'last'],
         'semi-style': ['error', 'last'],
-        semi: 'off',
+        semi: [2, 'always'],
         '@typescript-eslint/semi': ['error', 'always'],
         'comma-dangle': ['error', 'always-multiline'],
         'brace-style': ['error', '1tbs'],
@@ -143,6 +143,14 @@ module.exports = {
         'vue/no-unused-refs': 'error',
         'vue/require-typed-ref': 'error',
         '@typescript-eslint/consistent-type-imports': 'error',
+        'no-extra-parens': 'error',
+        'arrow-body-style': ['error', 'as-needed'],
+        '@typescript-eslint/no-misused-promises': [
+            'error',
+            { checksVoidReturn: false },
+        ],
+        '@typescript-eslint/no-non-null-asserted-optional-chain': 'off',
+        '@stylistic/type-annotation-spacing': 'error',
         'local-rules/prefer-true-attribute-shorthand': ['error', 'always'],
         'local-rules/add-vue-extension': 'error',
         'local-rules/use-shortest-alias': 'error',
@@ -174,6 +182,7 @@ module.exports = {
         {
             files: ['*.json', '*.json5', '*.jsonc'],
             parser: 'jsonc-eslint-parser',
+            rules: { 'jsonc/comma-dangle': 'error' },
         },
     ],
 };

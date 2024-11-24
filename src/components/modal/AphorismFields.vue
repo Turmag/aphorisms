@@ -16,21 +16,21 @@ interface IProps {
 const props = defineProps<IProps>();
 
 interface IEmits {
-    (e: 'update:text', value: string): void;
-    (e: 'update:author', value: string): void;
+    (event: 'update:text', value: string): void;
+    (event: 'update:author', value: string): void;
 }
 
 const emits = defineEmits<IEmits>();
 
-const localText = computed(({
+const localText = computed({
     get: () => props.text,
     set: value => emits('update:text', value),
-}));
+});
 
-const localAuthor = computed(({
+const localAuthor = computed({
     get: () => props.author,
     set: value => emits('update:author', value),
-}));
+});
 </script>
 
 <style lang="scss" module>

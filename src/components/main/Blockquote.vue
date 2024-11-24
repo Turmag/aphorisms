@@ -137,16 +137,16 @@ const copyLink = () => {
     clearTimeout(timeout);
     toggleIsLinkCopied(true);
 
-    var link = `${location.origin}${location.pathname}?phraseNumb=${props.id}`;
+    const link = `${location.origin}${location.pathname}?phraseNumb=${props.id}`;
 
     // Копируем ссылку в буфер обмена
-    var tempInput = document.createElement('input');
+    const tempInput = document.createElement('input');
     tempInput.setAttribute('value', link);
     document.body.appendChild(tempInput);
     tempInput.select();
     document.execCommand('copy');
     document.body.removeChild(tempInput);
-    timeout = setTimeout(() => (toggleIsLinkCopied(false)), 1000);
+    timeout = setTimeout(() => toggleIsLinkCopied(false), 1000);
 };
 
 const textBlock = ref<HTMLDivElement>();
