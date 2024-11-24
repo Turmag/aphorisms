@@ -3,9 +3,7 @@ import { notify } from '@kyvg/vue3-notification';
 import Api from '@/shared/api';
 
 export const authStore = defineStore('auth', {
-    state: () => {
-        return { isAuthorized: false };
-    },
+    state: () => ({ isAuthorized: false }),
 
     actions: {
         async authorize(password: string) {

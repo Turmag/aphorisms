@@ -5,14 +5,12 @@ import { notify } from '@kyvg/vue3-notification';
 import Api from '@/shared/api';
 
 export const mainStore = defineStore('main', {
-    state: (): IStore => {
-        return {
-            isLoadedPage: false,
-            aphorisms: [],
-            unBlured: false,
-            filterWord: '',
-        };
-    },
+    state: (): IStore => ({
+        isLoadedPage: false,
+        aphorisms: [],
+        unBlured: false,
+        filterWord: '',
+    }),
 
     getters: {
         filteredAphorisms(state): IAphorism[] {
@@ -63,7 +61,7 @@ export const mainStore = defineStore('main', {
             } catch (error) {
                 console.error('error', error);
             }
-            
+
             notify({
                 title: 'Сохранение афоризма',
                 text: notifyText,
@@ -79,7 +77,7 @@ export const mainStore = defineStore('main', {
             try {
                 const { data: result } = await Api.addAphorism({
                     text,
-                    author, 
+                    author,
                 });
                 isSuccess = result === 'success';
                 if (isSuccess) {
@@ -89,7 +87,7 @@ export const mainStore = defineStore('main', {
             } catch (error) {
                 console.error('error', error);
             }
-            
+
             notify({
                 title: 'Добавление афоризма',
                 text: notifyText,
@@ -114,7 +112,7 @@ export const mainStore = defineStore('main', {
             } catch (error) {
                 console.error('error', error);
             }
-            
+
             notify({
                 title: 'Удаление афоризма',
                 text: notifyText,
