@@ -20,6 +20,7 @@ import { mainStore } from '@/store/main';
 const store = mainStore();
 
 const { open: openSettings, close } = useModal({
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     component: Modal,
     attrs: {
         getTitle: () => 'Добавление афоризма',
@@ -27,17 +28,17 @@ const { open: openSettings, close } = useModal({
         getCancelText: () => 'Не нужно',
         getIsShowInput: () => false,
         isShowAphorismFields: true,
-        onCancel() {
-            close();
+        async onCancel() {
+            await close();
         },
-        async onApply(text, author) {
+        async onApply(text: string, author?: string) {
             const isSuccess = await store.addAphorism({
                 text,
-                author: author as string, 
+                author: author!, 
             });
-            if(isSuccess) {
+            if (isSuccess) {
                 await store.getAphorisms();
-                close();
+                await close();
             }
         },
     },

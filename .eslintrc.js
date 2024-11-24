@@ -92,6 +92,7 @@ module.exports = {
         'vue/no-multiple-template-root': 'off',
         'space-before-blocks': 'error',
         'no-multi-spaces': 'error',
+        'keyword-spacing': 'error',
         'key-spacing': ['error', { afterColon: true }],
         'arrow-parens': ['error', 'as-needed'],
         'vue/no-v-html': 'off',
@@ -128,7 +129,6 @@ module.exports = {
             before: false,
             after: true, 
         }],
-        'vue/no-v-model-argument': 'off',
         '@typescript-eslint/no-this-alias': [
             'error',
             {
@@ -138,6 +138,9 @@ module.exports = {
         ],
         '@stylistic/member-delimiter-style': 'error',
         '@typescript-eslint/no-unused-vars': 'error',
+        'vue/no-useless-v-bind': 'error',
+        'vue/no-unused-refs': 'error',
+        'vue/require-typed-ref': 'error',
         '@typescript-eslint/consistent-type-imports': 'error',
         'local-rules/prefer-true-attribute-shorthand': ['error', 'always'],
         'local-rules/add-vue-extension': 'error',

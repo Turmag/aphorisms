@@ -17,7 +17,7 @@ export const authStore = defineStore('auth', {
                 const { data } = await Api.authorize(password);
                 isSuccess = data === 'success';
                 this.isAuthorized = isSuccess;
-                if(this.isAuthorized) {
+                if (this.isAuthorized) {
                     text = 'Всё прекрасно!';
                     type = 'success';
                     this.isAuthorized = true;

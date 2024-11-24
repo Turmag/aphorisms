@@ -82,7 +82,7 @@ const author = ref('');
 const addAphorism = () => emits('apply', text.value, author.value);
 
 const input = useTemplateRef('input');
-onMounted(async () => setTimeout(() => input.value?.focus()));
+onMounted(() => setTimeout(() => (input.value as HTMLInputElement)?.focus()));
 </script>
 
 <style lang="scss" module>
