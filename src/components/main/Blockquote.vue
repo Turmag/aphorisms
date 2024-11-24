@@ -81,6 +81,7 @@
             height="20"
             :viewBoxWidth="24"
             :viewBoxHeight="24"
+            :asd="true"
             @click="deleteAphorism"
         >
             <Delete />

@@ -4,7 +4,12 @@ import tseslint from 'typescript-eslint';
 import vueLint from 'eslint-plugin-vue';
 import stylistic from '@stylistic/eslint-plugin';
 
+// const localRules = require('eslint-plugin-local-rules')
+import localRules from 'eslint-plugin-local-rules';
+console.log('localRules', localRules);
 export default tseslint.config(
+    { plugins: { 'local-rules': localRules } },
+
     // config parsers
     {
         files: ['*.vue', '**/*.vue', '*.ts', '**/*.ts'],
@@ -32,6 +37,7 @@ export default tseslint.config(
     eslint.configs.recommended,
     ...tseslint.configs.recommendedTypeChecked,
     ...vueLint.configs['flat/recommended'],
+    // localRules.configs.all,
 
     // code style rules
     stylistic.configs['disable-legacy'],
@@ -92,10 +98,10 @@ export default tseslint.config(
                 'error',
                 { checksVoidReturn: false },
             ],
-        //     'local-rules/prefer-true-attribute-shorthand': ['error', 'always'],
-        // 'local-rules/add-vue-extension': 'error',
-        // 'local-rules/use-shortest-alias': 'error',
-        // 'local-rules/import-entities-by-column-or-line': ['error', { minProperties: 3 }],
+            'local-rules/prefer-true-attribute-shorthand': ['error', 'always'],
+            // 'local-rules/add-vue-extension': 'error',
+            // 'local-rules/use-shortest-alias': 'error',
+            // 'local-rules/import-entities-by-column-or-line': ['error', { minProperties: 3 }],
         },
     },
 
@@ -116,6 +122,16 @@ export default tseslint.config(
                     shouldMatchCase: false,
                 },
             ],
+        },
+    },
+
+    {
+        files: ['**/*.{json,json5,jsonc}'],
+        rules: {
+            '@stylistic/quote-props': 'off',
+            '@stylistic/quotes': 'off',
+            '@stylistic/comma-dangle': ['error', 'never'],
+            '@stylistic/semi': ['error', 'never'],
         },
     },
 
