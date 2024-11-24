@@ -36,7 +36,6 @@ export default tseslint.config(
     eslint.configs.recommended,
     ...tseslint.configs.recommendedTypeChecked,
     ...vueLint.configs['flat/recommended'],
-    // localRules.configs.all,
 
     // code style rules
     stylistic.configs['disable-legacy'],
@@ -136,10 +135,4 @@ export default tseslint.config(
             '@stylistic/semi': ['error', 'never'],
         },
     },
-
-    // {
-    //     files: ['*.json', '*.json5', '*.jsonc'],
-    //     parser: 'jsonc-eslint-parser',
-    //     rules: { 'jsonc/comma-dangle': 'error' },
-    // },
 );
