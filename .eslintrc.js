@@ -116,6 +116,7 @@ module.exports = {
         }],
         'object-curly-spacing': ['error', 'always'],
         'vue/object-curly-spacing': ['error', 'always'],
+        '@stylistic/object-curly-spacing': ['error', 'always'],
         'object-property-newline': 'error',
         'object-shorthand': 'error',
         'vue/singleline-html-element-content-newline': ['warn', { ignores: ['pre', 'textarea'] }],
