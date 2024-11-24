@@ -1,9 +1,9 @@
 import globals from 'globals';
 import eslint from '@eslint/js';
-import tseslint from 'typescript-eslint';
 import vueLint from 'eslint-plugin-vue';
 import stylistic from '@stylistic/eslint-plugin';
 import local from 'eslint-plugin-local';
+import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
     { plugins: { local } },
@@ -103,6 +103,7 @@ export default tseslint.config(
             'local/add-vue-extension': 'error',
             'local/use-shortest-alias': 'error',
             'local/import-entities-by-column-or-line': ['error', { minProperties: 3 }],
+            'local/import-right-order': 'off',
         },
     },
 
