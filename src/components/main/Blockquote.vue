@@ -179,19 +179,18 @@ const saveAphorism = () => store.saveAphorism({
 });
 
 const { open: deleteAphorism, close } = useModal({
-
     component: Modal,
     attrs: {
         getTitle: () => `Хочешь удалить афоризм #${props.numb}?`,
         getCancelText: () => 'Не хочу',
         getIsShowInput: () => false,
         onCancel() {
-            void (async () => await close())();
+            close();
         },
         onApply() {
             void (async () => {
                 await store.removeAphorism(props.id);
-                await close();
+                close();
             })();
         },
     },
