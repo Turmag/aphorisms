@@ -35,8 +35,7 @@ const { open: openSettings, close } = useModal({
             if (store.isAuthorized) {
                 await store.logout();
                 isSuccess = true;
-            }
-            else if (password.length) {
+            } else if (password.length) {
                 isSuccess = await store.authorize(password);
             }
             if (isSuccess) close();
