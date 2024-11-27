@@ -28,7 +28,7 @@ const { open: openSettings, close } = useModal({
         getIsShowInput: () => false,
         isShowAphorismFields: true,
         async onCancel() {
-            await close();
+            close();
         },
         async onApply(text: string, author?: string) {
             const isSuccess = await store.addAphorism({
@@ -37,7 +37,7 @@ const { open: openSettings, close } = useModal({
             });
             if (isSuccess) {
                 await store.getAphorisms();
-                await close();
+                close();
             }
         },
     },
