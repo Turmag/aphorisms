@@ -1,11 +1,7 @@
 {
     "compilerOptions": {
         "baseUrl": ".",
-        "paths": {
-            "@/*": ["src/*"],
-            "@components/*": ["src/components/*"],
-            "@assets/*": ["src/assets/*"]
-        },
+        "paths": { "@/*": ["src/*"] },
         "lib": ["esnext", "dom"],
         "types": ["node", "vite/client"],
         "target": "esnext",
