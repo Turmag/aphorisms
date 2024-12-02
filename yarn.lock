@@ -1159,10 +1159,10 @@ escape-string-regexp@^4.0.0:
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-4.0.0.tgz#14ba83a5d373e3d311e5afca29cf5bfad965bf34"
   integrity sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==
 
-eslint-plugin-turmag-special-rules@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-turmag-special-rules/-/eslint-plugin-turmag-special-rules-1.0.0.tgz#4ab6780980cd7f65518a8b3d9e7e28e32084fdae"
-  integrity sha512-njHjSioezJtUFXblRsiIVlxiBt55oN0gWPvWVL6S0jOK8Zr+ctIrZY2sZQ9agiqSsF3zAEI0jIoeY6Osm82dBw==
+eslint-plugin-turmag-special-rules@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-turmag-special-rules/-/eslint-plugin-turmag-special-rules-1.0.2.tgz#082d1322a92913f66a094a965a1281a80fbdb710"
+  integrity sha512-Rjes6dHkF8HOj8ri4bmtAyKDXivaQcu4WN3jaGtb9rvZ+7d60fArHSIaOUvQAJeUdxl5S+o0H3xUGV58KlLIPQ==
   dependencies:
     requireindex "^1.2.0"
 
@@ -2445,14 +2445,15 @@ ts-api-utils@^1.3.0:
   resolved "https://registry.yarnpkg.com/ts-api-utils/-/ts-api-utils-1.4.0.tgz#709c6f2076e511a81557f3d07a0cbd566ae8195c"
   integrity sha512-032cPxaEKwM+GT3vA5JXNzIaizx388rhsSW79vGRNGXfRRAdEAn2mvk36PvK5HnOchyWZ7afLEXqYCvPCrzuzQ==
 
-turmag-eslint-config@^2.0.14:
-  version "2.0.14"
-  resolved "https://registry.yarnpkg.com/turmag-eslint-config/-/turmag-eslint-config-2.0.14.tgz#1514f9d1e115ce239971ebcf54348dd74e048bed"
-  integrity sha512-x+p9ugJBbdQiFr3t1CPbdAuLskrWtqQACo19205yOyHv8ttkhGM4i7sqt7i74/oAtdQGKwJYQ+0DZuQpr4/0iA==
+turmag-eslint-config@^2.0.15:
+  version "2.0.15"
+  resolved "https://registry.yarnpkg.com/turmag-eslint-config/-/turmag-eslint-config-2.0.15.tgz#e1a2a05fac6d19b90afae14d5c13d065cbc1c267"
+  integrity sha512-z4194ShqyV3rnZOd2zJ+FjNPcg/myyB/7SdtNiBI3vF/ae/6YVZrFPZetZ+xpvw7pkFW54WQ07XQo6EStSq6cA==
   dependencies:
     "@stylistic/eslint-plugin" "^2.11.0"
     "@typescript-eslint/eslint-plugin" "^7.3.1"
     "@typescript-eslint/parser" "^7.3.1"
+    eslint-plugin-turmag-special-rules "^1.0.2"
     eslint-plugin-vue "^9.31.0"
     typescript-eslint "^8.15.0"
 
