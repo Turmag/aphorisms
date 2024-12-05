@@ -1,29 +1,21 @@
-module.exports = {
+export default {
     extends: [
         'stylelint-config-standard',
         'stylelint-config-recommended-vue/scss',
     ],
-    plugins: ['stylelint-order', 'stylelint-stylistic'],
+    plugins: ['stylelint-order', '@stylistic/stylelint-plugin'],
     rules: {
-        'property-no-unknown': null,
-        'at-rule-no-unknown': null,
-        'function-no-unknown': null,
-        'stylistic/indentation': [
+        '@stylistic/indentation': [
             4,
             { baseIndentLevel: 1 },
         ],
-        'annotation-no-unknown': null,
-        'stylistic/declaration-colon-space-after': 'always',
-        'stylistic/declaration-bang-space-after': 'never',
-        'stylistic/declaration-block-trailing-semicolon': 'always',
-        'stylistic/declaration-block-semicolon-newline-after': 'always',
-        'no-extra-semicolons': true,
+        '@stylistic/declaration-colon-space-after': 'always',
+        '@stylistic/declaration-bang-space-after': 'never',
+        '@stylistic/declaration-block-trailing-semicolon': 'always',
+        '@stylistic/declaration-block-semicolon-newline-after': 'always',
+        '@stylistic/no-extra-semicolons': true,
         'import-notation': 'string',
-        'no-descending-specificity': null,
-        'selector-pseudo-element-no-unknown': null,
-        'selector-pseudo-class-no-unknown': null,
-        'selector-class-pattern': null,
-        'value-keyword-case': null,
+        'selector-class-pattern': '[a-z]+[A-Z]*',
         'order/properties-order': [
             'content',
             'position',
@@ -38,8 +30,8 @@ module.exports = {
             'overflow-x',
             'overflow-y',
             'display',
-            'align-items',
             'justify-content',
+            'align-items',
             'align-content',
             'align-self',
             'flex',
