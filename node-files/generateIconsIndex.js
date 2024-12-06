@@ -1,27 +1,32 @@
-const fs = require('fs');
-const glob = require('glob');
+import {
+    open,
+    appendFile,
+    readdir,
+} from 'fs';
 
-function generateIconsIndex() {
+const generateIconsIndex = () => {
     let fileContent = '';
-    const filePath = './src/assets/icons/index.ts';
     const globPath = '/src/assets/icons';
+    const filePath = `.${globPath}/index.ts`;
 
-    glob(`.${globPath}/*.vue`, {}, function (err, files) {
+    readdir(`.${globPath}`, function (err, files) {
         if (err) throw err;
 
-        files.forEach(file => {
-            file = file.replace(globPath, '');
-            fileContent += `export { default as ${file.replace('./', '').replace('.vue', '')} } from '${file}';\n`;
-        });
+        for (let file of files) {
+            if (!file.includes('.vue')) continue;
 
-        fs.open(filePath, 'w', err => {
+            file = file.replace(globPath, '');
+            fileContent += `export { default as ${file.replace('./', '').replace('.vue', '')} } from './${file}';\n`;
+        }
+
+        open(filePath, 'w', err => {
             if (err) throw err;
         });
 
-        fs.appendFile(filePath, fileContent, err => {
+        appendFile(filePath, fileContent, err => {
             if (err) throw err;
         });
     });
-}
+};
 
 generateIconsIndex();
