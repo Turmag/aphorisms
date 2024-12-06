@@ -31,6 +31,12 @@ const modelValue = defineModel<boolean>();
         user-select: none;
     }
 
+    .checkbox {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
     .checkboxWrapper {
         display: flex;
 
@@ -56,6 +62,23 @@ const modelValue = defineModel<boolean>();
                 position: absolute;
             }
 
+            svg {
+                top: 0;
+                left: 0;
+                display: block;
+                width: 100%;
+                height: 100%;
+                color: var(--brdr);
+                transition: stroke-dasharray var(--dur), stroke-dashoffset var(--dur);
+                pointer-events: none;
+                stroke: var(--stroke, var(--border-active));
+                stroke-dasharray: var(--dash-array, 93);
+                stroke-dashoffset: var(--dash-offset, 94);
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-width: 2px;
+            }
+
             input {
                 display: block;
                 width: 100%;
@@ -65,8 +88,8 @@ const modelValue = defineModel<boolean>();
                 border-radius: calc(var(--size, 1) * 4px);
                 border: calc(var(--new-border, var(--size, 1)) * 1px) solid;
                 background-color: var(--bg);
-                outline: none;
                 color: var(--new-border-clear, var(--brdr));
+                outline: none;
                 transition: all calc(var(--dur) / 3) linear;
                 cursor: pointer;
                 appearance: none;
@@ -91,30 +114,7 @@ const modelValue = defineModel<boolean>();
                     --dash-offset: 109;
                 }
             }
-
-            svg {
-                top: 0;
-                left: 0;
-                display: block;
-                width: 100%;
-                height: 100%;
-                color: var(--brdr);
-                transition: stroke-dasharray var(--dur), stroke-dashoffset var(--dur);
-                pointer-events: none;
-                stroke: var(--stroke, var(--border-active));
-                stroke-dasharray: var(--dash-array, 93);
-                stroke-dashoffset: var(--dash-offset, 94);
-                stroke-linecap: round;
-                stroke-linejoin: round;
-                stroke-width: 2px;
-            }
         }
-    }
-
-    .checkbox {
-        display: block;
-        width: 100%;
-        height: 100%;
     }
 
     .text {

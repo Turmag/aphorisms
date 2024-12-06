@@ -43,7 +43,7 @@ const localAuthor = computed({
     .textarea {
         padding: 10px;
         background-color: transparent;
-        font-size: 16px;
         color: var(--color);
+        font-size: 16px;
     }
 </style>

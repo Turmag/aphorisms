@@ -214,9 +214,9 @@ watch(
         border-bottom: 1px solid var(--border-color);
         border-left: 8px solid var(--border-left-color);
         background: var(--blockquote-bg-1);
-        line-height: 30px;
         color: var(--blockquote-color);
         font-weight: 300;
+        line-height: 30px;
         scroll-margin: 60px;
 
         &:nth-child(2n) {
@@ -256,9 +256,9 @@ watch(
         &::before {
             content: '\201C';
             position: absolute;
+            color: var(--border-left-color);
             font-family: Arial, Verdana, Tahoma, sans-serif;
             font-size: 90px;
-            color: var(--border-left-color);
         }
     }
 
@@ -278,11 +278,11 @@ watch(
         padding: 10px;
         border-radius: 4px;
         background: var(--copy-bg);
+        color: var(--background-color);
         text-align: center;
         text-transform: none;
         font-size: 14px;
         line-height: 16px;
-        color: var(--background-color);
         cursor: default;
         filter: drop-shadow(0 7px 11px var(--copy-shadow-color))
             drop-shadow(0 3px 5px var(--copy-shadow-color));

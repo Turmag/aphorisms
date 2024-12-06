@@ -46,9 +46,9 @@ const resetFilter = () => store.filterWord = '';
         z-index: 2;
         display: flex;
         align-items: center;
+        gap: 16px;
         padding: 16px;
         background-color: var(--background-color);
-        gap: 16px;
     }
 
     .wrapperSticky {
@@ -67,9 +67,9 @@ const resetFilter = () => store.filterWord = '';
         border: 1px solid var(--background-color);
         border: 1px solid #aaa;
         background: var(--background-color);
+        color: var(--color);
         font-family: Verdana, Geneva, Tahoma, sans-serif;
         font-size: 16px;
-        color: var(--color);
 
         &::placeholder {
             color: #adadad;

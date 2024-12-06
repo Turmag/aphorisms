@@ -37,11 +37,11 @@ const headerClasses = computed(() => ({
         z-index: 3;
         display: flex;
         align-items: center;
+        gap: 16px;
         width: 100%;
         height: 60px;
-        background-color: var(--background-color);
-        gap: 16px;
         padding-inline: 16px;
+        background-color: var(--background-color);
     }
 
     .headerShadow {
@@ -50,8 +50,8 @@ const headerClasses = computed(() => ({
 
     .title {
         margin-top: 10px;
-        font-size: 28px;
         color: var(--color);
+        font-size: 28px;
         font-weight: bold;
     }
 
