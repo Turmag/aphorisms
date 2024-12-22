@@ -5,7 +5,7 @@
         </h1>
         <Switch />
         <div :class="$style.additional">
-            <Add v-if="authStoreVar.isAuthorized" />
+            <Add v-if="authStoreVariable.isAuthorized" />
             <Settings />
         </div>
     </header>
@@ -19,7 +19,7 @@ import Settings from '@/components/header/Settings.vue';
 import { useStorage } from '@vueuse/core';
 import { authStore } from '@/store/auth';
 
-const authStoreVar = authStore();
+const authStoreVariable = authStore();
 const $style = useCssModule();
 const isStickyFilters = useStorage('isStickyFilters', false);
 

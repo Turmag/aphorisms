@@ -53,7 +53,7 @@
             {{ author }}
         </div>
         <IconBase
-            v-if="authStoreVar.isAuthorized"
+            v-if="authStoreVariable.isAuthorized"
             :class="$style.edit"
             width="20"
             height="20"
@@ -64,7 +64,7 @@
             <Edit />
         </IconBase>
         <IconBase
-            v-if="authStoreVar.isAuthorized && isChangedAphorism"
+            v-if="authStoreVariable.isAuthorized && isChangedAphorism"
             :class="$style.save"
             width="20"
             height="20"
@@ -76,7 +76,7 @@
             <Save />
         </IconBase>
         <IconBase
-            v-if="authStoreVar.isAuthorized"
+            v-if="authStoreVariable.isAuthorized"
             :class="$style.delete"
             width="20"
             height="20"
@@ -122,7 +122,7 @@ const props = withDefaults(defineProps<IProps>(), { isEditable: false });
 
 const route = useRoute();
 const store = mainStore();
-const authStoreVar = authStore();
+const authStoreVariable = authStore();
 const $style = useCssModule();
 
 const [isLinkCopied, toggleIsLinkCopied] = useToggle();
@@ -150,12 +150,12 @@ const copyLink = () => {
     const link = `${location.origin}${location.pathname}?phraseNumb=${props.id}`;
 
     // Копируем ссылку в буфер обмена
-    const tempInput = document.createElement('input');
-    tempInput.setAttribute('value', link);
-    document.body.appendChild(tempInput);
-    tempInput.select();
+    const temporaryInput = document.createElement('input');
+    temporaryInput.setAttribute('value', link);
+    document.body.appendChild(temporaryInput);
+    temporaryInput.select();
     document.execCommand('copy');
-    document.body.removeChild(tempInput);
+    document.body.removeChild(temporaryInput);
     timeout = setTimeout(() => toggleIsLinkCopied(false), 1000);
 };
 

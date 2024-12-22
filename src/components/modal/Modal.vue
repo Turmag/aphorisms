@@ -60,8 +60,8 @@ const props = withDefaults(
 );
 
 interface IEmits {
-    (e: 'apply', value: string, additionalValue?: string): void;
-    (e: 'cancel'): void;
+    (event: 'apply', value: string, additionalValue?: string): void;
+    (event: 'cancel'): void;
 }
 
 const emits = defineEmits<IEmits>();
