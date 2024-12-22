@@ -2490,10 +2490,10 @@ ts-api-utils@^1.3.0:
   resolved "https://registry.yarnpkg.com/ts-api-utils/-/ts-api-utils-1.4.3.tgz#bfc2215fe6528fecab2b0fba570a2e8a4263b064"
   integrity sha512-i3eMG77UTMD0hZhgRS562pv83RC6ukSAC2GMNWc+9dieh/+jDM5u5YG+NHX6VNDRHQcHwmsTHctP9LhbC3WxVw==
 
-turmag-eslint-config@^2.0.19:
-  version "2.0.19"
-  resolved "https://registry.yarnpkg.com/turmag-eslint-config/-/turmag-eslint-config-2.0.19.tgz#2ca408a5b1d1ef6826a7948468517f151788e24f"
-  integrity sha512-2+FdeZIA7cT3ix13arEg5VmUTSdNCbH+VJlHi6P4BlgHVH5mv31kjs5zG30OE0JC8/2dhXlWuVDfSMtnQPNS5g==
+turmag-eslint-config@^2.0.21:
+  version "2.0.21"
+  resolved "https://registry.yarnpkg.com/turmag-eslint-config/-/turmag-eslint-config-2.0.21.tgz#08a8718ceaec1afa7fa3105add6780f9501cbac5"
+  integrity sha512-iU4yQZ+Q9JKsJHd200HPam5XocaOrZuXLkVZpwsdJcrH/e68ufqvS+ggYQ6WLKzvH2+y9W22k3O5FWJd7g3OMA==
   dependencies:
     "@stylistic/eslint-plugin" "^2.11.0"
     "@typescript-eslint/eslint-plugin" "^7.3.1"
