@@ -1,10 +1,10 @@
-import axios, { type AxiosResponse } from 'axios';
+import axios, { type AxiosPromise } from 'axios';
 const path = import.meta.env.MODE === 'development' ? '' : import.meta.env.BASE_URL;
 import type { IAphorism } from '@/shared/types';
 
 export default {
-    getAphorisms: (): Promise<{ data: IAphorism[] }> => axios.get(`${path}/api/getAphorisms.php`),
-    saveAphorism: (aphorism: IAphorism): Promise<AxiosResponse<string>> => {
+    getAphorisms: () => axios.get<IAphorism[]>(`${path}/api/getAphorisms.php`),
+    saveAphorism: (aphorism: IAphorism): AxiosPromise<string> => {
         const formData = new FormData();
         formData.append('id', aphorism.id);
         formData.append('text', aphorism.text);
@@ -16,7 +16,7 @@ export default {
             },
         });
     },
-    addAphorism: ({ text, author }: { text: string; author: string }): Promise<AxiosResponse<string>> => {
+    addAphorism: ({ text, author }: { text: string; author: string }): AxiosPromise<string> => {
         const formData = new FormData();
         formData.append('text', text);
         formData.append('author', author);
@@ -27,7 +27,7 @@ export default {
             },
         });
     },
-    removeAphorism: (id: string): Promise<AxiosResponse<string>> => {
+    removeAphorism: (id: string): AxiosPromise<string> => {
         const formData = new FormData();
         formData.append('id', id);
         return axios.post(`${path}/api/removeAphorism.php`, formData, {
@@ -37,7 +37,7 @@ export default {
             },
         });
     },
-    authorize: (password: string): Promise<AxiosResponse<string>> => {
+    authorize: (password: string): AxiosPromise<string> => {
         const formData = new FormData();
         formData.append('password', password);
         return axios.post(`${path}/api/authorize.php`, formData, {
@@ -47,6 +47,6 @@ export default {
             },
         });
     },
-    checkAuthorize: (): Promise<AxiosResponse<string>> => axios.post(`${path}/api/checkAuthorize.php`),
-    logout: (): Promise<AxiosResponse<string>> => axios.post(`${path}/api/logout.php`),
+    checkAuthorize: () => axios.post<string>(`${path}/api/checkAuthorize.php`),
+    logout: () => axios.post<string>(`${path}/api/logout.php`),
 };
