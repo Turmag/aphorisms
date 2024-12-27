@@ -27,7 +27,7 @@
         "@vitejs/plugin-vue": "^5.1.4",
         "eslint": "^9.15.0",
         "stylelint": "^16.11.0",
-        "turmag-eslint-config": "^2.0.22",
+        "turmag-eslint-config": "^2.0.23",
         "turmag-stylelint-config": "^0.0.5",
         "typescript": "^5.7.2",
         "vite": "^5.4.8"
