@@ -6,7 +6,7 @@ export interface IAphorism {
     isEditable?: boolean;
 }
 
-export interface IScrollTopObj {
+export interface IScrollTopObject {
     top: number;
     time: number;
 }
