@@ -1,7 +1,7 @@
+import { notify } from '@kyvg/vue3-notification';
 import { defineStore } from 'pinia';
 import type { IStore, IAphorism } from '@/shared/types';
 import type { LocationQuery } from 'vue-router';
-import { notify } from '@kyvg/vue3-notification';
 import Api from '@/shared/api';
 
 export const mainStore = defineStore('main', {

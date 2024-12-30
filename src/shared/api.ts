@@ -1,4 +1,5 @@
 import axios, { type AxiosPromise } from 'axios';
+
 const path = import.meta.env.MODE === 'development' ? '' : import.meta.env.BASE_URL;
 import type { IAphorism } from '@/shared/types';
 

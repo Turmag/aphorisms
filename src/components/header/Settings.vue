@@ -13,9 +13,9 @@
 
 <script setup lang="ts">
 import { useModal } from 'vue-final-modal';
-import IconBase from '@/components/shared/IconBase.vue';
-import Modal from '@/components/modal/Modal.vue';
 import { Settings } from '@/assets/icons';
+import Modal from '@/components/modal/Modal.vue';
+import IconBase from '@/components/shared/IconBase.vue';
 import { authStore } from '@/store/auth';
 
 const store = authStore();

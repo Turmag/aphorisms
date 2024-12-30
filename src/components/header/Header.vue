@@ -13,9 +13,9 @@
 
 <script setup lang="ts">
 import { computed, useCssModule } from 'vue';
-import Switch from '@/components/header/Switch.vue';
 import Add from '@/components/header/Add.vue';
 import Settings from '@/components/header/Settings.vue';
+import Switch from '@/components/header/Switch.vue';
 import { useStorage } from '@vueuse/core';
 import { authStore } from '@/store/auth';
 

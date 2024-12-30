@@ -23,9 +23,9 @@
 
 <script setup lang="ts">
 import { computed, useCssModule } from 'vue';
-import IconBase from '@/components/shared/IconBase.vue';
-import Checkbox from '@/components/shared/Checkbox.vue';
 import { Cancel } from '@/assets/icons';
+import Checkbox from '@/components/shared/Checkbox.vue';
+import IconBase from '@/components/shared/IconBase.vue';
 import { useStorage } from '@vueuse/core';
 import { mainStore } from '@/store/main';
 

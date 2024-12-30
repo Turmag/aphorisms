@@ -12,11 +12,12 @@
 </template>
 
 <script setup lang="ts">
-import IconBase from '@/components/shared/IconBase.vue';
+import { useModal } from 'vue-final-modal';
 import { Add } from '@/assets/icons';
 import Modal from '@/components/modal/Modal.vue';
-import { useModal } from 'vue-final-modal';
+import IconBase from '@/components/shared/IconBase.vue';
 import { mainStore } from '@/store/main';
+
 const store = mainStore();
 
 const { open: openSettings, close } = useModal({

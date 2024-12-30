@@ -1,7 +1,7 @@
 import { watch } from 'vue';
 import { mainStore } from '@/store/main';
-import { getSecondsDiff } from '@/shared/helpers';
 import type { IScrollTopObject } from '@/shared/types';
+import { getSecondsDiff } from '@/shared/helpers';
 
 export const useScrollPosition = () => {
     const store = mainStore();

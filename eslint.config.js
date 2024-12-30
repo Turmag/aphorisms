@@ -8,7 +8,6 @@ export default [
         rules: {
             'special-rules/add-vue-extension': ['error', { aliases }],
             'special-rules/use-shortest-alias': ['error', { aliases }],
-            'special-rules/import-right-order': 'off',
         },
     },
 ];

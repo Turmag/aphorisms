@@ -33,7 +33,6 @@
 </template>
 
 <script setup lang="ts">
-import AphorismFields from '@/components/modal/AphorismFields.vue';
 import { VueFinalModal } from 'vue-final-modal';
 import {
     ref,
@@ -41,6 +40,7 @@ import {
     useTemplateRef,
     onMounted,
 } from 'vue';
+import AphorismFields from '@/components/modal/AphorismFields.vue';
 
 interface IProps {
     getTitle: () => string;

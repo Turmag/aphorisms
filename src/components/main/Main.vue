@@ -12,9 +12,10 @@
 </template>
 
 <script setup lang="ts">
-import Search from '@/components/main/Search.vue';
 import Blockquote from '@/components/main/Blockquote.vue';
+import Search from '@/components/main/Search.vue';
 import { mainStore } from '@/store/main';
+
 const store = mainStore();
 </script>
 

@@ -29,8 +29,8 @@
 </template>
 
 <script setup lang="ts">
-import IconBase from '@/components/shared/IconBase.vue';
 import { Reset } from '@/assets/icons';
+import IconBase from '@/components/shared/IconBase.vue';
 import { useStorage } from '@vueuse/core';
 
 const isDarkMode = useStorage('isDarkModeAphorisms', false);
