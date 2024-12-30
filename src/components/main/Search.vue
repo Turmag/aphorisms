@@ -27,7 +27,7 @@ import { computed, useCssModule } from 'vue';
 import { Cancel } from '@/assets/icons';
 import Checkbox from '@/components/shared/Checkbox.vue';
 import IconBase from '@/components/shared/IconBase.vue';
-import { mainStore } from '@/store/main';
+import { mainStore } from '@/store/main.store';
 
 const store = mainStore();
 const $style = useCssModule();

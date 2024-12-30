@@ -9,15 +9,15 @@
 import { computed } from 'vue';
 
 interface IProps {
-    text: string;
     author: string;
+    text: string;
 }
 
 const props = defineProps<IProps>();
 
 interface IEmits {
-    (event: 'update:text', value: string): void;
     (event: 'update:author', value: string): void;
+    (event: 'update:text', value: string): void;
 }
 
 const emits = defineEmits<IEmits>();

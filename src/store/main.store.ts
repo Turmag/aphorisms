@@ -1,6 +1,6 @@
 import { notify } from '@kyvg/vue3-notification';
 import { defineStore } from 'pinia';
-import type { IStore, IAphorism } from '@/shared/types';
+import type { IAphorism, IStore } from '@/shared/types';
 import type { LocationQuery } from 'vue-router';
 import Api from '@/shared/api';
 
@@ -40,15 +40,15 @@ export const mainStore = defineStore('main', {
         },
 
         toggleIsEditableAphorism(id: string) {
-            const aphorism = this.aphorisms.find(aphorism => aphorism.id === id) ?? {} as IAphorism;
+            const aphorism = this.aphorisms.find(aphorism => aphorism.id === id)!;
             aphorism.isEditable = !aphorism.isEditable;
         },
 
-        async saveAphorism({ id, text, author }: { id: string; text: string; author: string }) {
+        async saveAphorism({ author, id, text }: { author: string; id: string; text: string }) {
             let notifyText = 'Афоризм не удалось сохранить';
             let type = 'error';
 
-            const aphorism = this.aphorisms.find(aphorism => aphorism.id === id) ?? {} as IAphorism;
+            const aphorism = this.aphorisms.find(aphorism => aphorism.id === id)!;
             aphorism.text = text;
             aphorism.author = author;
             aphorism.isEditable = false;
@@ -69,7 +69,7 @@ export const mainStore = defineStore('main', {
             });
         },
 
-        async addAphorism({ text, author }: { text: string; author: string }) {
+        async addAphorism({ text, author }: { author: string; text: string }) {
             let notifyText = 'Афоризм не удалось добавить';
             let type = 'error';
             let isSuccess = false;

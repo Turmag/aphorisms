@@ -1,5 +1,5 @@
 import { watch } from 'vue';
-import { mainStore } from '@/store/main';
+import { mainStore } from '@/store/main.store';
 import type { IScrollTopObject } from '@/shared/types';
 import { getSecondsDiff } from '@/shared/helpers';
 
@@ -8,8 +8,8 @@ export const useScrollPosition = () => {
 
     window.onbeforeunload = () => {
         const object = {
-            top: window.scrollY,
             time: new Date().getTime(),
+            top: window.scrollY,
         };
         localStorage.setItem('aphorismsScrollTop', JSON.stringify(object));
     };

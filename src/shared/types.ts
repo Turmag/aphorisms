@@ -1,19 +1,19 @@
 export interface IAphorism {
     author: string;
     id: string;
-    text: string;
-    numb: number;
     isEditable?: boolean;
+    numb: number;
+    text: string;
 }
 
 export interface IScrollTopObject {
-    top: number;
     time: number;
+    top: number;
 }
 
 export interface IStore {
-    isLoadedPage: boolean;
     aphorisms: IAphorism[];
-    unBlured: boolean;
     filterWord: string;
+    isLoadedPage: boolean;
+    unBlured: boolean;
 }

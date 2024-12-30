@@ -35,18 +35,18 @@
 <script setup lang="ts">
 import { VueFinalModal } from 'vue-final-modal';
 import {
-    ref,
     computed,
-    useTemplateRef,
     onMounted,
+    ref,
+    useTemplateRef,
 } from 'vue';
 import AphorismFields from '@/components/modal/AphorismFields.vue';
 
 interface IProps {
-    getTitle: () => string;
     getApplyText?: () => string;
     getCancelText?: () => string;
     getIsShowInput?: () => boolean;
+    getTitle: () => string;
     isShowAphorismFields?: boolean;
 }
 

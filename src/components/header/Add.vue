@@ -16,32 +16,32 @@ import { useModal } from 'vue-final-modal';
 import { Add } from '@/assets/icons';
 import Modal from '@/components/modal/Modal.vue';
 import IconBase from '@/components/shared/IconBase.vue';
-import { mainStore } from '@/store/main';
+import { mainStore } from '@/store/main.store';
 
 const store = mainStore();
 
-const { open: openSettings, close } = useModal({
-    component: Modal,
+const { close, open: openSettings } = useModal({
     attrs: {
-        getTitle: () => 'Добавление афоризма',
         getApplyText: () => 'Добавить',
         getCancelText: () => 'Не нужно',
         getIsShowInput: () => false,
+        getTitle: () => 'Добавление афоризма',
         isShowAphorismFields: true,
-        async onCancel() {
-            close();
-        },
         async onApply(text: string, author?: string) {
             const isSuccess = await store.addAphorism({
-                text,
                 author: author!,
+                text,
             });
             if (isSuccess) {
                 await store.getAphorisms();
                 close();
             }
         },
+        async onCancel() {
+            close();
+        },
     },
+    component: Modal,
 });
 </script>
 

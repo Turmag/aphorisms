@@ -17,7 +17,7 @@ import { computed, useCssModule } from 'vue';
 import Add from '@/components/header/Add.vue';
 import Settings from '@/components/header/Settings.vue';
 import Switch from '@/components/header/Switch.vue';
-import { authStore } from '@/store/auth';
+import { authStore } from '@/store/auth.store';
 
 const authStoreVariable = authStore();
 const $style = useCssModule();

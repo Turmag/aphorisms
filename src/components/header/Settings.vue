@@ -16,20 +16,16 @@ import { useModal } from 'vue-final-modal';
 import { Settings } from '@/assets/icons';
 import Modal from '@/components/modal/Modal.vue';
 import IconBase from '@/components/shared/IconBase.vue';
-import { authStore } from '@/store/auth';
+import { authStore } from '@/store/auth.store';
 
 const store = authStore();
 
-const { open: openSettings, close } = useModal({
-    component: Modal,
+const { close, open: openSettings } = useModal({
     attrs: {
-        getTitle: () => store.isAuthorized ? 'Хочешь выйти?' : 'Хочешь войти?',
         getApplyText: () => store.isAuthorized ? 'Выхожу' : 'Захожу',
         getCancelText: () => 'Нет, спасибо',
         getIsShowInput: () => !store.isAuthorized,
-        onCancel() {
-            close();
-        },
+        getTitle: () => store.isAuthorized ? 'Хочешь выйти?' : 'Хочешь войти?',
         async onApply(password: string) {
             let isSuccess = false;
             if (store.isAuthorized) {
@@ -40,7 +36,11 @@ const { open: openSettings, close } = useModal({
             }
             if (isSuccess) close();
         },
+        onCancel() {
+            close();
+        },
     },
+    component: Modal,
 });
 </script>
 

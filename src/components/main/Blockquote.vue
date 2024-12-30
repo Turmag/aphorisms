@@ -94,28 +94,28 @@ import { useToggle } from '@vueuse/core';
 import { useModal } from 'vue-final-modal';
 import { useRoute } from 'vue-router';
 import {
-    ref,
     computed,
-    watch,
+    ref,
     useCssModule,
+    watch,
 } from 'vue';
 import {
     CopyDecor,
+    Delete,
     Edit,
     Save,
-    Delete,
 } from '@/assets/icons';
 import Modal from '@/components/modal/Modal.vue';
 import IconBase from '@/components/shared/IconBase.vue';
-import { authStore } from '@/store/auth';
-import { mainStore } from '@/store/main';
+import { authStore } from '@/store/auth.store';
+import { mainStore } from '@/store/main.store';
 
 interface IProps {
-    id: string;
-    text: string;
     author: string;
-    numb: number;
+    id: string;
     isEditable?: boolean;
+    numb: number;
+    text: string;
 }
 
 const props = withDefaults(defineProps<IProps>(), { isEditable: false });
@@ -173,27 +173,27 @@ const toggleIsEditable = () => {
 const isChangedAphorism = computed(() => editText.value !== props.text || editAuthor.value !== props.author);
 
 const saveAphorism = () => store.saveAphorism({
+    author: editAuthor.value,
     id: props.id,
     text: editText.value,
-    author: editAuthor.value,
 });
 
-const { open: deleteAphorism, close } = useModal({
-    component: Modal,
+const { close, open: deleteAphorism } = useModal({
     attrs: {
-        getTitle: () => `Хочешь удалить афоризм #${props.numb}?`,
         getCancelText: () => 'Не хочу',
         getIsShowInput: () => false,
-        onCancel() {
-            close();
-        },
+        getTitle: () => `Хочешь удалить афоризм #${props.numb}?`,
         onApply() {
             void (async () => {
                 await store.removeAphorism(props.id);
                 close();
             })();
         },
+        onCancel() {
+            close();
+        },
     },
+    component: Modal,
 });
 
 watch(

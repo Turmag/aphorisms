@@ -1,6 +1,6 @@
 import {
-    open,
     appendFile,
+    open,
     readdir,
 } from 'fs';
 
@@ -9,8 +9,8 @@ const generateIconsIndex = () => {
     const globPath = '/src/assets/icons';
     const filePath = `.${globPath}/index.ts`;
 
-    readdir(`.${globPath}`, function (err, files) {
-        if (err) throw err;
+    readdir(`.${globPath}`, function (error, files) {
+        if (error) throw error;
 
         for (let file of files) {
             if (!file.includes('.vue')) continue;
@@ -19,12 +19,12 @@ const generateIconsIndex = () => {
             fileContent += `export { default as ${file.replace('./', '').replace('.vue', '')} } from './${file}';\n`;
         }
 
-        open(filePath, 'w', err => {
-            if (err) throw err;
+        open(filePath, 'w', error => {
+            if (error) throw error;
         });
 
-        appendFile(filePath, fileContent, err => {
-            if (err) throw err;
+        appendFile(filePath, fileContent, error => {
+            if (error) throw error;
         });
     });
 };
