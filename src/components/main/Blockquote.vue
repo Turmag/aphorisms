@@ -90,6 +90,7 @@
 </template>
 
 <script setup lang="ts">
+import { useToggle } from '@vueuse/core';
 import { useModal } from 'vue-final-modal';
 import { useRoute } from 'vue-router';
 import {
@@ -106,7 +107,6 @@ import {
 } from '@/assets/icons';
 import Modal from '@/components/modal/Modal.vue';
 import IconBase from '@/components/shared/IconBase.vue';
-import { useToggle } from '@vueuse/core';
 import { authStore } from '@/store/auth';
 import { mainStore } from '@/store/main';
 

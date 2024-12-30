@@ -3345,10 +3345,10 @@ tsconfig-paths@^3.15.0:
     minimist "^1.2.6"
     strip-bom "^3.0.0"
 
-turmag-eslint-config@^2.0.28:
-  version "2.0.28"
-  resolved "https://registry.yarnpkg.com/turmag-eslint-config/-/turmag-eslint-config-2.0.28.tgz#8b5383b0fa1c59ce88e7b5be50fba6b92026dc4d"
-  integrity sha512-zpC2yFT96j2AMpLn3S1nBMHPNqHoUQYiG3RAflmmWugrILDyHw6O9scpfvRkAeDbXSPenz2O2K7qSVT2UT7sDg==
+turmag-eslint-config@^2.0.29:
+  version "2.0.29"
+  resolved "https://registry.yarnpkg.com/turmag-eslint-config/-/turmag-eslint-config-2.0.29.tgz#516685eef294383b3dfe174568dd095c87e24568"
+  integrity sha512-NmbsSJrTNU/WN8pCHAAdwxncGZZKUjSC6nairNPU4wDfURRT8EBwp67hOhu5jp72Ucwsxr16FV2KWtqUdzBjVQ==
   dependencies:
     "@stylistic/eslint-plugin" "^2.11.0"
     "@typescript-eslint/eslint-plugin" "^7.3.1"

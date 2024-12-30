@@ -12,11 +12,11 @@
 </template>
 
 <script setup lang="ts">
+import { useStorage } from '@vueuse/core';
 import { computed, useCssModule } from 'vue';
 import Add from '@/components/header/Add.vue';
 import Settings from '@/components/header/Settings.vue';
 import Switch from '@/components/header/Switch.vue';
-import { useStorage } from '@vueuse/core';
 import { authStore } from '@/store/auth';
 
 const authStoreVariable = authStore();
