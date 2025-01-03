@@ -26,8 +26,8 @@ const generateIconsIndex = () => {
             exportObject += `'${toKebabCase(fileName)}': ${fileName},\n`;
         }
 
-        exportObject += '} as unknown as TIcon;';
-        fileContent += 'type TIcon = Record<string, DefineComponent>; \n\n';
+        exportObject += '} as unknown as TIcons;';
+        fileContent += 'type TIcons = Record<string, DefineComponent>; \n\n';
         fileContent += exportObject;
 
         open(filePath, 'w', error => {

@@ -8,7 +8,7 @@ import Reset from './Reset.vue';
 import Save from './Save.vue';
 import Settings from './Settings.vue';
 
-type TIcon = Record<string, DefineComponent>;
+type TIcons = Record<string, DefineComponent>;
 
 export default {
     'add': Add,
@@ -19,4 +19,4 @@ export default {
     'reset': Reset,
     'save': Save,
     'settings': Settings,
-} as unknown as TIcon;
+} as unknown as TIcons;
