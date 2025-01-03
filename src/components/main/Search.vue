@@ -27,6 +27,7 @@ import {
     computed,
     ref,
     useCssModule,
+    watch,
 } from 'vue';
 import Checkbox from '@/components/shared/Checkbox.vue';
 import SvgIcon from '@/components/shared/SvgIcon.vue';
@@ -45,6 +46,11 @@ const wrapperClasses = computed(() => ({
 
 const resetFilter = () => store.filterWord = '';
 const onInput = useDebounceFn(() => store.filterWord = filterWord.value, 500);
+
+watch(
+    () => store.filterWord,
+    value => filterWord.value = value,
+);
 </script>
 
 <style lang="scss" module>
