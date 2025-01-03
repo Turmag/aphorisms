@@ -15,13 +15,12 @@
                         :class="$style.popup"
                     >
                         Ссылка скопирована
-                        <IconBase
+                        <SvgIcon
                             :class="$style.decor"
                             width="22"
                             height="7"
-                        >
-                            <CopyDecor />
-                        </IconBase>
+                            icon-name="copy-decor"
+                        />
                     </div>
                 </Transition>
             </div>
@@ -52,40 +51,36 @@
         >
             {{ author }}
         </div>
-        <IconBase
+        <SvgIcon
             v-if="authStoreVariable.isAuthorized"
             :class="$style.edit"
             width="20"
             height="20"
             :viewBoxWidth="35"
             :viewBoxHeight="35"
+            icon-name="edit"
             @click="toggleIsEditable"
-        >
-            <Edit />
-        </IconBase>
-        <IconBase
+        />
+        <SvgIcon
             v-if="authStoreVariable.isAuthorized && isChangedAphorism"
             :class="$style.save"
             width="20"
             height="20"
             :viewBoxWidth="62"
             :viewBoxHeight="62"
-            asdf
+            icon-name="save"
             @click="saveAphorism"
-        >
-            <Save />
-        </IconBase>
-        <IconBase
+        />
+        <SvgIcon
             v-if="authStoreVariable.isAuthorized"
             :class="$style.delete"
             width="20"
             height="20"
             :viewBoxWidth="24"
             :viewBoxHeight="24"
+            icon-name="delete"
             @click="deleteAphorism"
-        >
-            <Delete />
-        </IconBase>
+        />
     </blockquote>
 </template>
 
@@ -99,14 +94,8 @@ import {
     useCssModule,
     watch,
 } from 'vue';
-import {
-    CopyDecor,
-    Delete,
-    Edit,
-    Save,
-} from '@/assets/icons';
 import Modal from '@/components/modal/Modal.vue';
-import IconBase from '@/components/shared/IconBase.vue';
+import SvgIcon from '@/components/shared/SvgIcon.vue';
 import { authStore } from '@/store/auth.store';
 import { mainStore } from '@/store/main.store';
 

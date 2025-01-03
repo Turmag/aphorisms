@@ -12,7 +12,7 @@
             </label>
         </div>
 
-        <IconBase
+        <SvgIcon
             v-if="isSavedDarkMode"
             v-tooltip="'Вернуться к системной теме'"
             :class="$style.themeReset"
@@ -20,18 +20,16 @@
             height="10"
             viewBoxWidth="1920"
             viewBoxHeight="1920"
+            icon-name="reset"
             style="min-width: 15px;"
             @click="resetStorageDarkMode"
-        >
-            <Reset />
-        </IconBase>
+        />
     </div>
 </template>
 
 <script setup lang="ts">
 import { useStorage } from '@vueuse/core';
-import { Reset } from '@/assets/icons';
-import IconBase from '@/components/shared/IconBase.vue';
+import SvgIcon from '@/components/shared/SvgIcon.vue';
 
 const isDarkMode = useStorage('isDarkModeAphorisms', false);
 const isSavedDarkMode = useStorage('isSavedDarkModeAphorisms', false);

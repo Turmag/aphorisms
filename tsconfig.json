@@ -1,14 +1,14 @@
 {
     "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
         "baseUrl": ".",
-        "paths": { "@/*": ["src/*"] },
         "lib": ["esnext", "dom"],
-        "types": ["node", "vite/client"],
-        "target": "esnext",
         "module": "esnext",
         "moduleResolution": "node",
+        "paths": { "@/*": ["src/*"] },
         "strict": true,
-        "allowSyntheticDefaultImports": true
+        "target": "esnext",
+        "types": ["node", "vite/client"]
     },
     "include": [
         "./**/*",

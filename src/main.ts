@@ -13,7 +13,6 @@ import FloatingVue from 'floating-vue';
 const vfm = createVfm();
 const pinia = createPinia();
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 const app = createApp(App);
 app.use(router);
 app.use(pinia);

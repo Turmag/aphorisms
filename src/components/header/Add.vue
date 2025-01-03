@@ -1,21 +1,19 @@
 <template>
-    <IconBase
+    <SvgIcon
         :class="$style.add"
         width="30"
         height="30"
         viewBoxWidth="24"
         viewBoxHeight="24"
+        icon-name="add"
         @click="openSettings"
-    >
-        <Add />
-    </IconBase>
+    />
 </template>
 
 <script setup lang="ts">
 import { useModal } from 'vue-final-modal';
-import { Add } from '@/assets/icons';
 import Modal from '@/components/modal/Modal.vue';
-import IconBase from '@/components/shared/IconBase.vue';
+import SvgIcon from '@/components/shared/SvgIcon.vue';
 import { mainStore } from '@/store/main.store';
 
 const store = mainStore();

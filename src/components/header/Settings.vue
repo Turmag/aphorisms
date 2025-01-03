@@ -1,21 +1,19 @@
 <template>
-    <IconBase
+    <SvgIcon
         :class="$style.settings"
         width="30"
         height="30"
         viewBoxWidth="24"
         viewBoxHeight="24"
+        icon-name="settings"
         @click="openSettings"
-    >
-        <Settings />
-    </IconBase>
+    />
 </template>
 
 <script setup lang="ts">
 import { useModal } from 'vue-final-modal';
-import { Settings } from '@/assets/icons';
 import Modal from '@/components/modal/Modal.vue';
-import IconBase from '@/components/shared/IconBase.vue';
+import SvgIcon from '@/components/shared/SvgIcon.vue';
 import { authStore } from '@/store/auth.store';
 
 const store = authStore();

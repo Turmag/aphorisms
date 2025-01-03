@@ -4,10 +4,15 @@ import {
     readdir,
 } from 'fs';
 
+const toKebabCase = string => string.replace(/([a-z])([A-Z])/g, '$1-$2')
+    .replace(/[\s_]+/g, '-')
+    .toLowerCase();
+
 const generateIconsIndex = () => {
-    let fileContent = '';
+    let fileContent = `import type { DefineComponent } from 'vue';\n`;
     const globPath = '/src/assets/icons';
     const filePath = `.${globPath}/index.ts`;
+    let exportObject = 'export default {\n';
 
     readdir(`.${globPath}`, function (error, files) {
         if (error) throw error;
@@ -16,8 +21,14 @@ const generateIconsIndex = () => {
             if (!file.includes('.vue')) continue;
 
             file = file.replace(globPath, '');
-            fileContent += `export { default as ${file.replace('./', '').replace('.vue', '')} } from './${file}';\n`;
+            const fileName = file.replace('./', '').replace('.vue', '');
+            fileContent += `import ${fileName} from './${file}';\n`;
+            exportObject += `'${toKebabCase(fileName)}': ${fileName},\n`;
         }
+
+        exportObject += '} as unknown as TIcon;';
+        fileContent += 'type TIcon = Record<string, DefineComponent>; \n\n';
+        fileContent += exportObject;
 
         open(filePath, 'w', error => {
             if (error) throw error;

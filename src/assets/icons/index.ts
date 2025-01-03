@@ -1,8 +1,22 @@
-export { default as Add } from './Add.vue';
-export { default as Cancel } from './Cancel.vue';
-export { default as CopyDecor } from './CopyDecor.vue';
-export { default as Delete } from './Delete.vue';
-export { default as Edit } from './Edit.vue';
-export { default as Reset } from './Reset.vue';
-export { default as Save } from './Save.vue';
-export { default as Settings } from './Settings.vue';
+import type { DefineComponent } from 'vue';
+import Add from './Add.vue';
+import Cancel from './Cancel.vue';
+import CopyDecor from './CopyDecor.vue';
+import Delete from './Delete.vue';
+import Edit from './Edit.vue';
+import Reset from './Reset.vue';
+import Save from './Save.vue';
+import Settings from './Settings.vue';
+
+type TIcon = Record<string, DefineComponent>;
+
+export default {
+    'add': Add,
+    'cancel': Cancel,
+    'copy-decor': CopyDecor,
+    'delete': Delete,
+    'edit': Edit,
+    'reset': Reset,
+    'save': Save,
+    'settings': Settings,
+} as unknown as TIcon;

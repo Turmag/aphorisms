@@ -5,16 +5,15 @@
             :class="$style.filter"
             placeholder="Поиск"
         >
-        <IconBase
+        <SvgIcon
             :class="$style.cancel"
             width="20"
             height="20"
             :view-box-width="69"
             :view-box-height="69"
+            icon-name="cancel"
             @click="resetFilter"
-        >
-            <Cancel />
-        </IconBase>
+        />
         <Checkbox v-model="isStickyFilters">
             Липкий поиск
         </Checkbox>
@@ -24,9 +23,8 @@
 <script setup lang="ts">
 import { useStorage } from '@vueuse/core';
 import { computed, useCssModule } from 'vue';
-import { Cancel } from '@/assets/icons';
 import Checkbox from '@/components/shared/Checkbox.vue';
-import IconBase from '@/components/shared/IconBase.vue';
+import SvgIcon from '@/components/shared/SvgIcon.vue';
 import { mainStore } from '@/store/main.store';
 
 const store = mainStore();

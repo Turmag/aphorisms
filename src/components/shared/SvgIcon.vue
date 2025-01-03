@@ -8,25 +8,28 @@
         role="presentation"
     >
         <g :fill="color">
-            <slot />
+            <component :is="icons[iconName]" />
         </g>
     </svg>
 </template>
 
 <script setup lang="ts">
+import icons from '@/assets/icons';
+
 interface IProps {
-    width?: string | number;
-    height?: string | number;
-    viewBoxWidth?: string | number;
-    viewBoxHeight?: string | number;
     color?: string;
+    height?: string | number;
+    iconName: string;
+    viewBoxHeight?: string | number;
+    viewBoxWidth?: string | number;
+    width?: string | number;
 }
 
 withDefaults(defineProps<IProps>(), {
-    width: 18,
-    height: 18,
-    viewBoxWidth: 0,
-    viewBoxHeight: 0,
     color: 'currentColor',
+    height: 18,
+    viewBoxHeight: 0,
+    viewBoxWidth: 0,
+    width: 18,
 });
 </script>
