@@ -1,6 +1,6 @@
 import { notify } from '@kyvg/vue3-notification';
 import { defineStore } from 'pinia';
-import Api from '@/shared/api';
+import Api from '@/shared/api/AuthApi';
 
 export const authStore = defineStore('auth', {
     state: () => ({ isAuthorized: false }),

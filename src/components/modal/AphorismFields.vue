@@ -22,5 +22,6 @@ const localAuthor = defineModel<string>('author');
         background-color: transparent;
         color: var(--color);
         font-size: 16px;
+        resize: vertical;
     }
 </style>

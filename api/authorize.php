@@ -1,7 +1,9 @@
 <?php
 require "functions.php"; 
 
-if($_POST['password'] === 'smile2'){
+$params = json_decode(file_get_contents("php://input"), true);
+
+if($params["password"] === 'smile2'){
     authorizeUser();
     setCookies();
     echo 'success';

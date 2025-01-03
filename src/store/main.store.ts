@@ -2,7 +2,7 @@ import { notify } from '@kyvg/vue3-notification';
 import { defineStore } from 'pinia';
 import type { IAphorism, IStore } from '@/shared/types';
 import type { LocationQuery } from 'vue-router';
-import Api from '@/shared/api';
+import Api from '@/shared/api/CommonApi';
 
 export const mainStore = defineStore('main', {
     state: (): IStore => ({
