@@ -37,7 +37,7 @@ const { close, open: openSettings } = useModal({
                 close();
             }
         },
-        async onCancel() {
+        onCancel() {
             close();
         },
     },
