@@ -1,9 +1,10 @@
 <template>
     <div :class="wrapperClasses">
         <input
-            v-model="store.filterWord"
+            v-model="filterWord"
             :class="$style.filter"
             placeholder="Поиск"
+            @input="onInput"
         >
         <SvgIcon
             :class="$style.cancel"
@@ -21,8 +22,12 @@
 </template>
 
 <script setup lang="ts">
-import { useStorage } from '@vueuse/core';
-import { computed, useCssModule } from 'vue';
+import { useDebounceFn, useStorage } from '@vueuse/core';
+import {
+    computed,
+    ref,
+    useCssModule,
+} from 'vue';
 import Checkbox from '@/components/shared/Checkbox.vue';
 import SvgIcon from '@/components/shared/SvgIcon.vue';
 import { mainStore } from '@/store/main.store';
@@ -31,12 +36,15 @@ const store = mainStore();
 const $style = useCssModule();
 const isStickyFilters = useStorage('isStickyFilters', false);
 
+const filterWord = ref('');
+
 const wrapperClasses = computed(() => ({
     [$style.wrapper]: true,
     [$style.wrapperSticky]: isStickyFilters.value,
 }));
 
 const resetFilter = () => store.filterWord = '';
+const onInput = useDebounceFn(() => store.filterWord = filterWord.value, 500);
 </script>
 
 <style lang="scss" module>
