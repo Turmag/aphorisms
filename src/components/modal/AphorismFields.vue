@@ -6,31 +6,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-
-interface IProps {
-    author: string;
-    text: string;
-}
-
-const props = defineProps<IProps>();
-
-interface IEmits {
-    (event: 'update:author', value: string): void;
-    (event: 'update:text', value: string): void;
-}
-
-const emits = defineEmits<IEmits>();
-
-const localText = computed({
-    get: () => props.text,
-    set: value => emits('update:text', value),
-});
-
-const localAuthor = computed({
-    get: () => props.author,
-    set: value => emits('update:author', value),
-});
+const localText = defineModel<string>('text');
+const localAuthor = defineModel<string>('author');
 </script>
 
 <style lang="scss" module>
