@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { useModal } from 'vue-final-modal';
 import Modal from '@/components/modal/Modal.vue';
-import SvgIcon from '@/components/shared/SvgIcon.vue';
+import SvgIcon from '@/components/common/SvgIcon.vue';
 import { mainStore } from '@/store/main.store';
 
 const store = mainStore();

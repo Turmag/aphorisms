@@ -29,8 +29,8 @@ import {
     useCssModule,
     watch,
 } from 'vue';
-import Checkbox from '@/components/shared/Checkbox.vue';
-import SvgIcon from '@/components/shared/SvgIcon.vue';
+import Checkbox from '@/components/common/Checkbox.vue';
+import SvgIcon from '@/components/common/SvgIcon.vue';
 import { mainStore } from '@/store/main.store';
 
 const store = mainStore();

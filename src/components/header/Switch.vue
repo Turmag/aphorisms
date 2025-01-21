@@ -29,7 +29,7 @@
 
 <script setup lang="ts">
 import { useStorage } from '@vueuse/core';
-import SvgIcon from '@/components/shared/SvgIcon.vue';
+import SvgIcon from '@/components/common/SvgIcon.vue';
 
 const isDarkMode = useStorage('isDarkModeAphorisms', false);
 const isSavedDarkMode = useStorage('isSavedDarkModeAphorisms', false);

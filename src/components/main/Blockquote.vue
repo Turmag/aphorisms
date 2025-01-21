@@ -95,7 +95,7 @@ import {
     watch,
 } from 'vue';
 import Modal from '@/components/modal/Modal.vue';
-import SvgIcon from '@/components/shared/SvgIcon.vue';
+import SvgIcon from '@/components/common/SvgIcon.vue';
 import { authStore } from '@/store/auth.store';
 import { mainStore } from '@/store/main.store';
 

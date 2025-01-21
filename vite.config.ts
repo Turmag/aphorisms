@@ -5,10 +5,7 @@ import vue from '@vitejs/plugin-vue';
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }: { mode: string }) => ({
     base: '/aphorisms/',
-    css: {
-        modules: { generateScopedName: mode === 'development' ? '' : '[hash:base64:8]' },
-        preprocessorOptions: { scss: { api: 'modern-compiler' } },
-    },
+    css: { modules: { generateScopedName: mode === 'development' ? '' : '[hash:base64:8]' } },
     plugins: [vue()],
     resolve: { alias: { '@': path.resolve(__dirname, './src') } },
     server: {
