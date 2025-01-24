@@ -4428,10 +4428,10 @@ turmag-eslint-config@^2.0.50:
     globals "^15.14.0"
     typescript-eslint "^8.19.1"
 
-turmag-stylelint-config@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/turmag-stylelint-config/-/turmag-stylelint-config-0.0.6.tgz#bcdde2ced0c105bd8cb90ffa811e69f79ae7213c"
-  integrity sha512-SPx9obBvTW2+p1It+TebheGwF5zVfeVHN0Afh/Uxw13QgiECKmqlJk5WwrNivvkJP8WfvIjJXgVmQv8/vppg3A==
+turmag-stylelint-config@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/turmag-stylelint-config/-/turmag-stylelint-config-0.0.7.tgz#27d6646cb42255d4e79b2975d395388ab383371e"
+  integrity sha512-jANcjX6weOPuoX+zvEEsi29pMGPYwWSWFAfu+sldSCjhh+Q4x5AxOSEVTiI4nMMMPfhbz7hz/AxsiVffhpPGPQ==
   dependencies:
     "@stylistic/stylelint-plugin" "^3.1.1"
     postcss-html "^1.7.0"
