@@ -1,7 +1,6 @@
 import axios from 'axios';
 import type { IAphorism } from '@/shared/types';
-
-const path = import.meta.env.MODE === 'development' ? '' : import.meta.env.BASE_URL;
+import { path } from '@/shared/constants';
 
 export default {
     addAphorism: ({ author, text }: { author: string; text: string }) => axios.post<string>(`${path}/api/addAphorism.php`, {
