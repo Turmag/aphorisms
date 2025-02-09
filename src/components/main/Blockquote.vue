@@ -28,59 +28,61 @@
         <div :class="$style.numb">
             {{ numb }}
         </div>
-        <textarea
-            v-if="isEditable"
-            v-model="editText"
-            :class="$style.textarea"
-            :style="`height: ${textBlockHeight}px;`"
-        />
-        <div
-            v-else
-            ref="textBlock"
-            :class="$style.text"
-            v-html="value"
-        />
-        <textarea
-            v-if="isEditable"
-            v-model="editAuthor"
-            :class="[$style.textarea, $style.textareaAuthor]"
-        />
-        <div
-            v-else
-            :class="$style.author"
-        >
-            {{ author }}
+        <div :class="$style.content">
+            <textarea
+                v-if="isEditable"
+                v-model="editText"
+                :class="$style.textarea"
+                :style="`height: ${textBlockHeight}px;`"
+            />
+            <div
+                v-else
+                ref="textBlock"
+                :class="$style.text"
+                v-html="value"
+            />
+            <textarea
+                v-if="isEditable"
+                v-model="editAuthor"
+                :class="[$style.textarea, $style.textareaAuthor]"
+            />
+            <div
+                v-else
+                :class="$style.author"
+            >
+                {{ author }}
+            </div>
+            <SvgIcon
+                v-if="authStoreVariable.isAuthorized"
+                :class="$style.edit"
+                width="20"
+                height="20"
+                :viewBoxWidth="35"
+                :viewBoxHeight="35"
+                icon-name="edit"
+                @click="toggleIsEditable"
+            />
+            <SvgIcon
+                v-if="authStoreVariable.isAuthorized && isChangedAphorism"
+                :class="$style.save"
+                width="20"
+                height="20"
+                :viewBoxWidth="62"
+                :viewBoxHeight="62"
+                icon-name="save"
+                @click="saveAphorism"
+            />
+            <SvgIcon
+                v-if="authStoreVariable.isAuthorized"
+                :class="$style.delete"
+                width="20"
+                height="20"
+                :viewBoxWidth="24"
+                :viewBoxHeight="24"
+                icon-name="delete"
+                @click="deleteAphorism"
+            />
         </div>
-        <SvgIcon
-            v-if="authStoreVariable.isAuthorized"
-            :class="$style.edit"
-            width="20"
-            height="20"
-            :viewBoxWidth="35"
-            :viewBoxHeight="35"
-            icon-name="edit"
-            @click="toggleIsEditable"
-        />
-        <SvgIcon
-            v-if="authStoreVariable.isAuthorized && isChangedAphorism"
-            :class="$style.save"
-            width="20"
-            height="20"
-            :viewBoxWidth="62"
-            :viewBoxHeight="62"
-            icon-name="save"
-            @click="saveAphorism"
-        />
-        <SvgIcon
-            v-if="authStoreVariable.isAuthorized"
-            :class="$style.delete"
-            width="20"
-            height="20"
-            :viewBoxWidth="24"
-            :viewBoxHeight="24"
-            icon-name="delete"
-            @click="deleteAphorism"
-        />
     </blockquote>
 </template>
 
@@ -197,8 +199,10 @@ watch(
 <style lang="scss" module>
     .blockquote {
         position: relative;
+        display: flex;
+        align-items: center;
         margin: 0;
-        padding: 40px 40px 40px 100px;
+        padding-block: 40px;
         border-right: 1px solid var(--border-color);
         border-bottom: 1px solid var(--border-color);
         border-left: 8px solid var(--border-left-color);
@@ -278,14 +282,22 @@ watch(
     }
 
     .numb {
-        position: absolute;
-        top: 50px;
-        left: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+        min-width: 100px;
+        height: 100%;
         font-size: 25px;
     }
 
+    .content {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
     .text {
-        margin-bottom: 10px;
         font-size: 28px;
     }
 
@@ -340,5 +352,12 @@ watch(
     .delete {
         top: initial;
         bottom: 10px;
+    }
+
+    @media screen and (width <= 600px) {
+        .numb {
+            width: 60px;
+            min-width: 60px;
+        }
     }
 </style>
