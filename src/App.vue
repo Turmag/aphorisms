@@ -12,8 +12,8 @@ import Header from '@/components/header/Header.vue';
 import Main from '@/components/main/Main.vue';
 import { useScrollPosition } from '@/shared/composables/useScrollPosition';
 import { useTheme } from '@/shared/composables/useTheme';
-import { authStore } from '@/store/auth.store';
-import { mainStore } from '@/store/main.store';
+import { authStore } from '@/stores/auth.store';
+import { mainStore } from '@/stores/main.store';
 
 const store = mainStore();
 const authStoreVariable = authStore();

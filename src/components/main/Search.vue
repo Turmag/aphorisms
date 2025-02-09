@@ -31,7 +31,7 @@ import {
 } from 'vue';
 import Checkbox from '@/components/common/Checkbox.vue';
 import SvgIcon from '@/components/common/SvgIcon.vue';
-import { mainStore } from '@/store/main.store';
+import { mainStore } from '@/stores/main.store';
 
 const store = mainStore();
 const $style = useCssModule();

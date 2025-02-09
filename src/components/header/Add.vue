@@ -14,7 +14,7 @@
 import { useModal } from 'vue-final-modal';
 import SvgIcon from '@/components/common/SvgIcon.vue';
 import Modal from '@/components/modal/Modal.vue';
-import { mainStore } from '@/store/main.store';
+import { mainStore } from '@/stores/main.store';
 
 const store = mainStore();
 

@@ -5,10 +5,12 @@ import {
     watch,
     watchEffect,
 } from 'vue';
+import { mainStore } from '@/stores/main.store';
 
 export function useTheme() {
-    const isDarkMode = useStorage('isDarkModeAphorisms', false);
-    const isSavedDarkMode = useStorage('isSavedDarkModeAphorisms', false);
+    const store = mainStore();
+    const isDarkMode = useStorage(store.darkModeName, false);
+    const isSavedDarkMode = useStorage(store.savedDarkModeName, false);
     const matches = ref(true);
 
     const setDarkMode = () => {

@@ -10,6 +10,8 @@ export const mainStore = defineStore('main', {
         aphorisms: [],
         unBlured: false,
         filterWord: '',
+        darkModeName: 'isDarkModeAphorisms',
+        savedDarkModeName: 'isSavedDarkModeAphorisms',
     }),
 
     getters: {

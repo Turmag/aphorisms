@@ -1,5 +1,5 @@
 import { watch } from 'vue';
-import { mainStore } from '@/store/main.store';
+import { mainStore } from '@/stores/main.store';
 import type { IScrollTopObject } from '@/shared/types';
 import { getSecondsDiff } from '@/shared/helpers';
 

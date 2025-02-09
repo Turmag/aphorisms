@@ -13,7 +13,9 @@ export interface IScrollTopObject {
 
 export interface IStore {
     aphorisms: IAphorism[];
+    darkModeName: string;
     filterWord: string;
     isLoadedPage: boolean;
+    savedDarkModeName: string;
     unBlured: boolean;
 }
