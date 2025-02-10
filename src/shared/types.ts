@@ -10,12 +10,3 @@ export interface IScrollTopObject {
     time: number;
     top: number;
 }
-
-export interface IStore {
-    aphorisms: IAphorism[];
-    darkModeName: string;
-    filterWord: string;
-    isLoadedPage: boolean;
-    isUnBlured: boolean;
-    savedDarkModeName: string;
-}
