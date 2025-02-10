@@ -27,7 +27,7 @@ const init = async () => {
     await store.getAphorisms();
     store.isLoadedPage = true;
     store.scrollToChosenAphorism(route.query);
-    document.onclick = () => store.unBlured = true;
+    document.onclick = () => store.isUnBlured = true;
 };
 
 init();

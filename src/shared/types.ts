@@ -16,6 +16,6 @@ export interface IStore {
     darkModeName: string;
     filterWord: string;
     isLoadedPage: boolean;
+    isUnBlured: boolean;
     savedDarkModeName: string;
-    unBlured: boolean;
 }

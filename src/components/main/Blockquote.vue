@@ -124,7 +124,7 @@ const isBlur = computed(
     () =>
         Boolean(route.query.phraseNumb)
         && route.query.phraseNumb !== String(props.id)
-        && !store.unBlured,
+        && !store.isUnBlured,
 );
 
 const blockquoteClasses = computed(() => ({
