@@ -4272,6 +4272,14 @@ stylelint-config-recommended@>=6.0.0, stylelint-config-recommended@^14.0.1:
   resolved "https://registry.yarnpkg.com/stylelint-config-recommended/-/stylelint-config-recommended-14.0.1.tgz#d25e86409aaf79ee6c6085c2c14b33c7e23c90c6"
   integrity sha512-bLvc1WOz/14aPImu/cufKAZYfXs/A/owZfSMZ4N+16WGXLoX5lOir53M6odBxvhgmgdxCVnNySJmZKx73T93cg==
 
+stylelint-config-standard-scss@^14.0.0:
+  version "14.0.0"
+  resolved "https://registry.yarnpkg.com/stylelint-config-standard-scss/-/stylelint-config-standard-scss-14.0.0.tgz#d2a3dde0eeae3601ccdd734a63a0e3be12430a7e"
+  integrity sha512-6Pa26D9mHyi4LauJ83ls3ELqCglU6VfCXchovbEqQUiEkezvKdv6VgsIoMy58i00c854wVmOw0k8W5FTpuaVqg==
+  dependencies:
+    stylelint-config-recommended-scss "^14.1.0"
+    stylelint-config-standard "^36.0.1"
+
 stylelint-config-standard@^36.0.1:
   version "36.0.1"
   resolved "https://registry.yarnpkg.com/stylelint-config-standard/-/stylelint-config-standard-36.0.1.tgz#727cbb2a1ef3e210f5ce8329cde531129f156609"
@@ -4428,10 +4436,10 @@ turmag-eslint-config@^2.0.52:
     globals "^15.14.0"
     typescript-eslint "^8.19.1"
 
-turmag-stylelint-config@^0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/turmag-stylelint-config/-/turmag-stylelint-config-0.0.7.tgz#27d6646cb42255d4e79b2975d395388ab383371e"
-  integrity sha512-jANcjX6weOPuoX+zvEEsi29pMGPYwWSWFAfu+sldSCjhh+Q4x5AxOSEVTiI4nMMMPfhbz7hz/AxsiVffhpPGPQ==
+turmag-stylelint-config@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/turmag-stylelint-config/-/turmag-stylelint-config-0.0.8.tgz#dcbead022a94222c8c21bf302309a3f8e263a569"
+  integrity sha512-Hg63DakeGjnw6nCs70yjeZj5KMj1UnWNfk7vKQfyS4iw0MA5hIjZh5AMrLAM5R9v0vrO+0I3oN/We/S9xgcGOA==
   dependencies:
     "@stylistic/stylelint-plugin" "^3.1.1"
     postcss-html "^1.7.0"
@@ -4439,6 +4447,7 @@ turmag-stylelint-config@^0.0.7:
     stylelint-config-recommended-scss "^14.1.0"
     stylelint-config-recommended-vue "^1.5.0"
     stylelint-config-standard "^36.0.1"
+    stylelint-config-standard-scss "^14.0.0"
     stylelint-order "^6.0.4"
 
 type-check@^0.4.0, type-check@~0.4.0:
