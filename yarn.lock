@@ -2492,10 +2492,10 @@ eslint-plugin-sonarjs@^3.0.1:
     semver "7.6.3"
     typescript "^5"
 
-eslint-plugin-turmag-special-rules@^1.0.20:
-  version "1.0.20"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-turmag-special-rules/-/eslint-plugin-turmag-special-rules-1.0.20.tgz#1f569ab789bb3c76419f0264d06b35a4e9961acc"
-  integrity sha512-6nRL5KID58Y89wCxwXPpOXT1PpuGy2PqPqujwLD+bh/P4ex+GmASQDUrZ4Nz8uV9jvPmWf0yH8SHbLJAzZc+dg==
+eslint-plugin-turmag-special-rules@^1.0.23:
+  version "1.0.23"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-turmag-special-rules/-/eslint-plugin-turmag-special-rules-1.0.23.tgz#64d1c94541549c1db12a6e54894dba88fa4b4615"
+  integrity sha512-ihCZTzIQevVB5rg8w0OcoUZRMsJx9fzYgUY0DTfPnqlV/zIPu0uspasKZCetS31sLniJE2UEsvPCf3iENse9Eg==
   dependencies:
     requireindex "^1.2.0"
 
@@ -4421,16 +4421,16 @@ tsconfig-paths@^3.15.0:
     minimist "^1.2.6"
     strip-bom "^3.0.0"
 
-turmag-eslint-config@^2.0.52:
-  version "2.0.52"
-  resolved "https://registry.yarnpkg.com/turmag-eslint-config/-/turmag-eslint-config-2.0.52.tgz#eb7a507e363ecf9b72edb1e9d1c51145e2fe6ebc"
-  integrity sha512-b3BkwPtq68pApOApAst2N7y2Ay1mM+astNMLfzNxFNBWJmE4D6/pFlEz5AoNKyOFpSjnB3akyM1HF1V304E5QQ==
+turmag-eslint-config@^2.0.54:
+  version "2.0.54"
+  resolved "https://registry.yarnpkg.com/turmag-eslint-config/-/turmag-eslint-config-2.0.54.tgz#40fa8ac2a5f26f1fff0e413bbfc287dd57959beb"
+  integrity sha512-tAQcsWSLx6W0eNN5xfOR5clpI4qe11Cxx0+vMwl589oEOoN6ewxuEOiHXzfi7fi2c8SoqK4I5xmZw775MuJt3g==
   dependencies:
     "@stylistic/eslint-plugin" "^2.12.1"
     eslint-plugin-import "^2.31.0"
     eslint-plugin-perfectionist "^4.4.0"
     eslint-plugin-sonarjs "^3.0.1"
-    eslint-plugin-turmag-special-rules "^1.0.20"
+    eslint-plugin-turmag-special-rules "^1.0.23"
     eslint-plugin-unicorn "^56.0.1"
     eslint-plugin-vue "^9.32.0"
     globals "^15.14.0"
