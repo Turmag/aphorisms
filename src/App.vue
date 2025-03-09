@@ -12,11 +12,11 @@ import Header from '@/components/header/Header.vue';
 import Main from '@/components/main/Main.vue';
 import { useScrollPosition } from '@/shared/composables/useScrollPosition';
 import { useTheme } from '@/shared/composables/useTheme';
-import { authStore } from '@/stores/auth.store';
-import { mainStore } from '@/stores/main.store';
+import { useAuthStore } from '@/stores/useAuth.store';
+import { useMainStore } from '@/stores/useMain.store';
 
-const store = mainStore();
-const authStoreVariable = authStore();
+const store = useMainStore();
+const authStoreVariable = useAuthStore();
 const route = useRoute();
 
 useTheme();

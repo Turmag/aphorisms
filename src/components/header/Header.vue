@@ -17,9 +17,9 @@ import { computed, useCssModule } from 'vue';
 import Add from '@/components/header/Add.vue';
 import Settings from '@/components/header/Settings.vue';
 import Switch from '@/components/header/Switch.vue';
-import { authStore } from '@/stores/auth.store';
+import { useAuthStore } from '@/stores/useAuth.store';
 
-const authStoreVariable = authStore();
+const authStoreVariable = useAuthStore();
 const $style = useCssModule();
 const isStickyFilters = useStorage('isStickyFilters', false);
 

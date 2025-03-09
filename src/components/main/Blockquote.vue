@@ -98,8 +98,8 @@ import {
 } from 'vue';
 import SvgIcon from '@/components/common/SvgIcon.vue';
 import Modal from '@/components/modal/Modal.vue';
-import { authStore } from '@/stores/auth.store';
-import { mainStore } from '@/stores/main.store';
+import { useAuthStore } from '@/stores/useAuth.store';
+import { useMainStore } from '@/stores/useMain.store';
 
 interface IProps {
     author: string;
@@ -112,8 +112,8 @@ interface IProps {
 const props = withDefaults(defineProps<IProps>(), { isEditable: false });
 
 const route = useRoute();
-const store = mainStore();
-const authStoreVariable = authStore();
+const store = useMainStore();
+const authStoreVariable = useAuthStore();
 const $style = useCssModule();
 
 const [isLinkCopied, toggleIsLinkCopied] = useToggle();

@@ -5,7 +5,7 @@ import type { IAphorism } from '@/shared/types';
 import type { LocationQuery } from 'vue-router';
 import Api from '@/shared/api/CommonApi';
 
-export const mainStore = defineStore('main', () => {
+export const useMainStore = defineStore('main', () => {
     const isLoadedPage = ref(false);
     const aphorisms = ref<IAphorism[]>([]);
     const isUnBlured = ref(false);

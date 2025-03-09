@@ -14,9 +14,9 @@
 <script setup lang="ts">
 import Blockquote from '@/components/main/Blockquote.vue';
 import Search from '@/components/main/Search.vue';
-import { mainStore } from '@/stores/main.store';
+import { useMainStore } from '@/stores/useMain.store';
 
-const store = mainStore();
+const store = useMainStore();
 </script>
 
 <style lang="scss" module>

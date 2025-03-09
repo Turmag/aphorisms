@@ -1,11 +1,11 @@
 import { useStorage } from '@vueuse/core';
 import { watch } from 'vue';
-import { mainStore } from '@/stores/main.store';
+import { useMainStore } from '@/stores/useMain.store';
 import type { IScrollTopObject } from '@/shared/types';
 import { getSecondsDiff } from '@/shared/helpers';
 
 export const useScrollPosition = () => {
-    const store = mainStore();
+    const store = useMainStore();
     const aphorismsScrollTop = useStorage('aphorismsScrollTop', {} as IScrollTopObject);
 
     window.onbeforeunload = () => {

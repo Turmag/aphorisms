@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import Api from '@/shared/api/AuthApi';
 
-export const authStore = defineStore('auth', () => {
+export const useAuthStore = defineStore('auth', () => {
     const isAuthorized = ref(false);
 
     const authorize = async (password: string) => {

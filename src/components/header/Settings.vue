@@ -14,9 +14,9 @@
 import { useModal } from 'vue-final-modal';
 import SvgIcon from '@/components/common/SvgIcon.vue';
 import Modal from '@/components/modal/Modal.vue';
-import { authStore } from '@/stores/auth.store';
+import { useAuthStore } from '@/stores/useAuth.store';
 
-const store = authStore();
+const store = useAuthStore();
 
 const { close, open: openSettings } = useModal({
     attrs: {
