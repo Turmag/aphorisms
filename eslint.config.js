@@ -1,5 +1,5 @@
-import config from 'turmag-eslint-config';
 import { aliases } from './aliases.js';
+import config from 'turmag-eslint-config';
 
 export default [
     ...config,
