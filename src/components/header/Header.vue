@@ -21,7 +21,7 @@ import { useAuthStore } from '@/stores/useAuth.store';
 
 const authStoreVariable = useAuthStore();
 const $style = useCssModule();
-const isStickyFilters = useStorage('isStickyFilters', false);
+const isStickyFilters = useStorage('isAphorismsStickyFilters', false);
 
 const headerClasses = computed(() => ({
     [$style.header]: true,

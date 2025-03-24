@@ -35,7 +35,7 @@ import { useMainStore } from '@/stores/useMain.store';
 
 const store = useMainStore();
 const $style = useCssModule();
-const isStickyFilters = useStorage('isStickyFilters', false);
+const isStickyFilters = useStorage('isAphorismsStickyFilters', false);
 
 const filterWord = ref('');
 
