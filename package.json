@@ -10,7 +10,8 @@
         "deploy": "scp -r dist/* u2250830@37.140.192.227:./www/focusinfo.ru/aphorisms",
         "bd": "yarn build && yarn deploy",
         "dapi": "scp -r api/* u2250830@37.140.192.227:./www/focusinfo.ru/aphorisms/api",
-        "generate-icons-idx": "node .\\node-files\\generateIconsIndex.js"
+        "generate-icons-idx": "node .\\/node-files\\/generateIconsIndex.js",
+        "generate-components-idx": "node .\\/node-files\\/generateComponentsIndex.js"
     },
     "dependencies": {
         "@kyvg/vue3-notification": "^3.2.1",

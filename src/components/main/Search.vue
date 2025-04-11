@@ -15,9 +15,9 @@
             icon-name="cancel"
             @click="resetFilter"
         />
-        <Checkbox v-model="isStickyFilters">
+        <UiCheckbox v-model="isStickyFilters">
             Липкий поиск
-        </Checkbox>
+        </UiCheckbox>
     </div>
 </template>
 
@@ -29,8 +29,7 @@ import {
     useCssModule,
     watch,
 } from 'vue';
-import Checkbox from '@/components/common/Checkbox.vue';
-import SvgIcon from '@/components/common/SvgIcon.vue';
+import { SvgIcon, UiCheckbox } from '@/components/kit';
 import { useMainStore } from '@/stores/useMain.store';
 
 const store = useMainStore();

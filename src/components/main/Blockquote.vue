@@ -96,7 +96,7 @@ import {
     useCssModule,
     watch,
 } from 'vue';
-import SvgIcon from '@/components/common/SvgIcon.vue';
+import { SvgIcon } from '@/components/kit';
 import Modal from '@/components/modal/Modal.vue';
 import { useAuthStore } from '@/stores/useAuth.store';
 import { useMainStore } from '@/stores/useMain.store';

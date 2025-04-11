@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import { useModal } from 'vue-final-modal';
-import SvgIcon from '@/components/common/SvgIcon.vue';
+import { SvgIcon } from '@/components/kit';
 import Modal from '@/components/modal/Modal.vue';
 import { useAuthStore } from '@/stores/useAuth.store';
 
