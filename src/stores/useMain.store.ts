@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 import type { IAphorism } from '@/shared/types';
 import type { LocationQuery } from 'vue-router';
-import Api from '@/shared/api/CommonApi';
+import Api from '@/shared/api/MainApi';
 
 export const useMainStore = defineStore('main', () => {
     const isLoadedPage = ref(false);
