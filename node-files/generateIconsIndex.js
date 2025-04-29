@@ -23,11 +23,12 @@ const generateIconsIndex = () => {
             file = file.replace(globPath, '');
             const fileName = file.replace('./', '').replace('.vue', '');
             fileContent += `import ${fileName} from './${file}';\n`;
-            exportObject += `'${toKebabCase(fileName)}': ${fileName},\n`;
+            const kebabFilename = toKebabCase(fileName);
+            exportObject += `    ${kebabFilename.includes('-') ? '\'' : ''}${kebabFilename}${kebabFilename.includes('-') ? '\'' : ''}: ${fileName},\n`;
         }
 
-        exportObject += '} as unknown as TIcons;';
-        fileContent += 'type TIcons = Record<string, DefineComponent>; \n\n';
+        exportObject += '} as unknown as TIcons;\n';
+        fileContent += '\ntype TIcons = Record<string, DefineComponent>;\n\n';
         fileContent += exportObject;
 
         open(filePath, 'w', error => {

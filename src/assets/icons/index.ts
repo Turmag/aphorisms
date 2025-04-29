@@ -11,12 +11,12 @@ import Settings from './Settings.vue';
 type TIcons = Record<string, DefineComponent>;
 
 export default {
-    'add': Add,
-    'cancel': Cancel,
+    add: Add,
+    cancel: Cancel,
     'copy-decor': CopyDecor,
-    'delete': Delete,
-    'edit': Edit,
-    'reset': Reset,
-    'save': Save,
-    'settings': Settings,
+    delete: Delete,
+    edit: Edit,
+    reset: Reset,
+    save: Save,
+    settings: Settings,
 } as unknown as TIcons;
