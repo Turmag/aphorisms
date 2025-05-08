@@ -19,7 +19,7 @@ import icons from '@/assets/icons';
 interface IProps {
     color?: string;
     height?: string | number;
-    iconName: string;
+    iconName: keyof typeof icons;
     viewBoxHeight?: string | number;
     viewBoxWidth?: string | number;
     width?: string | number;

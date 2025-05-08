@@ -9,7 +9,7 @@ const toKebabCase = string => string.replace(/([a-z])([A-Z])/g, '$1-$2')
     .toLowerCase();
 
 const generateIconsIndex = () => {
-    let fileContent = `import type { DefineComponent } from 'vue';\n`;
+    let fileContent = '';
     const globPath = '/src/assets/icons';
     const filePath = `.${globPath}/index.ts`;
     let exportObject = 'export default {\n';
@@ -27,8 +27,8 @@ const generateIconsIndex = () => {
             exportObject += `    ${kebabFilename.includes('-') ? '\'' : ''}${kebabFilename}${kebabFilename.includes('-') ? '\'' : ''}: ${fileName},\n`;
         }
 
-        exportObject += '} as unknown as TIcons;\n';
-        fileContent += '\ntype TIcons = Record<string, DefineComponent>;\n\n';
+        exportObject += '};\n';
+        fileContent += '\n';
         fileContent += exportObject;
 
         open(filePath, 'w', error => {
