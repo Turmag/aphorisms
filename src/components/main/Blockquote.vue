@@ -299,6 +299,7 @@ watch(
 
     .text {
         font-size: 28px;
+        line-height: 120%;
     }
 
     .textarea {
@@ -307,6 +308,7 @@ watch(
         background-color: transparent;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
         font-size: 28px;
+        line-height: 120%;
         resize: none;
     }
 
