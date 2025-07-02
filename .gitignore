@@ -24,3 +24,4 @@ dist-ssr
 *.sw?
 
 db_connect.php
+authorize.php
