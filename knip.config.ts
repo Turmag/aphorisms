@@ -11,12 +11,15 @@ interface ITsConfig {
 
 const getTsConfigPaths = (): Record<string, string[]> => {
     try {
+        // eslint-disable-next-line @typescript-eslint/unbound-method
         const result = readConfigFile('tsconfig.json', sys.readFile);
 
         if (result.error) {
+            // eslint-disable-next-line @typescript-eslint/no-base-to-string, @typescript-eslint/restrict-template-expressions
             throw new Error(`Failed to read tsconfig.json: ${result.error.messageText}`);
         }
 
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const tsConfig: ITsConfig = result.config;
 
         return tsConfig.compilerOptions?.paths || {};
