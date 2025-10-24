@@ -10,7 +10,6 @@ export default [
         rules: {
             'special-rules/add-vue-extension': ['error', { aliases }],
             'special-rules/use-shortest-alias': ['error', { aliases }],
-            'oxlint/no-unused-expressions': ['off'],
         },
     },
 ];
