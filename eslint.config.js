@@ -1,10 +1,8 @@
 import { aliases } from './aliases.js';
-import pluginOxlint from 'eslint-plugin-oxlint';
 import config from 'turmag-eslint-config';
 
 export default [
     ...config,
-    ...pluginOxlint.configs['flat/recommended'],
 
     {
         rules: {
