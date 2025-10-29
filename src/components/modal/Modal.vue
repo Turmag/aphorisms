@@ -40,7 +40,7 @@ import {
     ref,
     useTemplateRef,
 } from 'vue';
-import AphorismFields from '@/components/modal/AphorismFields.vue';
+import AphorismFields from '@/components/modal/ModalAphorismFields.vue';
 
 interface IProps {
     getApplyText?: () => string;

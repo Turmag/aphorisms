@@ -14,9 +14,9 @@
 <script setup lang="ts">
 import { useStorage } from '@vueuse/core';
 import { computed, useCssModule } from 'vue';
-import Add from '@/components/header/Add.vue';
-import Settings from '@/components/header/Settings.vue';
-import Switch from '@/components/header/Switch.vue';
+import Add from '@/components/header/HeaderAdd.vue';
+import Settings from '@/components/header/HeaderSettings.vue';
+import Switch from '@/components/header/HeaderSwitch.vue';
 import { useAuthStore } from '@/stores/useAuth.store';
 
 const authStoreVariable = useAuthStore();

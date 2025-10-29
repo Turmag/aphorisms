@@ -12,8 +12,8 @@
 </template>
 
 <script setup lang="ts">
-import Blockquote from '@/components/main/Blockquote.vue';
-import Search from '@/components/main/Search.vue';
+import Blockquote from '@/components/main/MainBlockquote.vue';
+import Search from '@/components/main/MainSearch.vue';
 import { useMainStore } from '@/stores/useMain.store';
 
 const store = useMainStore();
