@@ -44,7 +44,7 @@ const { close, open: openSettings } = useModal({
 
 <style lang="scss" module>
     .settings {
-        color: var(--color);
+        color: var(--color-text-default);
         outline: none;
         cursor: pointer;
         user-select: none;

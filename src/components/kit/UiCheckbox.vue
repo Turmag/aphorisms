@@ -1,6 +1,6 @@
 <template>
-    <div :class="$style.wrapper">
-        <div :class="$style.checkboxWrapper">
+    <UiFlex align-items="center" gap="g8" :class="$style.wrapper">
+        <UiFlex :class="$style.checkboxWrapper">
             <span :class="$style.checkbox">
                 <input id="input" v-model="modelValue" type="checkbox">
                 <svg>
@@ -12,22 +12,22 @@
                     <path fill="none" stroke="currentColor" d="M5.5,11.3L9,14.8L20.2,3.3l0,0c-0.5-1-1.5-1.8-2.7-1.8h-13c-1.7,0-3,1.3-3,3v13c0,1.7,1.3,3,3,3h13 c1.7,0,3-1.3,3-3v-13c0-0.4-0.1-0.8-0.3-1.2" />
                 </symbol>
             </svg>
-        </div>
+        </UiFlex>
         <label v-if="$slots" for="input" :class="$style.text">
             <slot />
         </label>
-    </div>
+    </UiFlex>
 </template>
 
 <script setup lang="ts">
+import { UiFlex } from '@/components/kit';
+
 const modelValue = defineModel<boolean>();
 </script>
 
 <style lang="scss" module>
     .wrapper {
-        display: flex;
-        align-items: center;
-        gap: 8px;
+        cursor: pointer;
         user-select: none;
     }
 
@@ -38,12 +38,10 @@ const modelValue = defineModel<boolean>();
     }
 
     .checkboxWrapper {
-        display: flex;
-
         .checkbox {
-            --bg: var(--background-color);
-            --brdr: var(--color);
-            --brdr-actv: var(--color);
+            --bg: var(--background-color-default);
+            --brdr: var(--color-text-default);
+            --brdr-actv: var(--color-text-default);
             --brdr-hovr: #bbc1e1;
             --dur: calc((var(--size, 2) / 2) * 0.6s);
 
@@ -118,6 +116,7 @@ const modelValue = defineModel<boolean>();
     }
 
     .text {
-        color: var(--color);
+        color: var(--color-text-default);
+        cursor: pointer;
     }
   </style>

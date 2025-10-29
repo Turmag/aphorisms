@@ -1,5 +1,5 @@
 <template>
-    <div :class="$style.switchWrapper">
+    <UiFlex align-items="center" gap="g8">
         <div :class="$style.switch">
             <label :class="$style.label">
                 <input
@@ -24,12 +24,12 @@
             style="min-width: 15px;"
             @click="resetStorageDarkMode"
         />
-    </div>
+    </UiFlex>
 </template>
 
 <script setup lang="ts">
 import { useStorage } from '@vueuse/core';
-import { SvgIcon } from '@/components/kit';
+import { SvgIcon, UiFlex } from '@/components/kit';
 import { useMainStore } from '@/stores/useMain.store';
 
 const store = useMainStore();
@@ -51,12 +51,6 @@ const resetStorageDarkMode = () => {
 </script>
 
 <style lang="scss" module>
-    .switchWrapper {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-
     .switch {
         position: relative;
         width: 44px;
@@ -68,7 +62,7 @@ const resetStorageDarkMode = () => {
         width: 100%;
         height: 22px;
         border-radius: 50px;
-        background-color: var(--color);
+        background-color: var(--color-text-default);
         cursor: pointer;
         user-select: none;
     }
@@ -94,13 +88,13 @@ const resetStorageDarkMode = () => {
         width: 16px;
         height: 16px;
         border-radius: 50%;
-        background-color: var(--color);
+        background-color: var(--color-text-default);
         transition: 0.3s;
-        box-shadow: inset 4px -1px 0 0 var(--background-color);
+        box-shadow: inset 4px -1px 0 0 var(--background-color-default);
     }
 
     input:checked ~ .slider::before {
-        background-color: var(--background-color);
+        background-color: var(--background-color-default);
         transform: translateX(22px);
         box-shadow: none;
     }
@@ -109,7 +103,7 @@ const resetStorageDarkMode = () => {
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        color: var(--color);
+        color: var(--color-text-default);
         outline: none;
         cursor: pointer;
         user-select: none;

@@ -1,21 +1,30 @@
 :root {
-    --color: #213547;
-    --background-color: #fff;
-    --border-color: #dcdcdc;
-    --border-left-color: #cbdde7;
-    --blockquote-bg-1: #faf8eb;
-    --blockquote-bg-2: #fff9e4;
-    --blockquote-color: #231e28;
-    --copy-bg: rgb(0 0 0 / 85%);
-    --copy-shadow-color: rgb(8 0 47 / 7%);
-    --btn-background-color: #dcdcdc;
-    --btn-background-color-hover: #c7c7c7;
-    --btn-background-color-active: #b4b4b4;
-    --icon-color: #7fabc4;
-    --shadow-color: rgb(34 60 80 / 20%);
+    /** Светлая тема **/
 
-    background-color: var(--background-color);
-    color: var(--color);
+    /* Фоны */
+    --background-color-default: #fff;
+    --background-color-button: #dcdcdc;
+    --background-color-button-hover: #c7c7c7;
+    --background-color-button-active: #b4b4b4;
+    --background-color-blockquote-primary: #faf8eb;
+    --background-color-blockquote-secondary: #fff9e4;
+    --background-color-blockquote-copy: rgb(0 0 0 / 85%);
+    --background-color-shadow: rgb(34 60 80 / 20%);
+    --background-color-shadow-copy: rgb(8 0 47 / 7%);
+
+    /* Текстовые цвета */
+    --color-text-default: #213547;
+    --color-text-blockquote: #231e28;
+
+    /* Границы */
+    --color-border-default: #dcdcdc;
+    --color-border-special: #cbdde7;
+
+    /* Иконки */
+    --color-icon-default: #7fabc4;
+
+    background-color: var(--background-color-default);
+    color: var(--color-text-default);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 16px;
     font-weight: 400;
@@ -34,21 +43,29 @@ body {
     margin: 0;
     background-color: var(--background-color);
 
+    /** Тёмная тема **/
     &.dark {
-        --color: #f8f4f1;
-        --background-color: #242424;
-        --border-color: #232323;
-        --border-left-color: #f7bfa0;
-        --blockquote-bg-1: #050714;
-        --blockquote-bg-2: #00061b;
-        --blockquote-color: #dce1d7;
-        --copy-bg: rgb(255 255 255 / 85%);
-        --copy-shadow-color: rgb(247 255 208 / 7%);
-        --btn-background-color: #646363;
-        --btn-background-color-hover: #838282;
-        --btn-background-color-active: #a0a0a0;
-        --icon-color: #f7bfa0;
-        --shadow-color: rgb(240 245 248 / 20%);
+        /* Фоны */
+        --background-color-default: #242424;
+        --background-color-button: #646363;
+        --background-color-button-hover: #838282;
+        --background-color-button-active: #a0a0a0;
+        --background-color-blockquote-primary: #050714;
+        --background-color-blockquote-secondary: #00061b;
+        --background-color-blockquote-copy: rgb(255 255 255 / 85%);
+        --background-color-shadow: rgb(240 245 248 / 20%);
+        --background-color-shadow-copy: rgb(247 255 208 / 7%);
+
+        /* Текстовые цвета */
+        --color-text-default: #f8f4f1;
+        --color-text-blockquote: #dce1d7;
+
+        /* Границы */
+        --color-border-default: #232323;
+        --color-border-special: #f7bfa0;
+
+        /* Иконки */
+        --color-icon-default: #f7bfa0;
     }
 }
 

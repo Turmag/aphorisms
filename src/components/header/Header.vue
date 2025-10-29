@@ -4,10 +4,10 @@
             Афоризмы
         </h1>
         <Switch />
-        <div :class="$style.additional">
+        <UiFlex gap="g8" :class="$style.additional">
             <Add v-if="authStoreVariable.isAuthorized" />
             <Settings />
-        </div>
+        </UiFlex>
     </header>
 </template>
 
@@ -17,6 +17,7 @@ import { computed, useCssModule } from 'vue';
 import Add from '@/components/header/HeaderAdd.vue';
 import Settings from '@/components/header/HeaderSettings.vue';
 import Switch from '@/components/header/HeaderSwitch.vue';
+import { UiFlex } from '@/components/kit';
 import { useAuthStore } from '@/stores/useAuth.store';
 
 const authStoreVariable = useAuthStore();
@@ -41,23 +42,21 @@ const headerClasses = computed(() => ({
         width: 100%;
         height: 60px;
         padding-inline: 16px;
-        background-color: var(--background-color);
+        background-color: var(--background-color-default);
     }
 
     .headerShadow {
-        box-shadow: 0 3px 2px 0 var(--shadow-color);
+        box-shadow: 0 3px 2px 0 var(--background-color-shadow);
     }
 
     .title {
         margin-top: 10px;
-        color: var(--color);
+        color: var(--color-text-default);
         font-size: 28px;
         font-weight: bold;
     }
 
     .additional {
-        display: flex;
-        gap: 8px;
         margin-left: auto;
     }
 </style>

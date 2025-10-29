@@ -1,5 +1,13 @@
 <template>
-    <div :class="wrapperClasses">
+    <UiFlex
+        align-items="center"
+        gap="g16"
+        padding="p16"
+        :class="{
+            [$style.wrapper]: true,
+            [$style.wrapperSticky]: isStickyFilters,
+        }"
+    >
         <input
             v-model="filterWord"
             :class="$style.filter"
@@ -18,18 +26,21 @@
         <UiCheckbox v-model="isStickyFilters">
             Липкий поиск
         </UiCheckbox>
-    </div>
+    </UiFlex>
 </template>
 
 <script setup lang="ts">
 import { useDebounceFn, useStorage } from '@vueuse/core';
 import {
-    computed,
     ref,
     useCssModule,
     watch,
 } from 'vue';
-import { SvgIcon, UiCheckbox } from '@/components/kit';
+import {
+    SvgIcon,
+    UiCheckbox,
+    UiFlex,
+} from '@/components/kit';
 import { useMainStore } from '@/stores/useMain.store';
 
 const store = useMainStore();
@@ -37,11 +48,6 @@ const $style = useCssModule();
 const isStickyFilters = useStorage('isAphorismsStickyFilters', false);
 
 const filterWord = ref('');
-
-const wrapperClasses = computed(() => ({
-    [$style.wrapper]: true,
-    [$style.wrapperSticky]: isStickyFilters.value,
-}));
 
 const resetFilter = () => store.filterWord = '';
 const onInput = useDebounceFn(() => store.filterWord = filterWord.value, 500);
@@ -55,18 +61,14 @@ watch(
 <style lang="scss" module>
     .wrapper {
         z-index: 2;
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        padding: 16px;
-        background-color: var(--background-color);
+        background-color: var(--background-color-default);
     }
 
     .wrapperSticky {
         position: sticky;
         top: 60px;
         left: 0;
-        box-shadow: 0 3px 2px 0 var(--shadow-color);
+        box-shadow: 0 3px 2px 0 var(--background-color-shadow);
     }
 
     .filter {
@@ -75,10 +77,10 @@ watch(
         height: 40px;
         padding: 8px;
         border-radius: 4px;
-        border: 1px solid var(--background-color);
+        border: 1px solid var(--background-color-default);
         border: 1px solid #aaa;
-        background: var(--background-color);
-        color: var(--color);
+        background: var(--background-color-default);
+        color: var(--color-text-default);
         font-family: Verdana, Geneva, Tahoma, sans-serif;
         font-size: 16px;
 
@@ -88,7 +90,7 @@ watch(
     }
 
     .cancel {
-        color: var(--color);
+        color: var(--color-text-default);
         cursor: pointer;
         user-select: none;
     }

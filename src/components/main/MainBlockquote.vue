@@ -1,6 +1,9 @@
 <template>
     <blockquote
-        :class="blockquoteClasses"
+        :class="{
+            [$style.blockquote]: true,
+            [$style.blockquoteBlur]: isBlur,
+        }"
         :isSingle="!isBlur"
     >
         <div
@@ -8,7 +11,7 @@
             title="Скопировать ссылку на данный афоризм"
             @click="copyLink"
         >
-            <div :class="$style.popupWrapper">
+            <UiFlex justify-content="center" width="wfull" :class="$style.popupWrapper">
                 <Transition name="fade">
                     <div
                         v-if="isLinkCopied"
@@ -23,12 +26,12 @@
                         />
                     </div>
                 </Transition>
-            </div>
+            </UiFlex>
         </div>
-        <div :class="$style.numb">
+        <UiFlex justify-content="center" align-items="center" :class="$style.numb">
             {{ numb }}
-        </div>
-        <div :class="$style.content">
+        </UiFlex>
+        <UiFlex direction="col" gap="g4" width="wfull">
             <textarea
                 v-if="isEditable"
                 v-model="editText"
@@ -82,7 +85,7 @@
                 icon-name="delete"
                 @click="deleteAphorism"
             />
-        </div>
+        </UiFlex>
     </blockquote>
 </template>
 
@@ -96,7 +99,7 @@ import {
     useCssModule,
     watch,
 } from 'vue';
-import { SvgIcon } from '@/components/kit';
+import { SvgIcon, UiFlex } from '@/components/kit';
 import Modal from '@/components/modal/Modal.vue';
 import { useAuthStore } from '@/stores/useAuth.store';
 import { useMainStore } from '@/stores/useMain.store';
@@ -126,11 +129,6 @@ const isBlur = computed(
         && route.query.phraseNumb !== String(props.id)
         && !store.isUnBlured,
 );
-
-const blockquoteClasses = computed(() => ({
-    [$style.blockquote]: true,
-    [$style.blockquoteBlur]: isBlur.value,
-}));
 
 const value = computed(() => props.text.replace(/\n/g, '<br>'));
 
@@ -203,21 +201,21 @@ watch(
         align-items: center;
         margin: 0;
         padding-block: 40px;
-        border-right: 1px solid var(--border-color);
-        border-bottom: 1px solid var(--border-color);
-        border-left: 8px solid var(--border-left-color);
-        background: var(--blockquote-bg-1);
-        color: var(--blockquote-color);
+        border-right: 1px solid var(--color-border-default);
+        border-bottom: 1px solid var(--color-border-default);
+        border-left: 8px solid var(--color-border-special);
+        background: var(--background-color-blockquote-primary);
+        color: var(--color-text-blockquote);
         font-weight: 300;
         line-height: 30px;
         scroll-margin: 60px;
 
         &:nth-child(2n) {
-            background: var(--blockquote-bg-2);
+            background: var(--background-color-blockquote-secondary);
         }
 
         &:first-child {
-            border-top: 1px solid var(--border-color);
+            border-top: 1px solid var(--color-border-default);
         }
 
         & :global {
@@ -249,7 +247,7 @@ watch(
         &::before {
             content: '\201C';
             position: absolute;
-            color: var(--border-left-color);
+            color: var(--color-border-special);
             font-family: Arial, Verdana, Tahoma, sans-serif;
             font-size: 90px;
         }
@@ -258,9 +256,6 @@ watch(
     .popupWrapper {
         position: absolute;
         bottom: 0;
-        display: flex;
-        justify-content: center;
-        width: 100%;
     }
 
     .popup {
@@ -270,31 +265,22 @@ watch(
         width: 108px;
         padding: 10px;
         border-radius: 4px;
-        background: var(--copy-bg);
-        color: var(--background-color);
+        background: var(--background-color-blockquote-copy);
+        color: var(--background-color-default);
         text-align: center;
         text-transform: none;
         font-size: 14px;
         line-height: 16px;
         cursor: default;
-        filter: drop-shadow(0 7px 11px var(--copy-shadow-color))
-            drop-shadow(0 3px 5px var(--copy-shadow-color));
+        filter: drop-shadow(0 7px 11px var(--background-color-shadow-copy))
+            drop-shadow(0 3px 5px var(--background-color-shadow-copy));
     }
 
     .numb {
-        display: flex;
-        justify-content: center;
-        align-items: center;
         width: 100px;
         min-width: 100px;
         height: 100%;
         font-size: 25px;
-    }
-
-    .content {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
     }
 
     .text {
@@ -334,7 +320,7 @@ watch(
         display: block;
         width: 22px;
         height: 7px;
-        color: var(--copy-bg);
+        color: var(--background-color-blockquote-copy);
         transform: rotate(180deg);
     }
 
@@ -342,7 +328,7 @@ watch(
         position: absolute;
         top: 10px;
         right: 10px;
-        color: var(--icon-color);
+        color: var(--color-icon-default);
         cursor: pointer;
         user-select: none;
     }

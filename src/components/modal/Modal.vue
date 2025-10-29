@@ -9,7 +9,7 @@
         <div :class="$style.title">
             {{ title }}
         </div>
-        <div v-if="isShowInput" :class="$style.inputWrapper">
+        <UiFlex v-if="isShowInput" justify-content="center" width="wfull">
             <input
                 ref="input"
                 v-model="password"
@@ -19,16 +19,21 @@
                 placeholder="Пароль для входа"
                 @keydown.enter="sendPassword"
             >
-        </div>
+        </UiFlex>
         <AphorismFields v-if="isShowAphorismFields" v-model:text="text" v-model:author="author" />
-        <div :class="$style.btns">
-            <div :class="$style.btn" @click="emits('cancel')">
+        <UiFlex
+            justify-content="center"
+            gap="g32"
+            width="wfull"
+            :class="$style.buttons"
+        >
+            <UiButton @click="emits('cancel')">
                 {{ cancelText }}
-            </div>
-            <div :class="$style.btn" @click="apply">
+            </UiButton>
+            <UiButton @click="apply">
                 {{ applyText }}
-            </div>
-        </div>
+            </UiButton>
+        </UiFlex>
     </VueFinalModal>
 </template>
 
@@ -40,6 +45,7 @@ import {
     ref,
     useTemplateRef,
 } from 'vue';
+import { UiButton, UiFlex } from '@/components/kit';
 import AphorismFields from '@/components/modal/ModalAphorismFields.vue';
 
 interface IProps {
@@ -96,15 +102,15 @@ onMounted(() => setTimeout(() => (input.value as HTMLInputElement)?.focus()));
         position: relative;
         overflow: hidden;
         display: flex;
+        flex-direction: column;
         gap: 16px;
         width: 880px;
         min-height: 100px;
         max-height: 500px;
         padding: 24px;
         border-radius: 15px;
-        border: 1px solid var(--border-color);
-        background-color: var(--background-color);
-        flex-direction: column;
+        border: 1px solid var(--color-border-default);
+        background-color: var(--background-color-default);
 
         @media screen and (width <= 600px) {
             width: 380px;
@@ -113,7 +119,7 @@ onMounted(() => setTimeout(() => (input.value as HTMLInputElement)?.focus()));
 
     .title {
         width: 100%;
-        color: var(--color);
+        color: var(--color-text-default);
         text-align: center;
         font-size: 40px;
         line-height: normal;
@@ -123,64 +129,20 @@ onMounted(() => setTimeout(() => (input.value as HTMLInputElement)?.focus()));
         }
     }
 
-    .inputWrapper {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-    }
-
     .input {
         width: 400px;
         height: 60px;
         padding: 5px;
         border-radius: 8px;
-        border: 1px solid var(--border-color);
+        border: 1px solid var(--color-border-default);
         text-align: center;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
         font-size: 24px;
     }
 
-    .btns {
-        display: flex;
-        justify-content: center;
-        gap: 30px;
-        width: 100%;
-
+    .buttons {
         @media screen and (width <= 600px) {
             gap: 16px;
-        }
-    }
-
-    .btn {
-        box-sizing: border-box;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-width: 200px;
-        height: 64px;
-        padding: 16px;
-        border-radius: 15px;
-        background-color: var(--btn-background-color);
-        color: var(--color);
-        font-size: 24px;
-        font-weight: 400;
-        line-height: normal;
-        transition: 0.3s ease;
-        cursor: pointer;
-        user-select: none;
-
-        &:hover {
-            background-color: var(--btn-background-color-hover);
-        }
-
-        &:active {
-            background-color: var(--btn-background-color-active);
-        }
-
-        @media screen and (width <= 600px) {
-            min-width: 170px;
-            height: 40px;
-            font-size: 20px;
         }
     }
 </style>
