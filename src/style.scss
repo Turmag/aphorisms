@@ -41,7 +41,8 @@ body {
     min-width: 320px;
     min-height: 100vh;
     margin: 0;
-    background-color: var(--background-color);
+    background-color: var(--background-color-default);
+    color: var(--color-text-default);
 
     /** Тёмная тема **/
     &.dark {
