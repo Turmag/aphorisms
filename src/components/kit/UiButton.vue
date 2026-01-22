@@ -3,7 +3,7 @@
         justify-content="center"
         align-items="center"
         padding="p16"
-        bg="button"
+        bg="secondary"
         radius="r16"
         :class="$style.button"
     >
@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { UiFlex } from '@/components/kit';
+import { UiFlex } from 'turmag-vue-components';
 </script>
 
 <style lang="scss" module>
@@ -29,11 +29,11 @@ import { UiFlex } from '@/components/kit';
         user-select: none;
 
         &:hover {
-            background-color: var(--background-color-button-hover);
+            background-color: var(--background-color-secondary-hover);
         }
 
         &:active {
-            background-color: var(--background-color-button-active);
+            background-color: var(--background-color-secondary-active);
         }
 
         @media screen and (width <= 600px) {

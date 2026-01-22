@@ -38,6 +38,7 @@
 </template>
 
 <script setup lang="ts">
+import { UiFlex } from 'turmag-vue-components';
 import { VueFinalModal } from 'vue-final-modal';
 import {
     computed,
@@ -45,7 +46,7 @@ import {
     ref,
     useTemplateRef,
 } from 'vue';
-import { UiButton, UiFlex } from '@/components/kit';
+import { UiButton } from '@/components/kit';
 import AphorismFields from '@/components/modal/ModalAphorismFields.vue';
 
 interface IProps {

@@ -4040,6 +4040,11 @@ turmag-stylelint-config@^0.0.11:
     stylelint-config-standard-scss "^14.0.0"
     stylelint-order "^6.0.4"
 
+turmag-vue-components@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/turmag-vue-components/-/turmag-vue-components-0.0.4.tgz#aceed08139673015a0f0578a92d27ceff046d3b8"
+  integrity sha512-UUyQPkheAbGwIS6EODC3NPn3FsSBSHP0z1d0YrCD22qfEDxtLJMJxmxiUmsoYlivRu7CTvGc/HGf5ZpraNUFug==
+
 type-check@^0.4.0, type-check@~0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/type-check/-/type-check-0.4.0.tgz#07b8203bfa7056c0657050e3ccd2c37730bab8f1"

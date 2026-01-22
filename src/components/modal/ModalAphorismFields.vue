@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import { UiFlex } from '@/components/kit';
+import { UiFlex } from 'turmag-vue-components';
 
 const localText = defineModel<string>('text');
 const localAuthor = defineModel<string>('author');

@@ -91,6 +91,7 @@
 
 <script setup lang="ts">
 import { useToggle } from '@vueuse/core';
+import { UiFlex } from 'turmag-vue-components';
 import { useModal } from 'vue-final-modal';
 import { useRoute } from 'vue-router';
 import {
@@ -99,7 +100,7 @@ import {
     useCssModule,
     watch,
 } from 'vue';
-import { SvgIcon, UiFlex } from '@/components/kit';
+import { SvgIcon } from '@/components/kit';
 import Modal from '@/components/modal/Modal.vue';
 import { useAuthStore } from '@/stores/useAuth.store';
 import { useMainStore } from '@/stores/useMain.store';
@@ -204,14 +205,14 @@ watch(
         border-right: 1px solid var(--color-border-default);
         border-bottom: 1px solid var(--color-border-default);
         border-left: 8px solid var(--color-border-special);
-        background: var(--background-color-blockquote-primary);
+        background: var(--background-color-accent);
         color: var(--color-text-blockquote);
         font-weight: 300;
         line-height: 30px;
         scroll-margin: 60px;
 
         &:nth-child(2n) {
-            background: var(--background-color-blockquote-secondary);
+            background: var(--background-color-quiet);
         }
 
         &:first-child {
@@ -265,7 +266,7 @@ watch(
         width: 108px;
         padding: 10px;
         border-radius: 4px;
-        background: var(--background-color-blockquote-copy);
+        background: var(--background-color-muted);
         color: var(--background-color-default);
         text-align: center;
         text-transform: none;
@@ -320,7 +321,7 @@ watch(
         display: block;
         width: 22px;
         height: 7px;
-        color: var(--background-color-blockquote-copy);
+        color: var(--background-color-muted);
         transform: rotate(180deg);
     }
 

@@ -3,12 +3,12 @@
 
     /* Фоны */
     --background-color-default: #fff;
-    --background-color-button: #dcdcdc;
-    --background-color-button-hover: #c7c7c7;
-    --background-color-button-active: #b4b4b4;
-    --background-color-blockquote-primary: #faf8eb;
-    --background-color-blockquote-secondary: #fff9e4;
-    --background-color-blockquote-copy: rgb(0 0 0 / 85%);
+    --background-color-secondary: #dcdcdc;
+    --background-color-secondary-hover: #c7c7c7;
+    --background-color-secondary-active: #b4b4b4;
+    --background-color-accent: #faf8eb;
+    --background-color-quiet: #fff9e4;
+    --background-color-muted: rgb(0 0 0 / 85%);
     --background-color-shadow: rgb(34 60 80 / 20%);
     --background-color-shadow-copy: rgb(8 0 47 / 7%);
 
@@ -48,12 +48,12 @@ body {
     &.dark {
         /* Фоны */
         --background-color-default: #242424;
-        --background-color-button: #646363;
-        --background-color-button-hover: #838282;
-        --background-color-button-active: #a0a0a0;
-        --background-color-blockquote-primary: #050714;
-        --background-color-blockquote-secondary: #00061b;
-        --background-color-blockquote-copy: rgb(255 255 255 / 85%);
+        --background-color-secondary: #646363;
+        --background-color-secondary-hover: #838282;
+        --background-color-secondary-active: #a0a0a0;
+        --background-color-accent: #050714;
+        --background-color-quiet: #00061b;
+        --background-color-muted: rgb(255 255 255 / 85%);
         --background-color-shadow: rgb(240 245 248 / 20%);
         --background-color-shadow-copy: rgb(247 255 208 / 7%);
 

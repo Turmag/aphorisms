@@ -29,7 +29,8 @@
 
 <script setup lang="ts">
 import { useStorage } from '@vueuse/core';
-import { SvgIcon, UiFlex } from '@/components/kit';
+import { UiFlex } from 'turmag-vue-components';
+import { SvgIcon } from '@/components/kit';
 import { useMainStore } from '@/stores/useMain.store';
 
 const store = useMainStore();

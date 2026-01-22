@@ -1,5 +1,16 @@
 <template>
-    <header :class="headerClasses">
+    <UiFlex
+        position="sticky"
+        tag="header"
+        align-items="center"
+        gap="g16"
+        width="wfull"
+        padding-inline="p16"
+        :class="{
+            [$style.header]: true,
+            [$style.headerShadow]: !isStickyFilters,
+        }"
+    >
         <h1 :class="$style.title">
             Афоризмы
         </h1>
@@ -8,40 +19,27 @@
             <Add v-if="authStoreVariable.isAuthorized" />
             <Settings />
         </UiFlex>
-    </header>
+    </UiFlex>
 </template>
 
 <script setup lang="ts">
 import { useStorage } from '@vueuse/core';
-import { computed, useCssModule } from 'vue';
+import { UiFlex } from 'turmag-vue-components';
 import Add from '@/components/header/HeaderAdd.vue';
 import Settings from '@/components/header/HeaderSettings.vue';
 import Switch from '@/components/header/HeaderSwitch.vue';
-import { UiFlex } from '@/components/kit';
 import { useAuthStore } from '@/stores/useAuth.store';
 
 const authStoreVariable = useAuthStore();
-const $style = useCssModule();
 const isStickyFilters = useStorage('isAphorismsStickyFilters', false);
-
-const headerClasses = computed(() => ({
-    [$style.header]: true,
-    [$style.headerShadow]: !isStickyFilters.value,
-}));
 </script>
 
 <style lang="scss" module>
     .header {
-        position: sticky;
         top: 0;
         left: 0;
         z-index: 3;
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        width: 100%;
         height: 60px;
-        padding-inline: 16px;
         background-color: var(--background-color-default);
     }
 
