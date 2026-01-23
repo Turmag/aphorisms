@@ -28,11 +28,10 @@
         "@kyvg/vue3-notification": "^3.2.1",
         "@vueuse/core": "^10.9.0",
         "axios": "^1.7.9",
-        "floating-vue": "^5.2.2",
         "lint-staged": "^16.2.6",
         "pinia": "^2.0.28",
         "sass": "^1.83.4",
-        "turmag-vue-components": "^0.0.4",
+        "turmag-vue-components": "^0.0.6",
         "vue": "^3.5.11",
         "vue-final-modal": "^4.5.4",
         "vue-router": "^4.1.6"

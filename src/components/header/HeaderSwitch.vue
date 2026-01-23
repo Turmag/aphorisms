@@ -12,24 +12,32 @@
             </label>
         </div>
 
-        <SvgIcon
-            v-if="isSavedDarkMode"
-            v-tooltip="'Вернуться к системной теме'"
-            :class="$style.themeReset"
-            width="10"
-            height="10"
-            viewBoxWidth="1920"
-            viewBoxHeight="1920"
-            icon-name="reset"
-            style="min-width: 15px;"
-            @click="resetStorageDarkMode"
-        />
+        <UiTooltipWrapper v-if="isSavedDarkMode">
+            <template #trigger>
+                <SvgIcon
+                    :class="$style.themeReset"
+                    width="10"
+                    height="10"
+                    viewBoxWidth="1920"
+                    viewBoxHeight="1920"
+                    icon-name="reset"
+                    style="min-width: 15px;"
+                    @click="resetStorageDarkMode"
+                />
+            </template>
+
+            <UiTooltipContent>Вернуться к системной теме</UiTooltipContent>
+        </UiTooltipWrapper>
     </UiFlex>
 </template>
 
 <script setup lang="ts">
 import { useStorage } from '@vueuse/core';
-import { UiFlex } from 'turmag-vue-components';
+import {
+    UiFlex,
+    UiTooltipContent,
+    UiTooltipWrapper,
+} from 'turmag-vue-components';
 import { SvgIcon } from '@/components/kit';
 import { useMainStore } from '@/stores/useMain.store';
 
