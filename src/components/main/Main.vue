@@ -1,5 +1,5 @@
 <template>
-    <main :class="$style.main">
+    <UiFlex tag="main" direction="col">
         <Search />
         <div>
             <Blockquote
@@ -8,20 +8,14 @@
                 v-bind="aphorism"
             />
         </div>
-    </main>
+    </UiFlex>
 </template>
 
 <script setup lang="ts">
+import { UiFlex } from 'turmag-vue-components';
 import Blockquote from '@/components/main/MainBlockquote.vue';
 import Search from '@/components/main/MainSearch.vue';
 import { useMainStore } from '@/stores/useMain.store';
 
 const store = useMainStore();
 </script>
-
-<style lang="scss" module>
-    .main {
-        display: flex;
-        flex-direction: column;
-    }
-</style>

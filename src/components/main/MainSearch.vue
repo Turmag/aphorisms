@@ -32,16 +32,11 @@
 <script setup lang="ts">
 import { useDebounceFn, useStorage } from '@vueuse/core';
 import { UiFlex } from 'turmag-vue-components';
-import {
-    ref,
-    useCssModule,
-    watch,
-} from 'vue';
+import { ref, watch } from 'vue';
 import { SvgIcon, UiCheckbox } from '@/components/kit';
 import { useMainStore } from '@/stores/useMain.store';
 
 const store = useMainStore();
-const $style = useCssModule();
 const isStickyFilters = useStorage('isAphorismsStickyFilters', false);
 
 const filterWord = ref('');
