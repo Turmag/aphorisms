@@ -3995,10 +3995,10 @@ turmag-stylelint-config@^0.0.11:
     stylelint-config-standard-scss "^14.0.0"
     stylelint-order "^6.0.4"
 
-turmag-vue-components@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/turmag-vue-components/-/turmag-vue-components-0.0.6.tgz#367f75c310ba4a1e54f315fc5034f3ecea364a2e"
-  integrity sha512-WjgkWD08jsMFCIjJVaiE7A8ldn23NuLV4WHyCa0X3QcKRcZp55NPG1AFV/ijYPl11LqdKPAMKmndcBgBJV6oMw==
+turmag-vue-components@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/turmag-vue-components/-/turmag-vue-components-0.0.7.tgz#b9985cc8e9e02de2fbe369be74b92f38e31fecae"
+  integrity sha512-qw+iVh0svNZJwR2K9FJaU8PkzqKfc+QymJzPMzNE0SlNYMM/2YXd+SEqcUfp/Q/NkW/EleLucsCsJcRMZQRy7A==
   dependencies:
     vue-tippy "^6.7.1"
 
