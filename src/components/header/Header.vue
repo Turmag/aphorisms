@@ -14,10 +14,10 @@
         <h1 :class="$style.title">
             Афоризмы
         </h1>
-        <Switch />
+        <HeaderSwitch />
         <UiFlex gap="g8" :class="$style.additional">
-            <Add v-if="authStoreVariable.isAuthorized" />
-            <Settings />
+            <HeaderAdd v-if="authStoreVariable.isAuthorized" />
+            <HeaderSettings />
         </UiFlex>
     </UiFlex>
 </template>
@@ -25,9 +25,9 @@
 <script setup lang="ts">
 import { useStorage } from '@vueuse/core';
 import { UiFlex } from 'turmag-vue-components';
-import Add from '@/components/header/HeaderAdd.vue';
-import Settings from '@/components/header/HeaderSettings.vue';
-import Switch from '@/components/header/HeaderSwitch.vue';
+import HeaderAdd from '@/components/header/HeaderAdd.vue';
+import HeaderSettings from '@/components/header/HeaderSettings.vue';
+import HeaderSwitch from '@/components/header/HeaderSwitch.vue';
 import { useAuthStore } from '@/stores/useAuth.store';
 
 const authStoreVariable = useAuthStore();
