@@ -6,14 +6,20 @@
         gap="g16"
         width="wfull"
         padding-inline="p16"
+        bg="default"
         :class="{
             [$style.header]: true,
             [$style.headerShadow]: !isStickyFilters,
         }"
     >
-        <h1 :class="$style.title">
+        <UiText
+            tag="h1"
+            size="fs28"
+            weight="fw700"
+            :class="$style.title"
+        >
             Афоризмы
-        </h1>
+        </UiText>
         <HeaderSwitch />
         <UiFlex gap="g8" :class="$style.additional">
             <HeaderAdd v-if="authStoreVariable.isAuthorized" />
@@ -24,7 +30,7 @@
 
 <script setup lang="ts">
 import { useStorage } from '@vueuse/core';
-import { UiFlex } from 'turmag-vue-components';
+import { UiFlex, UiText } from 'turmag-vue-components';
 import HeaderAdd from '@/components/header/HeaderAdd.vue';
 import HeaderSettings from '@/components/header/HeaderSettings.vue';
 import HeaderSwitch from '@/components/header/HeaderSwitch.vue';
@@ -40,7 +46,6 @@ const isStickyFilters = useStorage('isAphorismsStickyFilters', false);
         left: 0;
         z-index: 3;
         height: 60px;
-        background-color: var(--background-color-default);
     }
 
     .headerShadow {
@@ -49,9 +54,6 @@ const isStickyFilters = useStorage('isAphorismsStickyFilters', false);
 
     .title {
         margin-top: 10px;
-        color: var(--color-text-default);
-        font-size: 28px;
-        font-weight: bold;
     }
 
     .additional {
