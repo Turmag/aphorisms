@@ -17,4 +17,17 @@ export default defineConfig(({ mode }: { mode: string }) => ({
             },
         },
     },
+    test: {
+        environment: 'node',
+        globals: true,
+        // INFO: Возможно, чуть позже будет актуально
+        // setupFiles: ['./vitest.setup.ts'],
+        include: ['**/*.test.ts'],
+        exclude: [
+            '**/node_modules/**',
+            '**/dist/**',
+            '**/build/**',
+        ],
+        alias: { '@': path.resolve(__dirname, './src') },
+    },
 }));
