@@ -13,7 +13,10 @@
         "generate-icons-idx": "node .\\/node-files\\/generateIconsIndex.js",
         "generate-components-idx": "node .\\/node-files\\/generateComponentsIndex.js",
         "lint": "lint-staged",
-        "knip": "knip"
+        "knip": "knip",
+        "test": "vitest",
+        "test:ui": "vitest --ui",
+        "test:run": "vitest run"
     },
     "lint-staged": {
         "*.{js,ts,vue}": [
@@ -39,6 +42,7 @@
     "devDependencies": {
         "@types/node": "^24.3.1",
         "@vitejs/plugin-vue": "^5.1.4",
+        "esbuild": "^0.27.4",
         "eslint": "^9.38.0",
         "knip": "^5.63.1",
         "oxlint": "^1.39.0",
@@ -46,6 +50,7 @@
         "turmag-eslint-config": "^2.0.74",
         "turmag-stylelint-config": "^0.0.11",
         "typescript": "5.8.3",
-        "vite": "^6.0.11"
+        "vite": "^8.0.1",
+        "vitest": "^4.1.0"
     }
 }
