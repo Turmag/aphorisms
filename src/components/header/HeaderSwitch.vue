@@ -26,7 +26,9 @@
                 />
             </template>
 
-            <UiTooltipContent>Вернуться к системной теме</UiTooltipContent>
+            <UiTooltipContent>
+                Вернуться к системной теме
+            </UiTooltipContent>
         </UiTooltipWrapper>
     </UiFlex>
 </template>

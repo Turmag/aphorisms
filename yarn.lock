@@ -2507,9 +2507,9 @@ ignore@^7.0.5:
   integrity sha512-Hs59xBNfUIunMFgWAbGX5cq6893IbWg4KnrjbYwX3tx0ztorVgTDA6B2sxf8ejHJ4wz8BqGUMYlnzNBer5NvGg==
 
 immutable@^5.0.2:
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/immutable/-/immutable-5.1.1.tgz#d4cb552686f34b076b3dcf23c4384c04424d8354"
-  integrity sha512-3jatXi9ObIsPGr3N5hGw/vWWcTkq6hUYhpQz4k0wLC+owqWi/LiugIw9x0EdNZ2yGedKN/HzePiBvaJRXa0Ujg==
+  version "5.1.5"
+  resolved "https://registry.yarnpkg.com/immutable/-/immutable-5.1.5.tgz#93ee4db5c2a9ab42a4a783069f3c5d8847d40165"
+  integrity sha512-t7xcm2siw+hlUM68I+UEOK+z84RzmN59as9DZ7P1l0994DKUWV7UXBMQZVxaoMSRQ+PBZbHCOoBt7a2wxOMt+A==
 
 import-fresh@^3.2.1, import-fresh@^3.3.0:
   version "3.3.1"
@@ -4266,10 +4266,10 @@ turmag-stylelint-config@^0.0.11:
     stylelint-config-standard-scss "^14.0.0"
     stylelint-order "^6.0.4"
 
-turmag-vue-components@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/turmag-vue-components/-/turmag-vue-components-0.0.6.tgz#367f75c310ba4a1e54f315fc5034f3ecea364a2e"
-  integrity sha512-WjgkWD08jsMFCIjJVaiE7A8ldn23NuLV4WHyCa0X3QcKRcZp55NPG1AFV/ijYPl11LqdKPAMKmndcBgBJV6oMw==
+turmag-vue-components@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/turmag-vue-components/-/turmag-vue-components-0.0.9.tgz#3f833c17422f8e5f79aaec3e67e718f58e3cb4c4"
+  integrity sha512-MBvehRoxOUjU0Zsl297sSQ0GXfBUWRj/iPOgzgt74MnmmcfQm8xyu4P0L7owUs6bn4RewIaoFjf30EYv94zYig==
   dependencies:
     vue-tippy "^6.7.1"
 
