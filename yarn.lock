@@ -1965,10 +1965,10 @@ eslint-plugin-sonarjs@^3.0.1:
     semver "7.7.4"
     typescript ">=5"
 
-eslint-plugin-turmag-special-rules@^1.0.37:
-  version "1.0.37"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-turmag-special-rules/-/eslint-plugin-turmag-special-rules-1.0.37.tgz#b77a8eef38a1013d801d2dbd790489c552d3f5c0"
-  integrity sha512-kR9wUHncBZcikvNA56v0dooN7ZPBR25PeM7M2XTe7zSr9I/Toe79tSx0opL650r448rt7VSkOvtjRyif1rNKgg==
+eslint-plugin-turmag-special-rules@^1.0.40:
+  version "1.0.40"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-turmag-special-rules/-/eslint-plugin-turmag-special-rules-1.0.40.tgz#9df31dfb357e6d30c001afeac0e0b5f46e903fc0"
+  integrity sha512-MbW3Uad7a4L1uMJ9pOrvzW1jPeHQI6fa8Q6w4ZH5H+IqbBT8R5ebSC7fxMq1UIjz5agZ7Z+uo9D0C8B/lxGK6g==
 
 eslint-plugin-unicorn@^56.0.1:
   version "56.0.1"
@@ -4281,17 +4281,17 @@ tslib@^2.4.0:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.8.1.tgz#612efe4ed235d567e8aba5f2a5fab70280ade83f"
   integrity sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==
 
-turmag-eslint-config@^2.0.74:
-  version "2.0.74"
-  resolved "https://registry.yarnpkg.com/turmag-eslint-config/-/turmag-eslint-config-2.0.74.tgz#a3833b5da12151fae53f70186d502a8fd34fd15d"
-  integrity sha512-A0hyBeibn7H/wRDV3TW8G92fhs2SvgD7DQlmHDXOb8YQj8Iu/JfIBSAEzLwDxDlsfUk7/JVtetD1bv6x5H6fSQ==
+turmag-eslint-config@^2.0.76:
+  version "2.0.76"
+  resolved "https://registry.yarnpkg.com/turmag-eslint-config/-/turmag-eslint-config-2.0.76.tgz#b781c72fcd6d3df62939470b78509a6347588b92"
+  integrity sha512-4fWS4ZBWwdjAPLzYLpTtpLmruf+QsKKQPLUzavx2DTZvHyV+QMjyNngRY5S49wO7S2Qs9uezjkMOWzvY315b9Q==
   dependencies:
     "@stylistic/eslint-plugin" "^5.5.0"
     eslint-plugin-import "^2.31.0"
     eslint-plugin-oxlint "^1.42.0"
     eslint-plugin-perfectionist "^4.4.0"
     eslint-plugin-sonarjs "^3.0.1"
-    eslint-plugin-turmag-special-rules "^1.0.37"
+    eslint-plugin-turmag-special-rules "^1.0.40"
     eslint-plugin-unicorn "^56.0.1"
     eslint-plugin-vue "^9.32.0"
     globals "^15.14.0"
