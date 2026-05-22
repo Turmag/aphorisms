@@ -35,8 +35,8 @@ export function useTheme() {
 
     watch(
         () => matches.value,
-        value => {
-            if (!isSavedDarkMode.value) value ? setDarkMode() : setLightMode();
+        isValue => {
+            if (!isSavedDarkMode.value) isValue ? setDarkMode() : setLightMode();
         },
     );
 
