@@ -25,3 +25,4 @@ dist-ssr
 
 db_connect.php
 authorize.php
+yarn.lock
