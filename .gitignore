@@ -23,6 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 
+# Other
 db_connect.php
 authorize.php
 yarn.lock
