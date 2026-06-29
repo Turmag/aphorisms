@@ -20,9 +20,9 @@
         >
             Афоризмы
         </UiText>
-        <HeaderSwitch />
+        <UiThemeToggler v-model="isSavedDarkMode" :saved-mode="isSavedDarkMode ? isDarkMode ? 'dark' : 'light' : 'auto'" @toggle="isDarkMode = $event" />
         <UiFlex gap="g8" :class="$style.additional">
-            <HeaderAdd v-if="authStoreVariable.isAuthorized" />
+            <HeaderAdd v-if="authStore.isAuthorized" />
             <HeaderSettings />
         </UiFlex>
     </UiFlex>
@@ -30,14 +30,21 @@
 
 <script setup lang="ts">
 import { useStorage } from '@vueuse/core';
-import { UiFlex, UiText } from 'turmag-vue-components';
+import {
+    UiFlex,
+    UiText,
+    UiThemeToggler,
+} from 'turmag-vue-components';
 import HeaderAdd from '@/components/header/HeaderAdd.vue';
 import HeaderSettings from '@/components/header/HeaderSettings.vue';
-import HeaderSwitch from '@/components/header/HeaderSwitch.vue';
 import { useAuthStore } from '@/stores/useAuth.store';
+import { useMainStore } from '@/stores/useMain.store';
 
-const authStoreVariable = useAuthStore();
+const mainStore = useMainStore();
+const authStore = useAuthStore();
 const isStickyFilters = useStorage('isAphorismsStickyFilters', false);
+const isDarkMode = useStorage(mainStore.darkModeName, false);
+const isSavedDarkMode = useStorage(mainStore.savedDarkModeName, false);
 </script>
 
 <style lang="scss" module>
