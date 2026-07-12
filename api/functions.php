@@ -1,8 +1,17 @@
 <?php
-header("Content-Type: text/html; charset=utf-8");
+require __DIR__ . '/JwtAuth.php';
 require "db_connect.php";
 
 session_start();
+
+$tokensConfig = [
+    'jwt_secret' => 'my-awesome-secret-key-for-aphorisms-project',
+    'jwt_refresh_secret' => 'my-awesome-secret-key-for-aphorisms-project-for-refresh',
+    'access_token_ttl' => 3600,
+    'refresh_token_ttl' => 1209600,
+];
+
+$savedPassword = 'b1f4f9a523e36fd969f4573e25af4540';
 
 function myAphorisms(){
 	$mysqli = mysqli_connect(DB_HOST, DB_LOGIN, DB_PASSWORD, DB_NAME);
