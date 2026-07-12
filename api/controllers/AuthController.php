@@ -1,6 +1,6 @@
 <?php
 class AuthController {
-    public static function authorize($password): void {
+    public static function authorize(string $password): void {
         global $tokensConfig;
         global $savedPassword;
 
@@ -30,7 +30,7 @@ class AuthController {
         }
     }
 
-    public static function refresh($refreshToken): void {
+    public static function refresh(string $refreshToken): void {
         global $tokensConfig;
 
         if (empty($refreshToken)) {

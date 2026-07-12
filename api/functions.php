@@ -25,7 +25,7 @@ function myAphorisms(){
     return dataBaseToArray($result);
 }
 
-function dataBaseToArray($result){
+function dataBaseToArray(mysqli_result $result){
     $array = array();
     while($row = mysqli_fetch_assoc($result)){
         $array[] = $row;
@@ -33,7 +33,7 @@ function dataBaseToArray($result){
     return $array;
 }
 
-function saveAphorism($id, $text, $author){
+function saveAphorism(int $id, string $text, string $author){
 	$mysqli = mysqli_connect(DB_HOST, DB_LOGIN, DB_PASSWORD, DB_NAME);
 	mysqli_set_charset($mysqli, "utf8");
 	$text = mysqli_real_escape_string($mysqli, $text);
@@ -45,7 +45,7 @@ function saveAphorism($id, $text, $author){
 	mysqli_query($mysqli, $sql) or die(mysqli_connect_error());
 }
 
-function addAphorism($text, $author){
+function addAphorism(string $text, string $author){
 	$mysqli = mysqli_connect(DB_HOST, DB_LOGIN, DB_PASSWORD, DB_NAME);
 	mysqli_set_charset($mysqli, "utf8");
 	$sql = "INSERT INTO aphorisms(
@@ -59,7 +59,7 @@ function addAphorism($text, $author){
 	mysqli_query($mysqli, $sql) or die(mysqli_connect_error());
 }
 
-function removeAphorism($id){
+function removeAphorism(int $id){
 	$mysqli = mysqli_connect(DB_HOST, DB_LOGIN, DB_PASSWORD, DB_NAME);
 	mysqli_set_charset($mysqli, "utf8");
 	$sql = "DELETE from aphorisms
