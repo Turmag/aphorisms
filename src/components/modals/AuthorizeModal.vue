@@ -28,10 +28,10 @@
             width="wfull"
             :class="$style.buttons"
         >
-            <UiButton @click="emits('cancel')">
+            <UiButton @click="$emit('cancel')">
                 {{ cancelText }}
             </UiButton>
-            <UiButton @click="apply">
+            <UiButton :loading @click="apply">
                 {{ applyText }}
             </UiButton>
         </UiFlex>
@@ -52,6 +52,7 @@ import { UiButton, UiInput } from '@/components/kit';
 interface IProps {
     getApplyText?: () => string;
     getCancelText?: () => string;
+    getIsLoading?: () => boolean;
     getTitle: () => string;
 }
 
@@ -59,6 +60,7 @@ const props = withDefaults(
     defineProps<IProps>(), {
         getApplyText: () => 'Да',
         getCancelText: () => 'Отмена',
+        getIsLoading: () => false,
     },
 );
 
@@ -69,7 +71,8 @@ interface IEmits {
 
 const emits = defineEmits<IEmits>();
 
-const title = computed(() => props.getTitle() ?? '');
+const title = computed(() => props.getTitle());
+const loading = computed(() => props.getIsLoading());
 const applyText = computed(() => props.getApplyText());
 const cancelText = computed(() => props.getCancelText());
 

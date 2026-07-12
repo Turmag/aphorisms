@@ -12,6 +12,7 @@
 
 <script setup lang="ts">
 import { useModal } from 'vue-final-modal';
+import { ref } from 'vue';
 import { SvgIcon } from '@/components/kit';
 import AuthorizeModal from '@/components/modals/AuthorizeModal.vue';
 import ConfirmModal from '@/components/modals/ConfirmModal.vue';
@@ -20,23 +21,27 @@ import { useAuthStore } from '@/stores/useAuth.store';
 const authStore = useAuthStore();
 
 const openSettingsLocal = () => {
-    authStore.isAuthorized ? openLogoutModal() : openLoginModal();
+    authStore.isAuthorized ? openLogoutModal() : openAuthorizeModal();
 };
 
-const { close, open: openLoginModal } = useModal({
+const isLoading = ref(false);
+const { close: closeAuthorizeModal, open: openAuthorizeModal } = useModal({
     attrs: {
         getApplyText: () => 'Захожу',
         getCancelText: () => 'Нет, спасибо',
+        getIsLoading: () => isLoading.value,
         getTitle: () => 'Хочешь войти?',
         async onApply(password: string) {
+            isLoading.value = true;
             try {
                 await authStore.authorize(password);
-                close();
+                closeAuthorizeModal();
             // eslint-disable-next-line no-empty
             } catch {}
+            isLoading.value = false;
         },
         onCancel() {
-            close();
+            closeAuthorizeModal();
         },
     },
     component: AuthorizeModal,
@@ -52,7 +57,7 @@ const { close: closeLogoutModal, open: openLogoutModal } = useModal({
             closeLogoutModal();
         },
         onCancel() {
-            close();
+            closeLogoutModal();
         },
     },
     component: ConfirmModal,

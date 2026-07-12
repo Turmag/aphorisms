@@ -18,7 +18,7 @@
             <UiButton @click="$emit('cancel')">
                 {{ cancelText }}
             </UiButton>
-            <UiButton @click="$emit('apply')">
+            <UiButton :loading @click="$emit('apply')">
                 {{ applyText }}
             </UiButton>
         </UiFlex>
@@ -38,7 +38,7 @@ import { UiButton } from '@/components/kit';
 interface IProps {
     getApplyText?: () => string;
     getCancelText?: () => string;
-    getIsShowInput?: () => boolean;
+    getIsLoading?: () => boolean;
     getTitle: () => string;
 }
 
@@ -46,7 +46,7 @@ const props = withDefaults(
     defineProps<IProps>(), {
         getApplyText: () => 'Да',
         getCancelText: () => 'Отмена',
-        getIsShowInput: () => true,
+        getIsLoading: () => false,
     },
 );
 
@@ -57,7 +57,8 @@ interface IEmits {
 
 defineEmits<IEmits>();
 
-const title = computed(() => props.getTitle() ?? '');
+const title = computed(() => props.getTitle());
+const loading = computed(() => props.getIsLoading());
 const applyText = computed(() => props.getApplyText());
 const cancelText = computed(() => props.getCancelText());
 

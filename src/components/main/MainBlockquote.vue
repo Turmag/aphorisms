@@ -85,7 +85,7 @@
                 :viewBoxWidth="24"
                 :viewBoxHeight="24"
                 icon-name="delete"
-                @click="deleteAphorism"
+                @click="openRemoveAphorismModal"
             />
         </UiFlex>
     </blockquote>
@@ -170,21 +170,23 @@ const saveAphorism = () => store.saveAphorism({
     text: editText.value,
 });
 
-const { close, open: deleteAphorism } = useModal({
+const isLoading = ref(false);
+const { close: closeRemoveAphorismModal, open: openRemoveAphorismModal } = useModal({
     attrs: {
         getCancelText: () => 'Не хочу',
+        getIsLoading: () => isLoading.value,
         getTitle: () => `Хочешь удалить афоризм #${props.numb}?`,
-        onApply() {
-            void (async () => {
-                try {
-                    await store.removeAphorism(props.id);
-                    close();
+        async onApply() {
+            isLoading.value = true;
+            try {
+                await store.removeAphorism(props.id);
+                closeRemoveAphorismModal();
                 // eslint-disable-next-line no-empty
-                } catch {}
-            })();
+            } catch {}
+            isLoading.value = false;
         },
         onCancel() {
-            close();
+            closeRemoveAphorismModal();
         },
     },
     component: ConfirmModal,

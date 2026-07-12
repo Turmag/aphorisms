@@ -71,6 +71,7 @@ export const useMainStore = defineStore('main', () => {
                 author,
             });
             successToast('Добавление афоризма', 'Афоризм успешно добавлен!');
+            return true;
         } catch (error) {
             showError(error, 'Добавление афоризма');
             return false;
@@ -78,11 +79,10 @@ export const useMainStore = defineStore('main', () => {
     };
 
     const removeAphorism = async (id: string) => {
-        const index = aphorisms.value.findIndex(aphorism => aphorism.id === id) ?? -1;
-        aphorisms.value.splice(index, 1);
-
         try {
             await Api.removeAphorism(id);
+            const index = aphorisms.value.findIndex(aphorism => aphorism.id === id) ?? -1;
+            aphorisms.value.splice(index, 1);
             successToast('Удаление афоризма', 'Афоризм успешно удалён!');
         } catch (error) {
             const axiosError = error as AxiosError;

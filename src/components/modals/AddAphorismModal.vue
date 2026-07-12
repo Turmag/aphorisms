@@ -16,10 +16,10 @@
             width="wfull"
             :class="$style.buttons"
         >
-            <UiButton @click="emits('cancel')">
+            <UiButton @click="$emit('cancel')">
                 {{ cancelText }}
             </UiButton>
-            <UiButton @click="apply">
+            <UiButton :loading @click="apply">
                 {{ applyText }}
             </UiButton>
         </UiFlex>
@@ -41,6 +41,7 @@ import AddAphorismModalFields from '@/components/modals/AddAphorismModalFields.v
 interface IProps {
     getApplyText?: () => string;
     getCancelText?: () => string;
+    getIsLoading?: () => boolean;
     getTitle: () => string;
 }
 
@@ -48,17 +49,19 @@ const props = withDefaults(
     defineProps<IProps>(), {
         getApplyText: () => 'Да',
         getCancelText: () => 'Отмена',
+        getIsLoading: () => false,
     },
 );
 
 interface IEmits {
-    (event: 'apply', value: string, additionalValue?: string): void;
+    (event: 'apply', text: string, author: string): void;
     (event: 'cancel'): void;
 }
 
 const emits = defineEmits<IEmits>();
 
-const title = computed(() => props.getTitle() ?? '');
+const title = computed(() => props.getTitle());
+const loading = computed(() => props.getIsLoading());
 const applyText = computed(() => props.getApplyText());
 const cancelText = computed(() => props.getCancelText());
 
