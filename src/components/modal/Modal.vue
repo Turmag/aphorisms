@@ -10,15 +10,15 @@
             {{ title }}
         </div>
         <UiFlex v-if="isShowInput" justify-content="center" width="wfull">
-            <input
-                ref="input"
+            <UiInput
+                ref="inputRef"
                 v-model="password"
-                :class="$style.input"
                 type="password"
                 autocomplete="new-password"
                 placeholder="Пароль для входа"
+                :class="$style.input"
                 @keydown.enter="sendPassword"
-            >
+            />
         </UiFlex>
         <AphorismFields v-if="isShowAphorismFields" v-model:text="text" v-model:author="author" />
         <UiFlex
@@ -46,7 +46,7 @@ import {
     ref,
     useTemplateRef,
 } from 'vue';
-import { UiButton } from '@/components/kit';
+import { UiButton, UiInput } from '@/components/kit';
 import AphorismFields from '@/components/modal/ModalAphorismFields.vue';
 
 interface IProps {
@@ -82,14 +82,18 @@ const password = ref('');
 
 const apply = () => props.isShowAphorismFields ? addAphorism() : sendPassword();
 
-const sendPassword = () => emits('apply', password.value);
+const sendPassword = () => {
+    console.log('sendPassword');
+    // emits('apply', password.value);
+};
 
 const text = ref('');
 const author = ref('');
 const addAphorism = () => emits('apply', text.value, author.value);
 
-const input = useTemplateRef('input');
-onMounted(() => setTimeout(() => (input.value as HTMLInputElement)?.focus()));
+const inputRef = useTemplateRef('inputRef');
+// eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
+onMounted(() => setTimeout(() => inputRef.value?.focus()));
 </script>
 
 <style lang="scss" module>
@@ -133,12 +137,7 @@ onMounted(() => setTimeout(() => (input.value as HTMLInputElement)?.focus()));
     .input {
         width: 400px;
         height: 60px;
-        padding: 5px;
-        border-radius: 8px;
-        border: 1px solid var(--color-border-default);
         text-align: center;
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
-        font-size: 24px;
     }
 
     .buttons {

@@ -7,9 +7,9 @@ export default {
         author,
         text,
     }),
-    getAphorisms: () => axios.get<IAphorism[]>(`${path}api/getAphorisms.php`),
-    removeAphorism: (id: string) => axios.post<string>(`${path}api/removeAphorism.php`, { id }),
-    saveAphorism: (aphorism: IAphorism) => axios.post<string>(`${path}api/saveAphorism.php`, {
+    getAphorisms: () => axios.get<IAphorism[]>(`${path}api/getAphorisms`),
+    removeAphorism: (id: string) => axios.post<string>(`${path}api/removeAphorism`, { id }),
+    saveAphorism: (aphorism: IAphorism) => axios.post<string>(`${path}api/saveAphorism`, {
         author: aphorism.author,
         id: aphorism.id,
         text: aphorism.text,

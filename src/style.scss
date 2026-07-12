@@ -1,6 +1,8 @@
 :root {
     /** Светлая тема **/
 
+    --font-family: Verdana, Geneva, Tahoma, sans-serif;
+
     /* Фоны */
     --background-color-default: #fff;
     --background-color-secondary: #dcdcdc;
@@ -29,7 +31,7 @@
 
     background-color: var(--background-color-default);
     color: var(--color-text-default);
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: var(--font-family);
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;

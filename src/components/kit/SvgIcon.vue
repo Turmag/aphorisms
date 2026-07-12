@@ -27,9 +27,9 @@ interface IProps {
 
 withDefaults(defineProps<IProps>(), {
     color: 'currentColor',
-    height: 18,
+    height: 24,
     viewBoxHeight: 0,
     viewBoxWidth: 0,
-    width: 18,
+    width: 24,
 });
 </script>

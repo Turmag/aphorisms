@@ -15,19 +15,19 @@ import { useTheme } from '@/shared/composables/useTheme';
 import { useAuthStore } from '@/stores/useAuth.store';
 import { useMainStore } from '@/stores/useMain.store';
 
-const store = useMainStore();
-const authStoreVariable = useAuthStore();
+const authStore = useAuthStore();
+const mainStore = useMainStore();
 const route = useRoute();
 
 useTheme();
 useScrollPosition();
 
 const init = async () => {
-    await authStoreVariable.checkAuthorize();
-    await store.getAphorisms();
-    store.isLoadedPage = true;
-    store.scrollToChosenAphorism(route.query);
-    document.onclick = () => store.isUnBlured = true;
+    await authStore.checkAccessToken();
+    await mainStore.getAphorisms();
+    mainStore.isLoadedPage = true;
+    mainStore.scrollToChosenAphorism(route.query);
+    document.onclick = () => mainStore.isUnBlured = true;
 };
 
 init();

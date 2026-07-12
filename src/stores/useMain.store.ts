@@ -12,6 +12,8 @@ export const useMainStore = defineStore('main', () => {
     const filterWord = ref('');
     const darkModeName = ref('isDarkModeAphorisms');
     const savedDarkModeName = ref('isSavedDarkModeAphorisms');
+    const accessTokenName = ref('');
+    const refreshTokenName = ref('');
 
     const filteredAphorisms = computed(() => {
         const word = filterWord.value.toLowerCase();
@@ -126,6 +128,8 @@ export const useMainStore = defineStore('main', () => {
         isUnBlured,
         darkModeName,
         savedDarkModeName,
+        accessTokenName,
+        refreshTokenName,
         filterWord,
         filteredAphorisms,
         getAphorisms,

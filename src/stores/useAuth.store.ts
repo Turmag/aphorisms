@@ -1,70 +1,65 @@
-import { notify } from '@kyvg/vue3-notification';
+import { useStorage } from '@vueuse/core';
+import { jwtDecode } from 'jwt-decode';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
+import { useSpecialToast } from '@/shared/composables/useSpecialToast';
+import type { IDecodedToken } from '@/shared/types';
 import Api from '@/shared/api/AuthApi';
 
 export const useAuthStore = defineStore('auth', () => {
+    const { successToast, showError } = useSpecialToast();
     const isAuthorized = ref(false);
+    const accessToken = useStorage('aphorismsAccessToken', '');
+    const refreshToken = useStorage('aphorismsRefreshToken', '');
 
-    const authorize = async (password: string) => {
-        let text = 'Пароль введён неверно';
-        let type = 'error';
-        let isSuccess = false;
+    const checkAccessToken = async (isForceGet = false) => {
+        if (isAuthorized.value && !isForceGet || !accessToken.value) return;
+        if (accessToken.value === 'false') accessToken.value = '';
 
         try {
-            const { data } = await Api.authorize(password);
-            isSuccess = data === 'success';
-            isAuthorized.value = isSuccess;
-            if (isAuthorized.value) {
-                text = 'Всё прекрасно!';
-                type = 'success';
+            const decodedToken = jwtDecode<IDecodedToken>(accessToken.value);
+
+            const expDate = new Date(decodedToken.exp * 1000);
+            const today = new Date();
+
+            if (expDate < today) {
+                await getAccessTokenByRefreshTokenLocal();
+            } else {
                 isAuthorized.value = true;
             }
         } catch (error) {
-            console.error('error', error);
-        }
-
-        notify({
-            title: 'Вход в афоризмы',
-            text,
-            type,
-        });
-
-        return isSuccess;
-    };
-
-    const checkAuthorize = async () => {
-        try {
-            const { data: result } = await Api.checkAuthorize();
-            if (result === 'success') isAuthorized.value = true;
-        } catch (error) {
-            console.error('error', error);
-            notify({
-                title: 'Проверка авторизации',
-                text: 'Проверка авторизации не увенчалась успехом',
-                type: 'error',
-            });
+            showError(error, 'Проверка авторизации');
         }
     };
 
-    const logout = async () => {
+    const getAccessTokenByRefreshTokenLocal = async (isForceGet = false) => {
         try {
-            const { data: result } = await Api.logout();
-            if (result === 'success') isAuthorized.value = false;
+            const { data } = await Api.getAccessTokenByRefreshToken(refreshToken.value);
+            accessToken.value = data.access_token;
+            refreshToken.value = data.refresh_token;
+            await checkAccessToken(isForceGet);
+            isAuthorized.value = true;
         } catch (error) {
-            console.error('error', error);
-            notify({
-                title: 'Выход из афоризмов',
-                text: 'Выход из афоризмов не увенчался успехом',
-                type: 'error',
-            });
+            showError(error, 'Обновление токена');
+            accessToken.value = '';
+            refreshToken.value = '';
+            return;
+        }
+    };
+
+    const authorize = async (password: string) => {
+        try {
+            await Api.authorize(password);
+            isAuthorized.value = true;
+            successToast('Вход в Афоризмы', 'Всё прекрасно');
+        } catch (error) {
+            showError(error, 'Вход в Афоризмы');
         }
     };
 
     return {
         isAuthorized,
+        checkAccessToken,
         authorize,
-        checkAuthorize,
-        logout,
     };
 });
