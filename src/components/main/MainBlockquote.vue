@@ -176,8 +176,11 @@ const { close, open: deleteAphorism } = useModal({
         getTitle: () => `Хочешь удалить афоризм #${props.numb}?`,
         onApply() {
             void (async () => {
-                await store.removeAphorism(props.id);
-                close();
+                try {
+                    await store.removeAphorism(props.id);
+                    close();
+                // eslint-disable-next-line no-empty
+                } catch {}
             })();
         },
         onCancel() {

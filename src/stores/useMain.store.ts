@@ -1,11 +1,13 @@
-import { notify } from '@kyvg/vue3-notification';
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
+import { useSpecialToast } from '@/shared/composables/useSpecialToast';
 import type { IAphorism } from '@/shared/types';
+import type { AxiosError } from 'axios';
 import type { LocationQuery } from 'vue-router';
 import Api from '@/shared/api/MainApi';
 
 export const useMainStore = defineStore('main', () => {
+    const { successToast, showError } = useSpecialToast();
     const isLoadedPage = ref(false);
     const aphorisms = ref<IAphorism[]>([]);
     const isUnBlured = ref(false);
@@ -27,7 +29,7 @@ export const useMainStore = defineStore('main', () => {
             const { data } = await Api.getAphorisms();
             aphorisms.value = data;
         } catch (error) {
-            console.error('error', error);
+            showError(error, 'Загрузка афоризмов');
         }
     };
 
@@ -48,79 +50,45 @@ export const useMainStore = defineStore('main', () => {
     };
 
     const saveAphorism = async ({ author, id, text }: { author: string; id: string; text: string }) => {
-        let notifyText = 'Афоризм не удалось сохранить';
-        let type = 'error';
-
         const aphorism = aphorisms.value.find(aphorism => aphorism.id === id)!;
         aphorism.text = text;
         aphorism.author = author;
         aphorism.isEditable = false;
-        try {
-            const { data: result } = await Api.saveAphorism(aphorism);
-            if (result === 'success') {
-                notifyText = 'Афоризм успешно сохранён!';
-                type = 'success';
-            }
-        } catch (error) {
-            console.error('error', error);
-        }
 
-        notify({
-            title: 'Сохранение афоризма',
-            text: notifyText,
-            type,
-        });
+        try {
+            await Api.saveAphorism(aphorism);
+            successToast('Сохранение афоризма', 'Афоризм успешно сохранён!');
+        } catch (error) {
+            const axiosError = error as AxiosError;
+            showError(axiosError, 'Сохранение афоризма');
+        }
     };
 
     const addAphorism = async ({ text, author }: { author: string; text: string }) => {
-        let notifyText = 'Афоризм не удалось добавить';
-        let type = 'error';
-        let isSuccess = false;
-
         try {
-            const { data: result } = await Api.addAphorism({
+            await Api.addAphorism({
                 text,
                 author,
             });
-            isSuccess = result === 'success';
-            if (isSuccess) {
-                notifyText = 'Афоризм успешно добавлен!';
-                type = 'success';
-            }
+            successToast('Добавление афоризма', 'Афоризм успешно добавлен!');
         } catch (error) {
-            console.error('error', error);
+            showError(error, 'Добавление афоризма');
+            return false;
         }
-
-        notify({
-            title: 'Добавление афоризма',
-            text: notifyText,
-            type,
-        });
-
-        return isSuccess;
     };
 
     const removeAphorism = async (id: string) => {
-        let notifyText = 'Афоризм не удалось удалить';
-        let type = 'error';
-
         const index = aphorisms.value.findIndex(aphorism => aphorism.id === id) ?? -1;
         aphorisms.value.splice(index, 1);
-        try {
-            const { data: result } = await Api.removeAphorism(id);
-            if (result === 'success') {
-                notifyText = 'Афоризм успешно удалён!';
-                type = 'success';
-            }
-        } catch (error) {
-            console.error('error', error);
-        }
 
-        notify({
-            title: 'Удаление афоризма',
-            text: notifyText,
-            type,
-        });
+        try {
+            await Api.removeAphorism(id);
+            successToast('Удаление афоризма', 'Афоризм успешно удалён!');
+        } catch (error) {
+            const axiosError = error as AxiosError;
+            showError(axiosError, 'Удаление афоризма');
+            throw new Error(axiosError.message);
+        }
     };
 
     return {
