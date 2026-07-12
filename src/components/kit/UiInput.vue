@@ -51,6 +51,8 @@
 </template>
 
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false });
+
 import { useToggle } from '@vueuse/core';
 import { UiFlex } from 'turmag-vue-components';
 import { ref, useTemplateRef } from 'vue';

@@ -32,29 +32,31 @@
             {{ numb }}
         </UiFlex>
         <UiFlex direction="col" gap="g4" width="wfull">
-            <textarea
-                v-if="isEditable"
-                v-model="editText"
-                :class="$style.textarea"
-                :style="`height: ${textBlockHeight}px;`"
-            />
-            <div
-                v-else
-                ref="textBlock"
-                :class="$style.text"
-                v-html="value"
-            />
-            <textarea
-                v-if="isEditable"
-                v-model="editAuthor"
-                :class="[$style.textarea, $style.textareaAuthor]"
-            />
-            <div
-                v-else
-                :class="$style.author"
-            >
-                {{ author }}
-            </div>
+            <UiFlex>
+                <textarea
+                    v-if="isEditable"
+                    v-model="editText"
+                    :class="$style.textarea"
+                    :style="`height: ${textBlockHeight}px;`"
+                />
+                <div
+                    v-else
+                    ref="textBlock"
+                    :class="$style.text"
+                    v-html="value"
+                />
+            </UiFlex>
+            <UiFlex>
+                <textarea
+                    v-if="isEditable"
+                    v-model="editAuthor"
+                    :class="[$style.textarea, $style.textareaAuthor]"
+                />
+                <div v-else :class="$style.author">
+                    {{ author }}
+                </div>
+            </UiFlex>
+
             <SvgIcon
                 v-if="authStoreVariable.isAuthorized"
                 :class="$style.edit"
@@ -101,7 +103,7 @@ import {
     watch,
 } from 'vue';
 import { SvgIcon } from '@/components/kit';
-import Modal from '@/components/modal/Modal.vue';
+import ConfirmModal from '@/components/modals/ConfirmModal.vue';
 import { useAuthStore } from '@/stores/useAuth.store';
 import { useMainStore } from '@/stores/useMain.store';
 
@@ -171,7 +173,6 @@ const saveAphorism = () => store.saveAphorism({
 const { close, open: deleteAphorism } = useModal({
     attrs: {
         getCancelText: () => 'Не хочу',
-        getIsShowInput: () => false,
         getTitle: () => `Хочешь удалить афоризм #${props.numb}?`,
         onApply() {
             void (async () => {
@@ -183,7 +184,7 @@ const { close, open: deleteAphorism } = useModal({
             close();
         },
     },
-    component: Modal,
+    component: ConfirmModal,
 });
 
 watch(
@@ -290,7 +291,7 @@ watch(
     }
 
     .textarea {
-        width: 100%;
+        width: calc(100% - 40px);
         border: none;
         background-color: transparent;
         font-family: Verdana, Geneva, Tahoma, sans-serif;

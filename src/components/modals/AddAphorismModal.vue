@@ -9,18 +9,7 @@
         <div :class="$style.title">
             {{ title }}
         </div>
-        <UiFlex v-if="isShowInput" justify-content="center" width="wfull">
-            <UiInput
-                ref="inputRef"
-                v-model="password"
-                type="password"
-                autocomplete="new-password"
-                placeholder="Пароль для входа"
-                :class="$style.input"
-                @keydown.enter="sendPassword"
-            />
-        </UiFlex>
-        <AphorismFields v-if="isShowAphorismFields" v-model:text="text" v-model:author="author" />
+        <AddAphorismModalFields v-model:text="text" v-model:author="author" />
         <UiFlex
             justify-content="center"
             gap="g32"
@@ -46,23 +35,19 @@ import {
     ref,
     useTemplateRef,
 } from 'vue';
-import { UiButton, UiInput } from '@/components/kit';
-import AphorismFields from '@/components/modal/ModalAphorismFields.vue';
+import { UiButton } from '@/components/kit';
+import AddAphorismModalFields from '@/components/modals/AddAphorismModalFields.vue';
 
 interface IProps {
     getApplyText?: () => string;
     getCancelText?: () => string;
-    getIsShowInput?: () => boolean;
     getTitle: () => string;
-    isShowAphorismFields?: boolean;
 }
 
 const props = withDefaults(
     defineProps<IProps>(), {
         getApplyText: () => 'Да',
         getCancelText: () => 'Отмена',
-        getIsShowInput: () => true,
-        isShowAphorismFields: false,
     },
 );
 
@@ -76,16 +61,8 @@ const emits = defineEmits<IEmits>();
 const title = computed(() => props.getTitle() ?? '');
 const applyText = computed(() => props.getApplyText());
 const cancelText = computed(() => props.getCancelText());
-const isShowInput = computed(() => props.getIsShowInput());
 
-const password = ref('');
-
-const apply = () => props.isShowAphorismFields ? addAphorism() : sendPassword();
-
-const sendPassword = () => {
-    console.log('sendPassword');
-    // emits('apply', password.value);
-};
+const apply = () => addAphorism();
 
 const text = ref('');
 const author = ref('');

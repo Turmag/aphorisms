@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { useModal } from 'vue-final-modal';
 import { SvgIcon } from '@/components/kit';
-import Modal from '@/components/modal/Modal.vue';
+import AddAphorismModal from '@/components/modals/AddAphorismModal.vue';
 import { useMainStore } from '@/stores/useMain.store';
 
 const store = useMainStore();
@@ -22,9 +22,7 @@ const { close, open: openSettings } = useModal({
     attrs: {
         getApplyText: () => 'Добавить',
         getCancelText: () => 'Не нужно',
-        getIsShowInput: () => false,
         getTitle: () => 'Добавление афоризма',
-        isShowAphorismFields: true,
         async onApply(text: string, author?: string) {
             const isSuccess = await store.addAphorism({
                 author: author!,
@@ -39,7 +37,7 @@ const { close, open: openSettings } = useModal({
             close();
         },
     },
-    component: Modal,
+    component: AddAphorismModal,
 });
 </script>
 
