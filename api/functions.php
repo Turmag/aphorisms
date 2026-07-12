@@ -82,72 +82,63 @@ function replaceChar(){
     mysqli_query($mysqli, $sql) or die(mysqli_connect_error());
 }
 
-function authorizeUser() {
-	$_SESSION["isAphorismsAuthorized"] = true;
+function getBearerToken(): ?string {
+    // INFO: Пытаемся получить через apache_request_headers
+    if (function_exists('apache_request_headers')) {
+        $headers = apache_request_headers();
+        if (isset($headers['Authorization'])) {
+            $authHeader = $headers['Authorization'];
+        }
+    } 
+    // INFO:Для FPM
+    elseif (isset($_SERVER['HTTP_AUTHORIZATION'])) {
+        $authHeader = $_SERVER['HTTP_AUTHORIZATION'];
+    }
+    // INFO: Последний шанс — getallheaders
+    else {
+        $headers = getallheaders() ?? [];
+        if (isset($headers['Authorization'])) {
+            $authHeader = $headers['Authorization'];
+        }
+    }
+
+    // INFO: Извлекаем токен
+    if (!empty($authHeader) && preg_match('/^Bearer\s+(.*)$/i', $authHeader, $matches)) {
+        return $matches[1];
+    }
+
+    return null;
 }
 
-function unAuthorizeUser() {
-    $_SESSION["isAphorismsAuthorized"] = false;
+function checkBearerToken(): array {
+    $token = getBearerToken();
+
+    if (!$token) {
+        http_response_code(401);
+        echo json_encode(['success' => false, 'title' => 'Access token не указан']);
+        exit;
+    }
+
+    global $tokensConfig;
+
+    $jwtAuth = new JwtAuth($tokensConfig);
+
+    $validToken = $jwtAuth->validateAccessToken($token);
+    if (!$validToken) {
+        http_response_code(401);
+        echo json_encode(['success' => false, 'title' => 'Неправильный или истёкший токен']);
+        exit;
+    }
+
+    return $validToken;
 }
 
-function isAuthorizedUser(){
-	return $_SESSION["isAphorismsAuthorized"];
-}
-
-function checkAuthorizedUser(){
-	if(!isAuthorizedUser()){
-		header('HTTP/1.1 500 Internal Server Error');
-		die("Эта операция недопустима неавторизованным пользователям");
-	}
-}
-
-function setCookies(){
-	$cookiesFile = 'cookies.json';
-	if(!file_exists($cookiesFile)) file_put_contents($cookiesFile, '[]');
-
-	$handle = fopen($cookiesFile, "r");
-	$cookies = json_decode(fread($handle, filesize($cookiesFile)));
-	fclose($handle);
-
-	$cookieHash = md5('aphorisms' . rand(5, 150));
-
-	$cookies[] = (object)[
-		'hash' => $cookieHash
-	];
-
-	file_put_contents($cookiesFile, json_encode($cookies));
-	setcookie('aphorismsAuthorizeHash', $cookieHash, strtotime('+30 days'));
-}
-
-function unsetCookie(){
-	$cookiesFile = 'cookies.json';
-	if(!file_exists($cookiesFile)) file_put_contents($cookiesFile, '[]');
-
-	$handle = fopen($cookiesFile, "r");
-	$cookies = json_decode(fread($handle, filesize($cookiesFile)));
-	fclose($handle);
-
-	$cookieHash = $_COOKIE['aphorismsAuthorizeHash'];
-	$newItems = [];
-	foreach($cookies as $cookie){
-		if($cookie->hash !== $cookieHash){
-			$newItems[] = $cookie;
-		}
-	}
-
-	file_put_contents($cookiesFile, json_encode($newItems));
-}
-
-function checkCookie(){
-	$cookiesFile = 'cookies.json';
-	if(!file_exists($cookiesFile)) file_put_contents($cookiesFile, '[]');
-	$handle = fopen($cookiesFile, "r");
-	$cookies = json_decode(fread($handle, filesize($cookiesFile)));
-	fclose($handle);
-
-	foreach($cookies as $cookie){
-		if($cookie->hash === $_COOKIE['aphorismsAuthorizeHash']){
-			authorizeUser();
-		}
-	}
+function checkAdminPossibility(): void {
+    $token = checkBearerToken();
+    $role = $token['data']->role;
+    if ($role !== 'admin') {
+        http_response_code(401);
+        echo json_encode(['success' => false, 'title' => 'Для этого действия нужна роль администратора']);
+        exit;
+    }
 }

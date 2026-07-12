@@ -1,3 +1,6 @@
+import axios from 'axios';
+import { computed } from 'vue';
+import { useAuthStore } from '@/stores/useAuth.store';
 import type { TExtendedError } from '@/shared/types';
 
 export const getSecondsDiff = (d1: Date, d2: Date): number => {
@@ -18,4 +21,20 @@ export const getErrorMessage = (error: unknown, defaultMessage = 'Произош
     if (error instanceof Error && response.data.title === defaultMessage) return error.message;
 
     return response.data.title as string;
+};
+
+export const getAxiosInstance = async () => {
+    const authStore = useAuthStore();
+
+    await authStore.checkAccessToken();
+
+    return computed(() => {
+        const headers: Record<string, unknown> = {};
+
+        if (authStore.accessToken.length) {
+            headers.Authorization = `Bearer ${authStore.accessToken}`;
+        }
+
+        return axios.create({ headers });
+    });
 };

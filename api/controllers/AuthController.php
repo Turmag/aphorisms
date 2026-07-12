@@ -8,10 +8,13 @@ class AuthController {
         if (md5($password) === $savedPassword) $isSuccessAuthorize = true;
 
         if ($isSuccessAuthorize) {
+            $userData = [
+                'role' => 'admin'
+            ];
             $jwtAuth = new JwtAuth($tokensConfig);
 
-            $access_token = $jwtAuth->createAccessToken();
-            $refresh_token = $jwtAuth->createRefreshToken();
+            $access_token = $jwtAuth->createAccessToken($userData);
+            $refresh_token = $jwtAuth->createRefreshToken($userData);
 
             http_response_code(200);
             echo json_encode([
