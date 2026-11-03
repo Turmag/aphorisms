@@ -16,18 +16,25 @@
         >
             <UiLoader :width="48" :height="48" />
         </div>
-        <div v-else-if="store.loadError" role="alert">
-            Не удалось загрузить афоризмы.
-            <button type="button" @click="store.getAphorisms()">
-                Повторить
-            </button>
+        <div v-else-if="store.loadError" :class="$style.state">
+            <div role="alert">
+                <h2 :class="$style.stateTitle">
+                    Не удалось загрузить афоризмы
+                </h2>
+                <p :class="$style.stateText">
+                    Попробуйте загрузить данные ещё раз.
+                </p>
+            </div>
+            <UiButton @click="store.getAphorisms()">
+                Загрузить ещё раз
+            </UiButton>
         </div>
-        <div v-else-if="!store.total" :class="$style.empty">
+        <div v-else-if="!store.total" :class="$style.state">
             <div role="status">
-                <h2 :class="$style.emptyTitle">
+                <h2 :class="$style.stateTitle">
                     Ничего не найдено
                 </h2>
-                <p :class="$style.emptyText">
+                <p :class="$style.stateText">
                     Попробуйте изменить запрос или сбросьте фильтры, чтобы увидеть все афоризмы.
                 </p>
             </div>
@@ -68,7 +75,7 @@ const search = useTemplateRef('search');
         padding: 48px 24px;
     }
 
-    .empty {
+    .state {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -80,13 +87,13 @@ const search = useTemplateRef('search');
         text-align: center;
     }
 
-    .emptyTitle {
+    .stateTitle {
         margin: 0 0 12px;
         font-size: 28px;
         line-height: 1.3;
     }
 
-    .emptyText {
+    .stateText {
         max-width: 440px;
         margin: 0;
         line-height: 1.6;
