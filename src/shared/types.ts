@@ -6,6 +6,19 @@ export interface IAphorism {
     text: string;
 }
 
+export interface IAphorismsPage {
+    items: IAphorism[];
+    page: number;
+    total: number;
+}
+
+export interface IAphorismsParams {
+    limit: number;
+    page: number;
+    phraseNumb?: string;
+    search: string;
+}
+
 export interface IScrollTopObject {
     time: number;
     top: number;

@@ -1,5 +1,9 @@
 import axios from 'axios';
-import type { IAphorism } from '@/shared/types';
+import type {
+    IAphorism,
+    IAphorismsPage,
+    IAphorismsParams,
+} from '@/shared/types';
 import { path } from '@/shared/constants';
 import { getAxiosInstance } from '@/shared/helpers';
 
@@ -11,7 +15,7 @@ export default {
             text,
         });
     },
-    getAphorisms: () => axios.get<IAphorism[]>(`${path}api/getAphorisms`),
+    getAphorisms: (params: IAphorismsParams) => axios.get<IAphorismsPage>(`${path}api/getAphorisms`, { params }),
     removeAphorism: async (id: string) => {
         const axiosInstance = await getAxiosInstance();
         return axiosInstance.value.post<string>(`${path}api/removeAphorism`, { id });

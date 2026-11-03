@@ -1,13 +1,9 @@
 <?php
 class CommonController {
-    public static function getAphorisms(): void {
-        $aphorisms = myAphorisms();
-
-        foreach ($aphorisms as $i => &$aphorism) {
-            $aphorism['numb'] = $i + 1;
-        }
-
-        echo(json_encode($aphorisms));
+    public static function getAphorisms(int $page = 1, int $limit = 50, string $search = '', string $phraseNumb = ''): void {
+        $limit = in_array($limit, [50, 100, 150, 200], true) ? $limit : 50;
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode(myAphorisms(max(1, $page), $limit, $search, $phraseNumb));
     }
 
     public static function addAphorism(string $text, string $author): void {

@@ -24,7 +24,7 @@ useScrollPosition();
 
 const init = async () => {
     await authStore.checkAccessToken();
-    await mainStore.getAphorisms();
+    await mainStore.getAphorisms(typeof route.query.phraseNumb === 'string' ? route.query.phraseNumb : undefined);
     mainStore.isLoadedPage = true;
     mainStore.scrollToChosenAphorism(route.query);
     document.onclick = () => mainStore.isUnBlured = true;

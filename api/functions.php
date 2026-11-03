@@ -13,16 +13,39 @@ $tokensConfig = [
 
 $savedPassword = 'b1f4f9a523e36fd969f4573e25af4540';
 
-function myAphorisms(){
-	$mysqli = mysqli_connect(DB_HOST, DB_LOGIN, DB_PASSWORD, DB_NAME);
-	mysqli_set_charset($mysqli, 'utf8');
-	
-    $sql = "SELECT
-                *
-            FROM aphorisms
-			ORDER BY id";
-    $result = mysqli_query($mysqli, $sql) or die(mysqli_connect_error());
-    return dataBaseToArray($result);
+function myAphorisms(int $page, int $limit, string $search, string $phraseNumb): array {
+    $mysqli = mysqli_connect(DB_HOST, DB_LOGIN, DB_PASSWORD, DB_NAME);
+    mysqli_set_charset($mysqli, 'utf8');
+
+    // LOCATE treats %, _ and backslashes as literal search characters.
+    $where = "WHERE LOCATE(LOWER(?), LOWER(a.text)) > 0 OR LOCATE(LOWER(?), LOWER(a.author)) > 0";
+    $count = $mysqli->prepare("SELECT COUNT(*) FROM aphorisms a $where");
+    $count->bind_param('ss', $search, $search);
+    $count->execute();
+    $total = (int) $count->get_result()->fetch_row()[0];
+
+    if ($search === '' && ctype_digit($phraseNumb)) {
+        // Find the linked aphorism's position in the complete, ordered list.
+        $position = $mysqli->prepare("SELECT COUNT(*) FROM aphorisms a WHERE a.id < ? AND EXISTS (SELECT 1 FROM aphorisms WHERE id = ?)");
+        $position->bind_param('ss', $phraseNumb, $phraseNumb);
+        $position->execute();
+        $index = (int) $position->get_result()->fetch_row()[0];
+        $page = (int) floor($index / $limit) + 1;
+    }
+
+    $page = max(1, min($page, max(1, (int) ceil($total / $limit))));
+    $offset = ($page - 1) * $limit;
+    $numberColumn = $search === '' ? '' : ', (SELECT COUNT(*) FROM aphorisms numbered WHERE numbered.id <= a.id) AS numb';
+    $statement = $mysqli->prepare("SELECT a.* $numberColumn FROM aphorisms a $where ORDER BY a.id LIMIT ? OFFSET ?");
+    $statement->bind_param('ssii', $search, $search, $limit, $offset);
+    $statement->execute();
+    $items = dataBaseToArray($statement->get_result());
+    foreach ($items as $i => &$item) {
+        $item['numb'] = $search === '' ? $offset + $i + 1 : (int) $item['numb'];
+    }
+    $mysqli->close();
+
+    return ['items' => $items, 'page' => $page, 'total' => $total];
 }
 
 function dataBaseToArray(mysqli_result $result){

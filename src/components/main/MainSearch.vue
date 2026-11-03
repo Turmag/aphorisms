@@ -41,7 +41,10 @@ const isStickyFilters = useStorage('isAphorismsStickyFilters', false);
 
 const filterWord = ref('');
 
-const resetFilter = () => store.filterWord = '';
+const resetFilter = () => {
+    filterWord.value = '';
+    store.filterWord = '';
+};
 const onInput = useDebounceFn(() => store.filterWord = filterWord.value, 500);
 
 watch(

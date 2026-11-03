@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { computed, ref } from 'vue';
+import { ref, watch } from 'vue';
 import { useSpecialToast } from '@/shared/composables/useSpecialToast';
 import type { IAphorism } from '@/shared/types';
 import type { AxiosError } from 'axios';
@@ -12,26 +12,51 @@ export const useMainStore = defineStore('main', () => {
     const aphorisms = ref<IAphorism[]>([]);
     const isUnBlured = ref(false);
     const filterWord = ref('');
+    const currentPage = ref(1);
+    const itemsPerPage = ref(50);
+    const total = ref(0);
+    const isLoading = ref(false);
+    const loadError = ref(false);
+    let requestId = 0;
     const darkModeName = ref('isDarkModeAphorisms');
     const savedDarkModeName = ref('isSavedDarkModeAphorisms');
     const accessTokenName = ref('');
     const refreshTokenName = ref('');
 
-    const filteredAphorisms = computed(() => {
-        const word = filterWord.value.toLowerCase();
-        return aphorisms.value.filter(aphorism =>
-            aphorism.text.toLowerCase().includes(word)
-            || aphorism.author.toLowerCase().includes(word));
-    });
-
-    const getAphorisms = async () => {
+    const getAphorisms = async (phraseNumb?: string) => {
+        const id = ++requestId;
+        isLoading.value = true;
+        loadError.value = false;
+        aphorisms.value = [];
         try {
-            const { data } = await Api.getAphorisms();
-            aphorisms.value = data;
+            const { data } = await Api.getAphorisms({
+                limit: itemsPerPage.value,
+                page: currentPage.value,
+                search: filterWord.value,
+                phraseNumb,
+            });
+            if (id !== requestId) return;
+            aphorisms.value = data.items;
+            total.value = data.total;
+            currentPage.value = data.page;
         } catch (error) {
+            if (id !== requestId) return;
+            loadError.value = true;
             showError(error, 'Загрузка афоризмов');
+        } finally {
+            if (id === requestId) isLoading.value = false;
         }
     };
+
+    const changePage = (page: number) => {
+        currentPage.value = page;
+        void getAphorisms();
+    };
+
+    watch([itemsPerPage, filterWord], () => {
+        currentPage.value = 1;
+        void getAphorisms();
+    });
 
     const scrollToChosenAphorism = (query: LocationQuery) => {
         if (Boolean(query.phraseNumb) && !isUnBlured.value) {
@@ -57,6 +82,7 @@ export const useMainStore = defineStore('main', () => {
 
         try {
             await Api.saveAphorism(aphorism);
+            await getAphorisms();
             successToast('Сохранение афоризма', 'Афоризм успешно сохранён!');
         } catch (error) {
             const axiosError = error as AxiosError;
@@ -81,8 +107,7 @@ export const useMainStore = defineStore('main', () => {
     const removeAphorism = async (id: string) => {
         try {
             await Api.removeAphorism(id);
-            const index = aphorisms.value.findIndex(aphorism => aphorism.id === id) ?? -1;
-            aphorisms.value.splice(index, 1);
+            await getAphorisms();
             successToast('Удаление афоризма', 'Афоризм успешно удалён!');
         } catch (error) {
             const axiosError = error as AxiosError;
@@ -99,7 +124,13 @@ export const useMainStore = defineStore('main', () => {
         accessTokenName,
         refreshTokenName,
         filterWord,
-        filteredAphorisms,
+        aphorisms,
+        currentPage,
+        itemsPerPage,
+        total,
+        isLoading,
+        loadError,
+        changePage,
         getAphorisms,
         scrollToChosenAphorism,
         toggleIsEditableAphorism,
