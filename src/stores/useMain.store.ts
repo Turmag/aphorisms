@@ -53,6 +53,15 @@ export const useMainStore = defineStore('main', () => {
         void getAphorisms();
     };
 
+    const resetFilters = () => {
+        const isReloadScheduled = filterWord.value !== '' || itemsPerPage.value !== 50;
+        filterWord.value = '';
+        itemsPerPage.value = 50;
+        currentPage.value = 1;
+        isUnBlured.value = true;
+        if (!isReloadScheduled) void getAphorisms();
+    };
+
     watch([itemsPerPage, filterWord], () => {
         currentPage.value = 1;
         void getAphorisms();
@@ -131,6 +140,7 @@ export const useMainStore = defineStore('main', () => {
         isLoading,
         loadError,
         changePage,
+        resetFilters,
         getAphorisms,
         scrollToChosenAphorism,
         toggleIsEditableAphorism,

@@ -119,6 +119,28 @@ describe('Постраничная загрузка афоризмов', () => {
         });
     });
 
+    test('Сброс очищает поиск, размер страницы и выделение с одним запросом', async () => {
+        const store = useMainStore();
+        store.filterWord = 'Нет результатов';
+        store.itemsPerPage = 200;
+        await nextTick();
+        getAphorisms.mockClear();
+        store.currentPage = 4;
+        store.resetFilters();
+        await nextTick();
+        expect(store.filterWord).toBe('');
+        expect(store.itemsPerPage).toBe(50);
+        expect(store.currentPage).toBe(1);
+        expect(store.isUnBlured).toBe(true);
+        expect(getAphorisms).toHaveBeenCalledOnce();
+        expect(getAphorisms).toHaveBeenCalledWith({
+            limit: 50,
+            page: 1,
+            search: '',
+            phraseNumb: undefined,
+        });
+    });
+
     test('Ошибка загрузки показывает состояние для повторного запроса', async () => {
         getAphorisms.mockRejectedValueOnce(new Error('Нет сети'));
         const store = useMainStore();

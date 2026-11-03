@@ -47,6 +47,13 @@ const resetFilter = () => {
 };
 const onInput = useDebounceFn(() => store.filterWord = filterWord.value, 500);
 
+const resetFilters = () => {
+    filterWord.value = '';
+    store.resetFilters();
+};
+
+defineExpose({ resetFilters });
+
 watch(
     () => store.filterWord,
     value => filterWord.value = value,

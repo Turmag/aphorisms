@@ -16,7 +16,12 @@
                 aria-label="Предыдущая страница"
                 @click="goToPage(currentPage - 1)"
             >
-                ‹
+                <SvgIcon
+                    icon-name="chevron-down"
+                    :width="16"
+                    :height="16"
+                    :class="$style.leftIcon"
+                />
             </button>
             <template v-for="(page, i) in pagesToRender" :key="i">
                 <span v-if="page === null" aria-hidden="true">
@@ -41,7 +46,12 @@
                 aria-label="Следующая страница"
                 @click="goToPage(currentPage + 1)"
             >
-                ›
+                <SvgIcon
+                    icon-name="chevron-down"
+                    :width="16"
+                    :height="16"
+                    :class="$style.rightIcon"
+                />
             </button>
         </nav>
         <span>{{ rangeText }}</span>
@@ -50,6 +60,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import SvgIcon from '@/components/kit/SvgIcon.vue';
 
 interface IProps {
     disabled?: boolean;
@@ -114,7 +125,7 @@ const goToPage = (page: number) => {
     .button, .select {
         height: 44px;
         border-radius: 8px;
-        border: 1px solid var(--color-border-default);
+        border: 1px solid var(--color-border-pagination);
         background-color: var(--background-color-default);
         color: var(--color-text-default);
         font: inherit;
@@ -122,6 +133,9 @@ const goToPage = (page: number) => {
     }
 
     .button {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
         min-width: 44px;
         padding: 8px;
         font-weight: 700;
@@ -152,6 +166,15 @@ const goToPage = (page: number) => {
 
     .active {
         background-color: var(--color-border-special);
+        color: #213547;
+    }
+
+    .leftIcon {
+        transform: rotate(90deg);
+    }
+
+    .rightIcon {
+        transform: rotate(-90deg);
     }
 
     @media screen and (width <= 600px) {

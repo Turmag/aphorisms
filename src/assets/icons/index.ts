@@ -1,5 +1,6 @@
 import Add from './Add.vue';
 import Cancel from './Cancel.vue';
+import ChevronDown from './ChevronDown.vue';
 import CopyDecor from './CopyDecor.vue';
 import Cross from './Cross.vue';
 import Delete from './Delete.vue';
@@ -13,6 +14,7 @@ import Settings from './Settings.vue';
 export default {
     add: Add,
     cancel: Cancel,
+    'chevron-down': ChevronDown,
     'copy-decor': CopyDecor,
     cross: Cross,
     delete: Delete,
