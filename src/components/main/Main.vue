@@ -8,9 +8,14 @@
             :disabled="store.isLoading"
             @update:current-page="store.changePage"
         />
-        <p v-if="store.isLoading" role="status">
-            Загрузка афоризмов…
-        </p>
+        <div
+            v-if="store.isLoading"
+            :class="$style.loading"
+            role="status"
+            aria-label="Загрузка афоризмов"
+        >
+            <UiLoader :width="48" :height="48" />
+        </div>
         <div v-else-if="store.loadError" role="alert">
             Не удалось загрузить афоризмы.
             <button type="button" @click="store.getAphorisms()">
@@ -41,7 +46,7 @@
 </template>
 
 <script setup lang="ts">
-import { UiFlex } from 'turmag-vue-components';
+import { UiFlex, UiLoader } from 'turmag-vue-components';
 import { useTemplateRef } from 'vue';
 import { UiButton } from '@/components/kit';
 import UiPagination from '@/components/kit/UiPagination.vue';
@@ -54,6 +59,15 @@ const search = useTemplateRef('search');
 </script>
 
 <style lang="scss" module>
+    .loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        min-height: 320px;
+        padding: 48px 24px;
+    }
+
     .empty {
         display: flex;
         flex-direction: column;
