@@ -8,6 +8,7 @@
 <script setup lang="ts">
 import { ModalsContainer } from 'vue-final-modal';
 import { useRoute } from 'vue-router';
+import { watch } from 'vue';
 import Header from '@/components/header/Header.vue';
 import Main from '@/components/main/Main.vue';
 import { useScrollPosition } from '@/shared/composables/useScrollPosition';
@@ -23,12 +24,18 @@ useTheme();
 useScrollPosition();
 
 const init = async () => {
-    await authStore.checkAccessToken();
-    await mainStore.getAphorisms(typeof route.query.phraseNumb === 'string' ? route.query.phraseNumb : undefined);
+    await Promise.all([
+        authStore.checkAccessToken(),
+        mainStore.loadFromQuery(typeof route.query.phraseNumb === 'string' ? route.query.phraseNumb : undefined),
+    ]);
     mainStore.isLoadedPage = true;
-    mainStore.scrollToChosenAphorism(route.query);
-    document.onclick = () => mainStore.isUnBlured = true;
 };
+
+watch(() => route.query.phraseNumb, phraseNumb => {
+    if (mainStore.isLoadedPage) {
+        void mainStore.loadFromQuery(typeof phraseNumb === 'string' ? phraseNumb : undefined);
+    }
+});
 
 init();
 </script>

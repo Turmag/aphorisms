@@ -20,8 +20,8 @@ export interface IAphorismsPage {
 export interface IAphorismsParams {
     limit: number;
     page: number;
-    phraseNumb?: string;
     search: string;
+    searchByNumber: number;
 }
 
 export interface IScrollTopObject {

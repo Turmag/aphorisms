@@ -13,9 +13,26 @@ $tokensConfig = [
 
 $savedPassword = 'b1f4f9a523e36fd969f4573e25af4540';
 
-function myAphorisms(int $page, int $limit, string $search, string $phraseNumb): array {
+function myAphorisms(int $page, int $limit, string $search, bool $searchByNumber): array {
     $mysqli = mysqli_connect(DB_HOST, DB_LOGIN, DB_PASSWORD, DB_NAME);
     mysqli_set_charset($mysqli, 'utf8');
+
+    if ($searchByNumber && $search !== '') {
+        $number = filter_var(trim($search), FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]);
+        if ($number === false) {
+            $mysqli->close();
+            return ['items' => [], 'page' => 1, 'total' => 0];
+        }
+        // numb is the position in the full list ordered by id, including gaps in id.
+        $offset = $number - 1;
+        $statement = $mysqli->prepare('SELECT * FROM aphorisms ORDER BY id LIMIT 1 OFFSET ?');
+        $statement->bind_param('i', $offset);
+        $statement->execute();
+        $items = dataBaseToArray($statement->get_result());
+        if ($items) $items[0]['numb'] = $number;
+        $mysqli->close();
+        return ['items' => $items, 'page' => 1, 'total' => count($items)];
+    }
 
     // LOCATE treats %, _ and backslashes as literal search characters.
     $where = "WHERE LOCATE(LOWER(?), LOWER(a.text)) > 0 OR LOCATE(LOWER(?), LOWER(a.author)) > 0";
@@ -23,15 +40,6 @@ function myAphorisms(int $page, int $limit, string $search, string $phraseNumb):
     $count->bind_param('ss', $search, $search);
     $count->execute();
     $total = (int) $count->get_result()->fetch_row()[0];
-
-    if ($search === '' && ctype_digit($phraseNumb)) {
-        // Find the linked aphorism's position in the complete, ordered list.
-        $position = $mysqli->prepare("SELECT COUNT(*) FROM aphorisms a WHERE a.id < ? AND EXISTS (SELECT 1 FROM aphorisms WHERE id = ?)");
-        $position->bind_param('ss', $phraseNumb, $phraseNumb);
-        $position->execute();
-        $index = (int) $position->get_result()->fetch_row()[0];
-        $page = (int) floor($index / $limit) + 1;
-    }
 
     $page = max(1, min($page, max(1, (int) ceil($total / $limit))));
     $offset = ($page - 1) * $limit;

@@ -1,10 +1,6 @@
 <template>
     <blockquote
-        :class="{
-            [$style.blockquote]: true,
-            [$style.blockquoteBlur]: isBlur,
-        }"
-        :isSingle="!isBlur"
+        :class="$style.blockquote"
     >
         <div
             :class="$style.icon"
@@ -95,7 +91,6 @@
 import { useToggle } from '@vueuse/core';
 import { UiFlex } from 'turmag-vue-components';
 import { useModal } from 'vue-final-modal';
-import { useRoute } from 'vue-router';
 import {
     computed,
     ref,
@@ -117,7 +112,6 @@ interface IProps {
 
 const props = withDefaults(defineProps<IProps>(), { isEditable: false });
 
-const route = useRoute();
 const store = useMainStore();
 const authStoreVariable = useAuthStore();
 const $style = useCssModule();
@@ -126,20 +120,13 @@ const [isLinkCopied, toggleIsLinkCopied] = useToggle();
 
 let timeout: ReturnType<typeof setTimeout>;
 
-const isBlur = computed(
-    () =>
-        Boolean(route.query.phraseNumb)
-        && route.query.phraseNumb !== String(props.id)
-        && !store.isUnBlured,
-);
-
 const value = computed(() => props.text.replace(/\n/g, '<br>'));
 
 const copyLink = () => {
     clearTimeout(timeout);
     toggleIsLinkCopied(true);
 
-    const link = `${location.origin}${location.pathname}?phraseNumb=${props.id}`;
+    const link = `${location.origin}${location.pathname}?phraseNumb=${props.numb}`;
 
     // Копируем ссылку в буфер обмена
     const temporaryInput = document.createElement('input');
@@ -236,10 +223,6 @@ watch(
                 opacity: 0;
             }
         }
-    }
-
-    .blockquoteBlur {
-        filter: blur(1px);
     }
 
     .icon {

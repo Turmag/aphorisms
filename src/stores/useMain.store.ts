@@ -1,18 +1,22 @@
 import { useStorage } from '@vueuse/core';
 import { defineStore } from 'pinia';
-import { ref, watch } from 'vue';
+import {
+    nextTick,
+    ref,
+    watch,
+} from 'vue';
 import { useSpecialToast } from '@/shared/composables/useSpecialToast';
 import type { IAphorism } from '@/shared/types';
 import type { AxiosError } from 'axios';
-import type { LocationQuery } from 'vue-router';
 import Api from '@/shared/api/MainApi';
 
 export const useMainStore = defineStore('main', () => {
     const { successToast, showError } = useSpecialToast();
     const isLoadedPage = ref(false);
     const aphorisms = ref<IAphorism[]>([]);
-    const isUnBlured = ref(false);
     const filterWord = ref('');
+    const isSearchByNumber = ref(false);
+    let isApplyingQuery = false;
     const currentPage = ref(1);
     const itemsPerPage = useStorage('aphorismsItemsPerPage', 50);
     if (![50, 100, 150, 200].includes(itemsPerPage.value)) itemsPerPage.value = 50;
@@ -25,7 +29,7 @@ export const useMainStore = defineStore('main', () => {
     const accessTokenName = ref('');
     const refreshTokenName = ref('');
 
-    const getAphorisms = async (phraseNumb?: string) => {
+    const getAphorisms = async () => {
         const id = ++requestId;
         isLoading.value = true;
         loadError.value = false;
@@ -35,7 +39,7 @@ export const useMainStore = defineStore('main', () => {
                 limit: itemsPerPage.value,
                 page: currentPage.value,
                 search: filterWord.value,
-                phraseNumb,
+                searchByNumber: Number(isSearchByNumber.value),
             });
             if (id !== requestId) return;
             aphorisms.value = data.items;
@@ -50,35 +54,35 @@ export const useMainStore = defineStore('main', () => {
         }
     };
 
+    const loadFromQuery = async (phraseNumb?: string) => {
+        isApplyingQuery = true;
+        isSearchByNumber.value = phraseNumb !== undefined;
+        filterWord.value = phraseNumb ?? '';
+        currentPage.value = 1;
+        await nextTick();
+        isApplyingQuery = false;
+        await getAphorisms();
+    };
+
     const changePage = (page: number) => {
         currentPage.value = page;
         void getAphorisms();
     };
 
     const resetFilters = () => {
-        const isReloadScheduled = filterWord.value !== '' || itemsPerPage.value !== 50;
+        const isReloadScheduled = filterWord.value !== '' || itemsPerPage.value !== 50 || isSearchByNumber.value;
         filterWord.value = '';
+        isSearchByNumber.value = false;
         itemsPerPage.value = 50;
         currentPage.value = 1;
-        isUnBlured.value = true;
         if (!isReloadScheduled) void getAphorisms();
     };
 
-    watch([itemsPerPage, filterWord], () => {
+    watch([itemsPerPage, filterWord, isSearchByNumber], () => {
+        if (isApplyingQuery) return;
         currentPage.value = 1;
         void getAphorisms();
     });
-
-    const scrollToChosenAphorism = (query: LocationQuery) => {
-        if (Boolean(query.phraseNumb) && !isUnBlured.value) {
-            setTimeout(
-                () =>
-                    document.querySelector('[issingle=true]')
-                        ?.scrollIntoView({ behavior: 'smooth' }),
-                200,
-            );
-        }
-    };
 
     const toggleIsEditableAphorism = (id: string) => {
         const aphorism = aphorisms.value.find(aphorism => aphorism.id === id)!;
@@ -129,7 +133,7 @@ export const useMainStore = defineStore('main', () => {
 
     return {
         isLoadedPage,
-        isUnBlured,
+        isSearchByNumber,
         darkModeName,
         savedDarkModeName,
         accessTokenName,
@@ -144,7 +148,7 @@ export const useMainStore = defineStore('main', () => {
         changePage,
         resetFilters,
         getAphorisms,
-        scrollToChosenAphorism,
+        loadFromQuery,
         toggleIsEditableAphorism,
         saveAphorism,
         addAphorism,

@@ -18,6 +18,7 @@ export const useScrollPosition = () => {
     watch(
         () => store.isLoadedPage,
         () => {
+            if (store.isSearchByNumber) return;
             if (aphorismsScrollTop.value.time) {
                 const diffSeconds = getSecondsDiff(new Date(), new Date(aphorismsScrollTop.value.time));
                 if (diffSeconds > 5) {

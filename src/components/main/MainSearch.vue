@@ -2,6 +2,7 @@
     <UiFlex
         align-items="center"
         gap="g16"
+        wrap="wrap"
         padding="p16"
         :class="{
             [$style.wrapper]: true,
@@ -11,7 +12,8 @@
         <input
             v-model="filterWord"
             :class="$style.filter"
-            placeholder="Поиск"
+            :placeholder="store.isSearchByNumber ? 'Номер афоризма' : 'Поиск'"
+            :aria-label="store.isSearchByNumber ? 'Номер афоризма' : 'Поиск афоризмов'"
             @input="onInput"
         >
         <SvgIcon
@@ -23,6 +25,9 @@
             icon-name="cancel"
             @click="resetFilter"
         />
+        <UiCheckbox v-model="store.isSearchByNumber">
+            Поиск по номеру
+        </UiCheckbox>
         <UiCheckbox v-model="isStickyFilters">
             Липкий поиск
         </UiCheckbox>
@@ -39,7 +44,7 @@ import { useMainStore } from '@/stores/useMain.store';
 const store = useMainStore();
 const isStickyFilters = useStorage('isAphorismsStickyFilters', false);
 
-const filterWord = ref('');
+const filterWord = ref(store.filterWord);
 
 const resetFilter = () => {
     filterWord.value = '';
@@ -76,6 +81,7 @@ watch(
     .filter {
         box-sizing: border-box;
         width: 380px;
+        max-width: 100%;
         height: 40px;
         padding: 8px;
         border-radius: 4px;

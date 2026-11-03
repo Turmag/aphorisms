@@ -40,7 +40,7 @@ vi.mock('@/shared/composables/useSpecialToast', () => ({
 
 const item = {
     author: 'Автор',
-    id: '51',
+    id: '73',
     numb: 51,
     text: 'Афоризм',
 };
@@ -83,17 +83,30 @@ describe('Постраничная загрузка афоризмов', () => {
         expect(useMainStore().itemsPerPage).toBe(50);
     });
 
-    test('Запрашивает страницу по 50 элементов и передаёт прямую ссылку', async () => {
+    test('Прямая ссылка включает поиск по номеру одним запросом', async () => {
+        getAphorisms.mockResolvedValueOnce({
+            data: {
+                items: [item],
+                page: 1,
+                total: 1,
+            },
+        } as never);
         const store = useMainStore();
-        await store.getAphorisms('51');
+        const loading = store.loadFromQuery('51');
+        expect(store.isSearchByNumber).toBe(true);
+        expect(store.filterWord).toBe('51');
+        await loading;
+        expect(getAphorisms).toHaveBeenCalledOnce();
         expect(getAphorisms).toHaveBeenCalledWith({
             limit: 50,
             page: 1,
-            search: '',
-            phraseNumb: '51',
+            search: '51',
+            searchByNumber: 1,
         });
         expect(store.aphorisms).toEqual([item]);
-        expect(store.total).toBe(101);
+        expect(store.aphorisms[0].numb).toBe(51);
+        expect(store.aphorisms[0].id).toBe('73');
+        expect(store.total).toBe(1);
     });
 
     test('Поиск и изменение размера страницы сбрасывают страницу одним запросом', async () => {
@@ -107,7 +120,7 @@ describe('Постраничная загрузка афоризмов', () => {
             limit: 150,
             page: 1,
             search: 'Автор',
-            phraseNumb: undefined,
+            searchByNumber: 0,
         });
     });
 
@@ -154,14 +167,15 @@ describe('Постраничная загрузка афоризмов', () => {
             limit: 50,
             page: 3,
             search: '',
-            phraseNumb: undefined,
+            searchByNumber: 0,
         });
     });
 
-    test('Сброс очищает поиск, размер страницы и выделение с одним запросом', async () => {
+    test('Сброс очищает поиск, размер страницы и режим поиска по номеру с одним запросом', async () => {
         const store = useMainStore();
         store.filterWord = 'Нет результатов';
         store.itemsPerPage = 200;
+        store.isSearchByNumber = true;
         await nextTick();
         getAphorisms.mockClear();
         store.currentPage = 4;
@@ -170,14 +184,63 @@ describe('Постраничная загрузка афоризмов', () => {
         expect(store.filterWord).toBe('');
         expect(store.itemsPerPage).toBe(50);
         expect(store.currentPage).toBe(1);
-        expect(store.isUnBlured).toBe(true);
+        expect(store.isSearchByNumber).toBe(false);
         expect(getAphorisms).toHaveBeenCalledOnce();
         expect(getAphorisms).toHaveBeenCalledWith({
             limit: 50,
             page: 1,
             search: '',
-            phraseNumb: undefined,
+            searchByNumber: 0,
         });
+    });
+
+    test('Без параметра ссылки поиск по номеру выключен', async () => {
+        const store = useMainStore();
+        expect(store.isSearchByNumber).toBe(false);
+        await store.loadFromQuery('51');
+        getAphorisms.mockClear();
+        await store.loadFromQuery();
+        expect(store.isSearchByNumber).toBe(false);
+        expect(store.filterWord).toBe('');
+        expect(getAphorisms).toHaveBeenCalledOnce();
+        expect(getAphorisms).toHaveBeenCalledWith(expect.objectContaining({
+            search: '',
+            searchByNumber: 0,
+        }));
+    });
+
+    test('Переключение галочки сбрасывает страницу и меняет режим поиска', async () => {
+        const store = useMainStore();
+        store.currentPage = 4;
+        store.filterWord = '51';
+        store.isSearchByNumber = true;
+        await nextTick();
+        expect(getAphorisms).toHaveBeenCalledOnce();
+        expect(getAphorisms).toHaveBeenCalledWith(expect.objectContaining({
+            page: 1,
+            search: '51',
+            searchByNumber: 1,
+        }));
+        getAphorisms.mockClear();
+        store.isSearchByNumber = false;
+        await nextTick();
+        expect(getAphorisms).toHaveBeenCalledWith(expect.objectContaining({
+            search: '51',
+            searchByNumber: 0,
+        }));
+    });
+
+    test('Повторная загрузка после ошибки сохраняет номер из ссылки', async () => {
+        getAphorisms.mockRejectedValueOnce(new Error('Нет сети'));
+        const store = useMainStore();
+        await store.loadFromQuery('51');
+        expect(store.loadError).toBe(true);
+        await store.getAphorisms();
+        expect(getAphorisms).toHaveBeenLastCalledWith(expect.objectContaining({
+            search: '51',
+            searchByNumber: 1,
+        }));
+        expect(store.loadError).toBe(false);
     });
 
     test('Ошибка загрузки показывает состояние для повторного запроса', async () => {

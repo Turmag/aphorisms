@@ -16,4 +16,4 @@ app.use(router);
 app.use(pinia);
 app.use(Notifications);
 app.use(vfm);
-app.mount('#app');
+void router.isReady().then(() => app.mount('#app'));
