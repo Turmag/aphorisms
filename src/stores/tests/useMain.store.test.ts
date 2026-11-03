@@ -8,7 +8,22 @@ import {
 } from 'vitest';
 import { nextTick } from 'vue';
 import { useMainStore } from '@/stores/useMain.store';
+import type * as VueUse from '@vueuse/core';
 import Api from '@/shared/api/MainApi';
+
+const storedValues = vi.hoisted(() => new Map<string, string>());
+
+vi.mock('@vueuse/core', async importOriginal => {
+    const vueUse = await importOriginal<typeof VueUse>();
+    return {
+        ...vueUse,
+        useStorage: (key: string, defaults: number) => vueUse.useStorage(key, defaults, {
+            getItem: name => storedValues.get(name) ?? null,
+            setItem: (name, value) => storedValues.set(name, value),
+            removeItem: name => storedValues.delete(name),
+        }),
+    };
+});
 
 vi.mock('@/shared/api/MainApi', () => ({
     default: {
@@ -33,6 +48,7 @@ const getAphorisms = vi.mocked(Api.getAphorisms);
 
 describe('Постраничная загрузка афоризмов', () => {
     beforeEach(() => {
+        storedValues.clear();
         setActivePinia(createPinia());
         vi.resetAllMocks();
         getAphorisms.mockResolvedValue({
@@ -42,6 +58,29 @@ describe('Постраничная загрузка афоризмов', () => {
                 total: 101,
             },
         } as never);
+    });
+
+    test('Восстанавливает сохранённый размер страницы при первом запросе', async () => {
+        storedValues.set('aphorismsItemsPerPage', '150');
+        const store = useMainStore();
+        await store.getAphorisms();
+        expect(store.itemsPerPage).toBe(150);
+        expect(getAphorisms).toHaveBeenCalledWith(expect.objectContaining({ limit: 150 }));
+    });
+
+    test('Сохраняет размер страницы при изменении и сбросе', async () => {
+        const store = useMainStore();
+        store.itemsPerPage = 200;
+        await nextTick();
+        expect(storedValues.get('aphorismsItemsPerPage')).toBe('200');
+        store.resetFilters();
+        await nextTick();
+        expect(storedValues.get('aphorismsItemsPerPage')).toBe('50');
+    });
+
+    test('Заменяет недопустимое сохранённое количество на 50', () => {
+        storedValues.set('aphorismsItemsPerPage', '300');
+        expect(useMainStore().itemsPerPage).toBe(50);
     });
 
     test('Запрашивает страницу по 50 элементов и передаёт прямую ссылку', async () => {

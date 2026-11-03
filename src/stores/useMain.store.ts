@@ -1,3 +1,4 @@
+import { useStorage } from '@vueuse/core';
 import { defineStore } from 'pinia';
 import { ref, watch } from 'vue';
 import { useSpecialToast } from '@/shared/composables/useSpecialToast';
@@ -13,7 +14,8 @@ export const useMainStore = defineStore('main', () => {
     const isUnBlured = ref(false);
     const filterWord = ref('');
     const currentPage = ref(1);
-    const itemsPerPage = ref(50);
+    const itemsPerPage = useStorage('aphorismsItemsPerPage', 50);
+    if (![50, 100, 150, 200].includes(itemsPerPage.value)) itemsPerPage.value = 50;
     const total = ref(0);
     const isLoading = ref(false);
     const loadError = ref(false);

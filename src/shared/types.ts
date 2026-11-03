@@ -1,3 +1,8 @@
+export interface ISelectItem {
+    name: string | number;
+    title: string | number;
+}
+
 export interface IAphorism {
     author: string;
     id: string;

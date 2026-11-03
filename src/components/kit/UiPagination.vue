@@ -1,13 +1,14 @@
 <template>
     <div :class="$style.wrapper">
-        <label :class="$style.helper">
+        <div :class="$style.helper">
             Показывать по
-            <select v-model="itemsPerPage" :class="$style.select" :disabled="disabled">
-                <option v-for="count in [50, 100, 150, 200]" :key="count" :value="count">
-                    {{ count }}
-                </option>
-            </select>
-        </label>
+            <UiSelect
+                v-model="selectedPageSize"
+                :options="pageSizes"
+                :disabled="disabled"
+                label="Количество афоризмов на странице"
+            />
+        </div>
         <nav aria-label="Страницы афоризмов" :class="$style.pages">
             <button
                 type="button"
@@ -61,6 +62,8 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import SvgIcon from '@/components/kit/SvgIcon.vue';
+import UiSelect from '@/components/kit/UiSelect.vue';
+import type { ISelectItem } from '@/shared/types';
 
 interface IProps {
     disabled?: boolean;
@@ -70,6 +73,14 @@ interface IProps {
 const props = withDefaults(defineProps<IProps>(), { disabled: false });
 const itemsPerPage = defineModel<number>({ default: 50 });
 const currentPage = defineModel<number>('currentPage', { default: 1 });
+const pageSizes = [50, 100, 150, 200].map(name => ({
+    name,
+    title: name,
+}));
+const selectedPageSize = computed<ISelectItem>({
+    get: () => pageSizes.find(option => option.name === itemsPerPage.value) ?? pageSizes[0],
+    set: option => itemsPerPage.value = Number(option.name),
+});
 
 const totalPages = computed(() => Math.max(1, Math.ceil(props.total / itemsPerPage.value)));
 const rangeText = computed(() => {
@@ -122,36 +133,29 @@ const goToPage = (page: number) => {
         gap: 4px;
     }
 
-    .button, .select {
-        height: 44px;
-        border-radius: 8px;
-        border: 1px solid var(--color-border-pagination);
-        background-color: var(--background-color-default);
-        color: var(--color-text-default);
-        font: inherit;
-        cursor: pointer;
-    }
-
     .button {
         display: inline-flex;
         justify-content: center;
         align-items: center;
         min-width: 44px;
+        height: 44px;
         padding: 8px;
+        border-radius: 8px;
+        border: 1px solid var(--color-border-pagination);
+        background-color: var(--background-color-default);
+        color: var(--color-text-default);
+        font: inherit;
         font-weight: 700;
         transition: .3s;
+        cursor: pointer;
     }
 
-    .select {
-        padding: 8px;
-    }
-
-    .button:disabled, .select:disabled {
+    .button:disabled {
         opacity: .5;
         cursor: not-allowed;
     }
 
-    .button:focus-visible, .select:focus-visible {
+    .button:focus-visible {
         outline: 2px solid var(--color-icon-default);
         outline-offset: 2px;
     }
